@@ -11,8 +11,7 @@ const API_URL_SEARCH_MOVIE = 'https://api.themoviedb.org/3/search/movie';
 // /movie/{movie_id} - integer
 // {movie_id}, я так поняла, тянуть с localStorage (когда первые 20 загрузились)
 
-const API_URL_MOVIE_DETAILS = `https://api.themoviedb.org/3/movie/
-536554`;//так находит
+const API_URL_MOVIE_DETAILS = `https://api.themoviedb.org/3/movie/`;//так находит
 
 // * По документации Та же проблема
 const API_URL_MOVIE_VIDEO = 'https://api.themoviedb.org/3/movie/{movie_id}/videos';
@@ -32,9 +31,11 @@ class Movie {
       const response = await axios.get(API_URL_TRENDING_MOVIE, {
         params: {
           api_key: API_KEY,
+          page: this.currentPage,
         }
       });
       console.log(response.data);
+      console.log('Total Pages:', response.data.total_pages);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -59,16 +60,9 @@ class Movie {
     }
   }
 
-  async fetchMovieDetails() {
+  async fetchMovieDetails(id = `39860`) {
     try {
-      // * попытка
-      // const response = await axios.get(`API_URL_MOVIE_DETAILS({ results }).map(({ id }) => id), {
-      //   params: {
-      //     api_key: API_KEY,
-      //     language: 'en-US',
-      //   }
-      // }`)
-      const response = await axios.get(API_URL_MOVIE_DETAILS, {
+      const response = await axios.get(`${API_URL_MOVIE_DETAILS}${id}`, {
         params: {
           api_key: API_KEY,
           language: 'en-US',
@@ -81,12 +75,12 @@ class Movie {
     }
   }
 
-  async fetchMovieVideo() {
+  async fetchMovieVideo(id = `39860`) {
     try {
-      const response = await axios.get(API_URL_MOVIE_VIDEO, {
+      const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos`, {
         params: {
           api_key: API_KEY,
-          language: 'en-US',
+          // language: 'en-US',
         }
       })
       console.log(response.data);
