@@ -1,4 +1,4 @@
-import { Movie } from './services/api';
+import { Movie } from './partials_js/api';
 
 const movie = new Movie({
   // searchValue: '',
