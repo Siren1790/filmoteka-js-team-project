@@ -42,7 +42,7 @@ class Movie {
       const response = await axios.get(API_URL_SEARCH_MOVIE, {
         params: {
           api_key: API_KEY,
-          query: 'cat', //change on 'this.searchValue'
+          query: this.searchValue,
           language: 'en-US',
           page: this.currentPage,
           include_adult: 'false,'
@@ -58,7 +58,8 @@ class Movie {
   }
 
   /**
-     * @param {API_URL_MOVIE_DETAILS} id
+     * @param {String} API_URL_MOVIE_DETAILS
+     * @param {String} id
      * @returns full information about the movie
      */
   async fetchMovieDetails(id = `39860`) {
@@ -79,7 +80,7 @@ class Movie {
   }
   /**
    *
-   * @param {*} id
+   * @param {String} id
    * @returns full information about a possible trailer
    */
   async fetchMovieVideo(id = `39860`) {
