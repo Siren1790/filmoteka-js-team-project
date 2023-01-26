@@ -5,6 +5,7 @@ const API_URL_TRENDING_MOVIE =
   'https://api.themoviedb.org/3/trending/movie/day';
 const API_URL_SEARCH_MOVIE = 'https://api.themoviedb.org/3/search/movie';
 const API_URL_MOVIE_DETAILS = 'https://api.themoviedb.org/3/movie/';
+const API_URL_MOVIE_GENRES = 'https://api.themoviedb.org/3/genre/movie/list';
 
 class Movie {
   constructor({ searchValue }) {
@@ -43,7 +44,7 @@ class Movie {
       const response = await axios.get(API_URL_SEARCH_MOVIE, {
         params: {
           api_key: API_KEY,
-          query: 'cat', //change on 'this.searchValue'
+          query: this.searchValue,
           language: 'en-US',
           page: this.currentPage,
           include_adult: 'false,',
@@ -59,9 +60,10 @@ class Movie {
   }
 
   /**
-   * @param {API_URL_MOVIE_DETAILS} id
-   * @returns full information about the movie
-   */
+     * @param {String} API_URL_MOVIE_DETAILS
+     * @param {String} id
+     * @returns full information about the movie
+     */
   async fetchMovieDetails(id = `39860`) {
     try {
       const response = await axios.get(`${API_URL_MOVIE_DETAILS}${id}`, {
@@ -80,7 +82,7 @@ class Movie {
   }
   /**
    *
-   * @param {*} id
+   * @param {String} id
    * @returns full information about a possible trailer
    */
   async fetchMovieVideo(id = `39860`) {
@@ -102,6 +104,26 @@ class Movie {
     }
   }
 
+  /**
+   * 
+   * @returns an array of objects with decrypted genre ids
+   */
+async fetchMovieGenres() {
+    try {
+        const response = await axios.get(API_URL_MOVIE_GENRES, {
+            params: {
+                api_key: API_KEY,
+            }
+        });
+
+      console.log(response.data);
+
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }  
+  
   nextPage() {
     this.currentPage += 1;
   }
