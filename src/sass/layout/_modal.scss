@@ -29,6 +29,19 @@ ul {
     fill: var(--accent-color);
 }
 
+// table info
+.movie-info {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.row {
+    display: flex;
+}
+
+
+
 .movie_card {
     position: relative;
     display: block;
@@ -58,7 +71,7 @@ ul {
             height: 40%;
 
             h1 {
-                color: #fff;
+                color: var(--accent-color);
                 font-weight: 400;
             }
 
@@ -73,7 +86,7 @@ ul {
                 color: #fff;
                 padding: 5px;
                 border-radius: 5px;
-                border: 1px solid rgba(255, 255, 255, 0.13);
+                border: 1px solid rgba(235, 89, 10, 0.105);
             }
 
             .type {
@@ -87,7 +100,7 @@ ul {
                 float: left;
                 margin-right: 20px;
                 height: 120px;
-                box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.95);
             }
         }
 
@@ -151,7 +164,7 @@ ul {
     }
 
     .info_section {
-        background: linear-gradient(to right, #0d0d0c 50%, transparent 100%);
+        background: linear-gradient(to right, #ffffff 50%, transparent 100%);
     }
 
     .blur_back {
@@ -183,7 +196,7 @@ ul {
     }
 
     .info_section {
-        background: linear-gradient(to top, rgb(20, 20, 19) 50%, transparent 100%);
+        background: linear-gradient(to top, rgb(249, 249, 249) 50%, transparent 100%);
         display: inline-grid;
     }
 }
