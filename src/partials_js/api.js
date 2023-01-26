@@ -4,6 +4,7 @@ const API_KEY = 'fed7db976d902fcdece547680e82ff9e';
 const API_URL_TRENDING_MOVIE = 'https://api.themoviedb.org/3/trending/movie/day';
 const API_URL_SEARCH_MOVIE = 'https://api.themoviedb.org/3/search/movie';
 const API_URL_MOVIE_DETAILS = 'https://api.themoviedb.org/3/movie/';
+const API_URL_MOVIE_GENRES = 'https://api.themoviedb.org/3/genre/movie/list';
 
 class Movie {
   constructor({ searchValue }) {
@@ -99,6 +100,26 @@ class Movie {
     }
   }
 
+  /**
+   * 
+   * @returns an array of objects with decrypted genre ids
+   */
+async fetchMovieGenres() {
+    try {
+        const response = await axios.get(API_URL_MOVIE_GENRES, {
+            params: {
+                api_key: API_KEY,
+            }
+        });
+
+      console.log(response.data);
+
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }  
+  
   nextPage() {
     this.currentPage += 1;
   }
