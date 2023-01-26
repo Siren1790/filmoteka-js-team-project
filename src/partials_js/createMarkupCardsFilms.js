@@ -1,13 +1,17 @@
 import { Movie } from './api';
 
+const movie = new Movie({
+  searchValue: '',
+});
+
 export default function createMarkupCardsFilms(arrayMovies) {
   const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 
   return (markup = arrayMovies
-    .map(({ poster_paths, title, genre_ids, release_date, vote_average }) => {
-      const imgRow = poster_paths
+    .map(({ poster_path, title, genre_ids, release_date, vote_average }) => {
+      const imgRow = poster_path
         ? `<img src="${BASE_URL_POSTER}${poster_path}" />`
-        : `<img src="../images/no_photo.jpg" alt="xxx">`;
+        : `<img src="./images/no_image.jpg" alt="no photo" width="400" height="500">`;
 
       return `<li class="item-films">
               ${imgRow}
@@ -30,15 +34,10 @@ export default function createMarkupCardsFilms(arrayMovies) {
     .join(''));
 }
 
-const mainMarkFilms = document.querySelector('.list-films');
+// ************FOR INDEX.JS******************//
+// import createMarkupCardsFilms from './partials_js/createMarkupCardsFilms';
+// const mainMarkFilms = document.querySelector('.list-films');
 
-const movie = new Movie({
-  searchValue: '',
-});
-
-movie.fetchTrendingMovies().then(data => {
-  mainMarkFilms.insertAdjacentHTML(
-    'beforeend',
-    createMarkupCardsFilms(data.results)
-  );
-});
+// movie.fetchTrendingMovies().then(data => {
+//   mainMarkFilms.innerHTML += createMarkupCardsFilms(data.results);
+// });
