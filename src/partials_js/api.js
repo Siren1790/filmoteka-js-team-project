@@ -1,4 +1,5 @@
 import axios from "axios";
+import spinner from "./spinner";
 
 const API_KEY = 'fed7db976d902fcdece547680e82ff9e';
 const API_URL_TRENDING_MOVIE = 'https://api.themoviedb.org/3/trending/movie/day';
@@ -38,6 +39,7 @@ class Movie {
    * @returns a list of movies by keyword
    */
   async fetchSearchMovies() {
+    spinner();
     try {
       const response = await axios.get(API_URL_SEARCH_MOVIE, {
         params: {
