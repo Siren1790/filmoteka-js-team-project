@@ -45,28 +45,29 @@ a {
 
 // Backdrop - DO NOT REMOVE
 
-.backdrop-modal {
-    background-color: rgba(255, 255, 255, 0.251);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: 0;
-    transition: all 0.4s;
+// .backdrop-modal {
+//     background-color: rgba(255, 255, 255, 0.251);
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     z-index: 100;
+//     width: 100%;
+//     height: 100%;
+//     opacity: 0;
+//     visibility: hidden;
+//     pointer-events: 0;
+//     transition: all 0.4s;
 
-    &.is-open {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-    }
-}
+//     &.is-open {
+//         opacity: 1;
+//         visibility: visible;
+//         pointer-events: auto;
+//     }
+// }
 
 .movie_card {
     font-family: 'Roboto', sans-serif;
+    position: fixed;
     width: 280px;
     height: 940px;
     background-color: var(--color-white);
@@ -101,12 +102,7 @@ a {
     animation: flicker 1.5s infinite alternate;
     box-shadow: 0 0 4px rgb(128, 91, 91),
                 0 0 11px rgb(175, 112, 112),
-                0 0 19px rgb(77, 65, 65),
-                0 0 40px rgb(79, 43, 43),
-                0 0 80px rgb(186, 159, 159),
-                0 0 90px rgb(164, 143, 143),
-                0 0 100px rgb(237, 222, 222),
-                0 0 150px rgb(233, 139, 139);
+                0 0 80px rgb(109, 100, 100),
 }
 
 .info_section {
@@ -144,7 +140,7 @@ a {
     padding-right: 0px;
     padding-left: 0px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: -10px;
     border-radius: 5px;
     overflow: hidden;
 
@@ -270,6 +266,7 @@ a {
 .queue-btn {
     height: 44px;
     width: 110px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
     
     border-radius: 5px;
     transition: all 0.4s;
@@ -366,3 +363,36 @@ a {
         }
 }
 
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    transform: translateY(-120%,);
+}
+
+.close-button {
+    width: 60px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid var(--accent-color);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+    border-radius: 5px;
+    font-style: inherit;
+    font-weight: 500;
+    background-color: rgb(226, 220, 220);
+    transition: all 0.4s;
+
+    
+
+        &:hover {
+                border-color: var(--accent-color);
+                background-color: var(--accent-color);
+                transform: scale(1.1);
+            }
+        
+            &:focus {
+                border-color: var(--accent-color);
+                color: var(--accent-color);
+                transform: scale(1.1);
+            }
+
+}
