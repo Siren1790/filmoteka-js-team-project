@@ -152,8 +152,8 @@ a {
             @media screen and (min-width: 768px) {
                 width: 264px;
                 height: 373px;
+                margin-top: 15px;
                 margin-left: 36px;
-                margin-top: 40px;
             }
         
             @media screen and (min-width: 1280px) {
@@ -384,15 +384,14 @@ a {
     
 
         &:hover {
-                border-color: var(--accent-color);
-                background-color: var(--accent-color);
-                transform: scale(1.1);
-            }
+            border-color: var(--accent-color);
+            background-color: var(--accent-color);
+            transform: scale(1.1);
+        }
         
-            &:focus {
-                border-color: var(--accent-color);
-                color: var(--accent-color);
-                transform: scale(1.1);
-            }
-
+        &:focus {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
 }
