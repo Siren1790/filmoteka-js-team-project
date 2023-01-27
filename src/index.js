@@ -5,7 +5,7 @@ import createMarkupCardsFilms from './partials_js/createMarkupCardsFilms';
 const mainMarkFilms = document.querySelector('.list-films');
 
 const movie = new Movie({
-  // searchValue: '',
+  searchValue: '',
 });
 
 movie.fetchSearchMovies();
