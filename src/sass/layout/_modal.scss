@@ -329,8 +329,15 @@ a {
         &:hover,
         &:focus {
             transform: scale(1.2);
-            fill: var(--accent-color);
+            fill: var(--color-black);
         }
+}
+
+.icon-heart {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 
 .heart-box {
