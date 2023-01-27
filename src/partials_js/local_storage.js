@@ -1,60 +1,59 @@
-// import { Movie } from './api';
-// const movie = new Movie({
-//   // searchValue: '',
-// });
+import { Movie } from './api';
+const movie = new Movie({
+  searchValue: '',
+});
 
+const CURRENT_MOVIES = 'currentMovies';
+const STORAGE_KEY_WATCHED = 'addToWatched';
+const STORAGE_KEY_QUEUE = 'addToQueue';
 
+// * function saveLocalStorageTrendingMovies
+async function saveLocalStorageTrendingMovies() {
+  try {
+    const trendingMovies = await movie.fetchTrendingMovies();
+    const saveTrendingMovies = localStorage.setItem(CURRENT_MOVIES, JSON.stringify(trendingMovies.results));
+    return saveTrendingMovies;
+  } catch (error) {
+    console.log(error);
+  }
+}
+saveLocalStorageTrendingMovies();
 
-// const CURRENT_MOVIES = 'currentMovies';
-// const STORAGE_KEY_WATCHED = 'addToWatched';
-// const STORAGE_KEY_QUEUE = 'addToQueue';
-
-//* function saveLocalStorageTrendingMovies
-// async function saveLocalStorageTrendingMovies() {
-//   try {
-//     const trendingMovies = await movie.fetchTrendingMovies();
-//     const saveTrendingMovies = localStorage.setItem(CURRENT_MOVIES, JSON.stringify(trendingMovies.results));
-//     return saveTrendingMovies;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-// saveLocalStorageTrendingMovies();
-
-// // const btnAddToWatchedAndToQueue = document.querySelector('.js-modal-buttons');
+// const btnAddToWatchedAndToQueue = document.querySelector('.js-modal-buttons');
 
 // *function saveLocalStorageToWatched
-// const btnAddToWatched = document.querySelector('.js-btn-watched');
-// btnAddToWatched.addEventListener('click', saveLocalStorageToWatched);
+const btnAddToWatched = document.querySelector('.js-btn-watched');
+btnAddToWatched.addEventListener('click', saveLocalStorageToWatched);
 
-// async function saveLocalStorageToWatched() {
-//   try {
-//     const movieDetails = await movie.fetchMovieDetails();
+async function saveLocalStorageToWatched() {
+  try {
+    const movieDetails = await movie.fetchMovieDetails();
 
-//     const saveMovieDetails = localStorage.setItem(STORAGE_KEY_WATCHED, JSON.stringify(movieDetails));
-//     return saveMovieDetails;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-// saveLocalStorageToWatched();
+    const saveMovieDetails = localStorage.setItem(STORAGE_KEY_WATCHED, JSON.stringify(movieDetails));
+    return saveMovieDetails;
+  } catch (error) {
+    console.log(error);
+  }
+  saveLocalStorageToWatched();
+}
+
 
 // *function saveLocalStorageToQueue
-// const btnAddToQueue = document.querySelector('.js-btn-queue');
-// btnAddToQueue.addEventListener('click', saveLocalStorageToQueue);
-// async function saveLocalStorageToQueue() {
-//   try {
-//     const movieDetails = await movie.fetchMovieDetails();
-//     const saveMovieDetails = localStorage.setItem(STORAGE_KEY_QUEUE, JSON.stringify(movieDetails));
-//     return saveMovieDetails;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-// saveLocalStorageToQueue();
+const btnAddToQueue = document.querySelector('.js-btn-queue');
+btnAddToQueue.addEventListener('click', saveLocalStorageToQueue);
+async function saveLocalStorageToQueue() {
+  try {
+    const movieDetails = await movie.fetchMovieDetails();
+    const saveMovieDetails = localStorage.setItem(STORAGE_KEY_QUEUE, JSON.stringify(movieDetails));
+    return saveMovieDetails;
+  } catch (error) {
+    console.log(error);
+  }
+  saveLocalStorageToQueue();
+}
 
 
-//! SERVICE for ocalStorage EXAMPLE
+//! SERVICE for LocalStorage EXAMPLE
 // const save = (key, value) => {
 //   try {
 //     const serializedState = JSON.stringify(value);
