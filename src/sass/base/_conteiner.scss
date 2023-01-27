@@ -1,24 +1,22 @@
 // Container
 
 .container {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 320px;
+  padding-left: 20px;
+  padding-right: 20px;
 
-    @media screen and (min-width: 320px) {
-        width: 320px;
-    }
+  @media screen and (min-width: 768px) {
+    width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
 
-    @media screen and (min-width: 768px) {
-        width: 768px;
-        padding-left: 75px;
-        padding-right: 75px;
-    }
-
-    @media screen and (min-width: 1024px) {
-        width: 1024px;
-        padding-left: 71px;
-        padding-right: 71px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: 1280px;
+    padding-left: 32px;
+    padding-right: 32px;
+    // border: solid 1px red;
+  }
 }
