@@ -1,2 +1,6 @@
-@import './common';
-@import './example';
+@import './base/common';
+// @import './example';
+@import './base/utils';
+@import './base/conteiner';
+@import './layout/modal';
+
