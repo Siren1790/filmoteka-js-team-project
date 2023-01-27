@@ -4,5 +4,5 @@ let heartOn = document.querySelector('#heart');
 
 heartOn.addEventListener(
   'click',
-  () => (heartOn.style.backgroundColor = '#ff6b08')
+  () => (heartOn.style.backgroundColor = '#f8d792e5')
 );
