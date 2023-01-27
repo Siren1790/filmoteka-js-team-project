@@ -1,4 +1,5 @@
 import { Movie } from './api';
+
 const movie = new Movie({
   searchValue: '',
 });
@@ -8,6 +9,7 @@ const STORAGE_KEY_WATCHED = 'addToWatched';
 const STORAGE_KEY_QUEUE = 'addToQueue';
 
 // * function saveLocalStorageTrendingMovies
+// movie.fetchTrendingMovies().then(data => localStorage.setItem('key', JSON.stringify(data.results))).catch(error => console.log(error));
 async function saveLocalStorageTrendingMovies() {
   try {
     const trendingMovies = await movie.fetchTrendingMovies();
@@ -17,30 +19,20 @@ async function saveLocalStorageTrendingMovies() {
     console.log(error);
   }
 }
-saveLocalStorageTrendingMovies();
 
-// const btnAddToWatchedAndToQueue = document.querySelector('.js-modal-buttons');
 
 // *function saveLocalStorageToWatched
-const btnAddToWatched = document.querySelector('.js-btn-watched');
-btnAddToWatched.addEventListener('click', saveLocalStorageToWatched);
-
 async function saveLocalStorageToWatched() {
   try {
     const movieDetails = await movie.fetchMovieDetails();
-
     const saveMovieDetails = localStorage.setItem(STORAGE_KEY_WATCHED, JSON.stringify(movieDetails));
     return saveMovieDetails;
   } catch (error) {
     console.log(error);
   }
-  saveLocalStorageToWatched();
 }
 
-
 // *function saveLocalStorageToQueue
-const btnAddToQueue = document.querySelector('.js-btn-queue');
-btnAddToQueue.addEventListener('click', saveLocalStorageToQueue);
 async function saveLocalStorageToQueue() {
   try {
     const movieDetails = await movie.fetchMovieDetails();
@@ -49,35 +41,6 @@ async function saveLocalStorageToQueue() {
   } catch (error) {
     console.log(error);
   }
-  saveLocalStorageToQueue();
 }
 
-
-//! SERVICE for LocalStorage EXAMPLE
-// const save = (key, value) => {
-//   try {
-//     const serializedState = JSON.stringify(value);
-//     localStorage.setItem(key, serializedState);
-//   } catch (e) {
-//     console.error(e.message);
-//   }
-// };
-
-// const load = key => {
-//   try {
-//     const serializedState = localStorage.getItem(key);
-//     return serializedState === null ? undefined : JSON.parse(serializedState);
-//   } catch (e) {
-//     console.error(e.message);
-//   }
-// };
-
-// const remove = key => {
-//   try {
-//     localStorage.removeItem(key);
-//   } catch (e) {
-//     console.error(e.message);
-//   }
-// };
-
-// export { save, remove, load };
+export { saveLocalStorageTrendingMovies, saveLocalStorageToWatched, saveLocalStorageToQueue };

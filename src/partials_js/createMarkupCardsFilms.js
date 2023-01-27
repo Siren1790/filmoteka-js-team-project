@@ -16,5 +16,5 @@ export default function createMarkupCardsFilms(arrayMovies) {
     })
     .join('');
 
-    return markup;
+  return markup;
 }
