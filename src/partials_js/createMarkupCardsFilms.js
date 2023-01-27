@@ -3,7 +3,7 @@ const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 export default function createMarkupCardsFilms(arrayMovies) {
   let markup = arrayMovies
     .map(({ poster_path, title, genre_ids, release_date, vote_average }) => {
-      const imgRow = !poster_path ? `<img src="${BASE_URL_POSTER}${poster_path}" />` : `<img src="./images/no_image.jpg" alt="no photo" width="400" height="500">`;
+      const imgRow = poster_path ? `<img src="${BASE_URL_POSTER}${poster_path}" />` : `<img src="./images/no_image.jpg" alt="no photo" width="400" height="500">`;
       return `<li class="item-films">
                 ${imgRow}
                 <p class="title">${title ? title : 'Sorry, no information'} </p>
