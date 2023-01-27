@@ -1,8 +1,3 @@
-import { Movie } from './api';
-
-const movie = new Movie({
-  searchValue: '',
-});
 
 export default function createMarkupCardsFilms(arrayMovies) {
   const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
@@ -33,11 +28,3 @@ export default function createMarkupCardsFilms(arrayMovies) {
     })
     .join(''));
 }
-
-// ************FOR INDEX.JS******************//
-// import createMarkupCardsFilms from './partials_js/createMarkupCardsFilms';
-// const mainMarkFilms = document.querySelector('.list-films');
-
-// movie.fetchTrendingMovies().then(data => {
-//   mainMarkFilms.innerHTML += createMarkupCardsFilms(data.results);
-// });
