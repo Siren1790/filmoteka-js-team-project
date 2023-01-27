@@ -1,3 +1,132 @@
-h5 {
-    width: 100px;
+.header-container {
+  height: 230px;
+  position: relative;
+  // background-image: url();
+}
+
+.header-list {
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.logo-link {
+  display: flex;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: calc(35 / 30);
+  color: #fff;
+  // margin-right: 277px;
+
+  @media screen and (min-width: 768px) {
+    margin-right: 9px;
+  }
+}
+
+.logo-img {
+  width: 24px;
+  height: 23px;
+  margin-top: 40px;
+  margin-right: 10px;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 45px;
+  }
+}
+
+.logo-txt {
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    margin-top: 40px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-right: 277px;
+  }
+}
+
+.header-btn:not(:last-child) {
+  margin-right: 16px;
+  @media screen and (min-width: 768px) {
+    margin-right: 32px;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-right: 16px;
+  }
+}
+
+.header-btn:hover,
+.header-btn:focus {
+  background: #ff6b01;
+  border-color: #ff6b01;
+  cursor: pointer;
+}
+
+.header-btn {
+  width: 130px;
+  height: 44px;
+  background-color: transparent;
+  border-radius: 4px;
+  border-color: #fff;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+  transition: all 200ms;
+
+  @media screen and (min-width: 768px) {
+    width: 152px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 148px;
+    height: 42px;
+  }
+}
+
+.header-item-btn {
+  margin-top: 60px;
+  margin-bottom: 60px;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    margin-top: 115px;
+  }
+}
+
+.nav {
+  position: absolute;
+  top: 44;
+  right: 20;
+
+  @media screen and (min-width: 768px) {
+    top: 49px;
+  }
+  @media screen and (min-width: 1280px) {
+    right: 85px;
+  }
+}
+
+.nav-link {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #fff;
+}
+
+.nav-list {
+  display: flex;
+  // margin-top: 50px;
+}
+
+.nav-item:not(:last-child) {
+  margin-right: 40px;
 }
