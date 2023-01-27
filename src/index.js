@@ -8,10 +8,10 @@ const movie = new Movie({
   searchValue: '',
 });
 
-movie.fetchSearchMovies();
-movie.fetchMovieDetails();
-movie.fetchMovieVideo();
-movie.fetchMovieGenres();
+// movie.fetchSearchMovies();
+// movie.fetchMovieDetails();
+// movie.fetchMovieVideo();
+// movie.fetchMovieGenres();
 
 movie.fetchTrendingMovies().then(data => {
   mainMarkFilms.innerHTML = createMarkupCardsFilms(data.results);
