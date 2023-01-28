@@ -185,8 +185,13 @@
   align-items: center;
 }
 
+.search {
+  display: flex;
+  flex-direction: column;
+}
+
 .input-search {
-  width: 280px;
+  width: 394px;
   height: 20px;
   background-color: transparent;
   margin-top: 60px;
@@ -228,6 +233,7 @@
   top: 60;
   right: 0;
   transition: transform 200ms;
+  cursor: pointer;
 
   @media screen and (min-width: 768px) {
     top: 115;
@@ -248,15 +254,10 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  display: flex;
+  // display: flex;
   align-items: center;
 
   color: #ff001b;
 
   margin-top: 16px;
 }
-
-// .search {
-//   display: flex;
-//   flex-direction: column;
-// }
