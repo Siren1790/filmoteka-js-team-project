@@ -1,11 +1,21 @@
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 
+/**
+ *
+ * @param {*} arrayMovies
+ * @returns
+ */
 export default function createMarkupCardsFilms(arrayMovies) {
+  const genresState = localStorage.getItem('genres');
+  const loadGenres = JSON.parse(genresState);
+  console.log('ganers ok!!!', loadGenres);
+
   let markup = arrayMovies
     .map(({ poster_path, title, genre_ids, release_date, vote_average }) => {
       const imgRow = poster_path
         ? `<img src="${BASE_URL_POSTER}${poster_path}" />`
         : `<img src="./images/no_image.jpg" alt="no photo" width="400" height="500">`;
+
       return `<li class="item-films">
                 ${imgRow}
                 <p class="title">${title ? title : 'Sorry, no information'} </p>
