@@ -27,5 +27,45 @@ function saveStorageGenres(genres) {
     console.error('Set state error: ', error.message);
   }
 }
+/**
+ *
+ * @param {*} genre_ids
+ * @param {*} loadGenres
+ * @returns array of genres and can use for modal
+ */
+function markUpModalGenres(genre_ids, loadGenres) {
+  let genersArray = []; // array for genres value
+  if (genre_ids) {
+    for (const key in loadGenres) {
+      if (genre_ids.includes(Number(key))) {
+        genersArray.push(' ' + loadGenres[key]);
+      }
+    }
+  } else {
+    genersArray = 'Sorry, but no information about genres';
+  }
+  return genersArray;
+}
+/**
+ *
+ * @param {*} genre_ids
+ * @param {*} loadGenres
+ * @returns array of genres (can use for main)
+ */
+function markUpMainGenres(genre_ids, loadGenres) {
+  let genresForMain = markUpModalGenres(genre_ids, loadGenres);
+  if (genresForMain) {
+    if (genresForMain.length > 3) {
+      genresForMain.splice(2, 0, ' Other');
+      genresForMain.splice(3);
+      return genresForMain;
+    } else return genresForMain;
+  } else return (genresForMain = 'Sorry, but no information about genres');
+}
 
-export { saveStorageGenres, createGenresObject };
+export {
+  saveStorageGenres,
+  createGenresObject,
+  markUpMainGenres,
+  markUpModalGenres,
+};
