@@ -1,3 +1,8 @@
+import { Movie } from './api';
+const movie = new Movie({
+  searchValue: '',
+});
+
 /**
  *
  * @param {*} array
@@ -63,9 +68,18 @@ function markUpMainGenres(genre_ids, loadGenres) {
   } else return (genresForMain = 'Sorry, but no information about genres');
 }
 
+function genresCreate() {
+  movie
+    .fetchMovieGenres()
+    .then(createGenresObject)
+    .then(saveStorageGenres)
+    .catch();
+}
+
 export {
   saveStorageGenres,
   createGenresObject,
   markUpMainGenres,
   markUpModalGenres,
+  genresCreate,
 };

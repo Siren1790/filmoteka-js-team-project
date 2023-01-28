@@ -7,15 +7,9 @@ import {
 } from './partials_js/local_genres-storage';
 
 const mainMarkFilms = document.querySelector('.list-films');
-const genresState = localStorage.getItem('genres');
-const loadGenres = JSON.parse(genresState); // array id(genres): genres(value)
 
 const movie = new Movie({
   searchValue: '',
-});
-
-movie.fetchTrendingMovies().then(data => {
-  mainMarkFilms.innerHTML = createMarkupCardsFilms(data.results, loadGenres);
 });
 
 movie
@@ -23,3 +17,7 @@ movie
   .then(createGenresObject)
   .then(saveStorageGenres)
   .catch();
+
+movie.fetchTrendingMovies().then(data => {
+  mainMarkFilms.innerHTML = createMarkupCardsFilms(data.results);
+});
