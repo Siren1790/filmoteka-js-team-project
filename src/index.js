@@ -6,6 +6,7 @@ import createMarkupCardsFilms from './partials_js/createMarkupCardsFilms';
 const mainMarkFilms = document.querySelector('.list-films');
 const paginationWrapperNode = document.querySelector('.render-pagination-list');
 const lastPaginationItemNode = document.querySelector('.last-page');
+const firstPaginationItemNode = document.querySelector('.first-page');
 
 const prevPaginationNode = document.querySelector('.btn-arrow-prev');
 const nextPaginationNode = document.querySelector('.btn-arrow-next');
@@ -16,6 +17,23 @@ const DEFAULT_END_PAGINATION = [1995,1996,1997,1998,1999];
 const movie = new Movie({
   searchValue: '',
 });
+
+lastPaginationItemNode.addEventListener('click', (e) => {
+  movie.fetchTrendingMovies(parseInt(e.target.textContent))
+      .then(data => {
+        preparePaginationDynamicList();
+
+        return renderMovies(data.results)
+      });
+})
+firstPaginationItemNode.addEventListener('click', () => {
+movie.fetchTrendingMovies()
+      .then(data => {
+        preparePaginationDynamicList();
+
+        return renderMovies(data.results)
+      });
+})
 
 document.addEventListener('click', (e) => {
   const target = e.target.closest('.item-pagination');
