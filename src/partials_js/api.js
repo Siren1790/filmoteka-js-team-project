@@ -60,10 +60,10 @@ class Movie {
   }
 
   /**
-     * @param {String} API_URL_MOVIE_DETAILS
-     * @param {String} id
-     * @returns full information about the movie
-     */
+   * @param {String} API_URL_MOVIE_DETAILS
+   * @param {String} id
+   * @returns full information about the movie
+   */
   async fetchMovieDetails(id = `39860`) {
     try {
       const response = await axios.get(`${API_URL_MOVIE_DETAILS}${id}`, {
@@ -105,25 +105,25 @@ class Movie {
   }
 
   /**
-   * 
+   *
    * @returns an array of objects with decrypted genre ids
    */
-async fetchMovieGenres() {
+  async fetchMovieGenres() {
     try {
-        const response = await axios.get(API_URL_MOVIE_GENRES, {
-            params: {
-                api_key: API_KEY,
-            }
-        });
+      const response = await axios.get(API_URL_MOVIE_GENRES, {
+        params: {
+          api_key: API_KEY,
+        },
+      });
 
       console.log(response.data);
 
-      return response.data;
+      return response.data.genres;
     } catch (error) {
       console.error(error);
     }
-  }  
-  
+  }
+
   nextPage() {
     this.currentPage += 1;
   }
