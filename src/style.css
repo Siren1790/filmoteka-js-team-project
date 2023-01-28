@@ -48,7 +48,7 @@ img {
   background-size: cover;
 }
 
-/*
+
 .header-list {
   display: flex;
 }
@@ -126,7 +126,7 @@ img {
 
 .nav-item:not(:last-child) {
   margin-right: 40px;
-} */
+}
 
 .list-films {
   display: flex;
