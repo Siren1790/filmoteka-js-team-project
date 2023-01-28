@@ -43,45 +43,88 @@ a {
     text-transform: uppercase;
 }
 
-// Backdrop - DO NOT REMOVE
+// Backdrop - DO NOT REMOVE // UNCOMMENT TO SEE MODAL
 
-// .backdrop-modal {
-//     background-color: rgba(255, 255, 255, 0.251);
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     z-index: 100;
-//     width: 100%;
-//     height: 100%;
-//     opacity: 0;
-//     visibility: hidden;
-//     pointer-events: 0;
-//     transition: all 0.4s;
+.backdrop-modal {
+    background-color: rgba(255, 255, 255, 0.251);
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: 0;
+    transition: all 0.4s;
 
-//     &.is-open {
-//         opacity: 1;
-//         visibility: visible;
-//         pointer-events: auto;
-//     }
-// }
+    @media screen and (max-width: 479px) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0);
+    }
+        
+    @media screen and (min-width: 480px) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0);
+    }
+
+    @media screen and (min-width: 768px) {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.251);
+    }
+
+    &.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+}
 
 .movie_card {
     font-family: 'Roboto', sans-serif;
-    position: fixed;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
     width: 280px;
     height: 940px;
     background-color: var(--color-white);
     border: 1px solid var(--accent-color);
     border-radius: 10px;
 
+    @media screen and (max-width: 479px) {
+            
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
     @media screen and (min-width: 480px) {
         width: 420px;
         height: 940px;
+        // position: absolute;
+        // top: 100%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
     }
 
     @media screen and (min-width: 768px) {
         width: 704px;
         height: 552px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     @media screen and (min-width: 1280px) {
@@ -92,12 +135,6 @@ a {
     background-image: linear-gradient(to top,
             rgba(255, 255, 255, 0.87),
             rgba(85, 78, 78, 0.274));
-
-    position: absolute;
-    z-index: 20;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 
     animation: flicker 1.5s infinite alternate;
     box-shadow: 0 0 4px rgb(128, 91, 91),
@@ -204,19 +241,27 @@ a {
     color: var(--icon-color);
 }
 
+.votes {
+    background-color: var(--accent-color);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--color-white);
+    // font-weight: 500;
+}
+
 .movie_descr {
     margin-top: 20px;
     font-weight: 500;
     size: 12px;
 
           
-                @media screen and (min-width: 768px) {
-                    height: 260px;
-                }
+    @media screen and (min-width: 768px) {
+        height: 260px;
+    }
             
-                @media screen and (min-width: 1280px) {
-                    height: 204px;
-                }
+    @media screen and (min-width: 1280px) {
+        height: 204px;
+    }
 }
 
 .movie-descr__about {
@@ -366,7 +411,7 @@ a {
 .button-container {
     display: flex;
     justify-content: flex-end;
-    transform: translateY(-120%,);
+    transform: translate(3%, 10%);
 }
 
 .close-button {
