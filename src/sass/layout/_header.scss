@@ -130,3 +130,18 @@
 .nav-item:not(:last-child) {
   margin-right: 40px;
 }
+
+.current {
+  position: relative;
+  }
+  
+  .current::after {
+   content: " ";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  right: 0;
+  height: 3px;
+  background: #FF001B;
+  margin-top: 10px;
+  }
