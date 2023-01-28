@@ -1,7 +1,7 @@
 // autor: Ruslan branch Search_FT-10
 
 import { Movie } from './api';
-import createMarkupCardsFilms from './partials_js/createMarkupCardsFilms';
+import createMarkupCardsFilms from './createMarkupCardsFilms';
 
 const markSearchFilms = document.querySelector('.list-films');
 let search = '';
