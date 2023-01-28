@@ -9,13 +9,11 @@ heartOn.addEventListener(
 
 // modal - do later
 
-// const closeModalOnButtonClick = document.querySelector('#close-button');
+// window.addEventListener('keydown', closeModalHandler);
 
-// closeModalOnButtonClick.addEventListener('click', closeBtnModalOnClick);
-
-// function closeBtnModalOnClick(event) {
-//   event.preventDefault();
-//   let backdrop = document.querySelector('backdrop-modal');
-
-//   event.currentTarget.classList.add('.visually-hidden');
+// function closeModalHandler(e) {
+//   if (e.code === 'Escape') {
+//     modal.close();
+//     window.removeEventListener('keydown', closeModalHandler);
+//   }
 // }
