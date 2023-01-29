@@ -1,16 +1,41 @@
 // heart icon
 
-let heartOn = document.querySelector('#heart');
+// let heartOn = document.querySelector('#heart');
 
-heartOn.addEventListener(
-  'click',
-  () => (heartOn.style.backgroundColor = '#f8d792e5')
-);
+// heartOn.addEventListener(
+//   'click',
+//   () => (heartOn.style.backgroundColor = '#f8d792e5')
+// );
 
 // modal - do later
 
 // import * as basicLightbox from 'basiclightbox';
 // import modalURL from '../partials_html/modal.html';
+
+// const container = document.querySelector('#');
+
+// container.addEventListener('click', openModal);
+
+// const modal = basicLightbox.create(markup);
+
+// function openModal(e) {
+//   modal.show();
+
+//   window.addEventListener('keydown', closeModalHandler);
+
+//   function closeModalHandler(e) {
+//     if (e.code === 'Escape') {
+//       modal.close();
+//       window.removeEventListener('keydown', closeModalHandler);
+//     }
+//   }
+// }
+
+const divCard = document.querySelector('.js-modal-window');
+console.log(`divCard-ul`, divCard);
+divCard.addEventListener('click', openModal);
+
+const modal = document.querySelector('.js-markup__modal');
 
 const markup = `<div class="movie_card" id="bright">
             <div class="button-container"><button class="close-button" id='close-button'>Close</button></div>
@@ -69,30 +94,11 @@ const markup = `<div class="movie_card" id="bright">
             </div>
             <!-- <button class="close-button" id='close' onClick='closeDialog()'>Close</button> -->
         </div>`;
-// const container = document.querySelector('#');
 
-// container.addEventListener('click', openModal);
-
-// const modal = basicLightbox.create(markup);
-
-// function openModal(e) {
-//   modal.show();
-
-//   window.addEventListener('keydown', closeModalHandler);
-
-//   function closeModalHandler(e) {
-//     if (e.code === 'Escape') {
-//       modal.close();
-//       window.removeEventListener('keydown', closeModalHandler);
-//     }
-//   }
-// }
-
-const divCard = document.querySelector('.js-modal-window');
-const modal = document.querySelector('.js-markup__modal');
-const openModal = event => {
+function openModal(event) {
+  console.log(`!!!!touch!!!!`);
   if (event.currentTarget == event.target) return;
   modal.innerHTML = markup;
-  modal.hidden = false;
-};
-divCard.addEventListener('click', openModal);
+  // modal.remove = false;
+  modal.classList.remove('visually-hidden');
+}
