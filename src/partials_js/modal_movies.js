@@ -20,17 +20,7 @@
 
 // function openModal(e) {
 //   modal.show();
-
-//   window.addEventListener('keydown', closeModalHandler);
-
-//   function closeModalHandler(e) {
-//     if (e.code === 'Escape') {
-//       modal.close();
-//       window.removeEventListener('keydown', closeModalHandler);
-//     }
-//   }
-// }
-
+const closeModalBtn = document.querySelector('#close-button-1');
 const divCard = document.querySelector('.js-modal-window');
 console.log(`divCard-ul`, divCard);
 divCard.addEventListener('click', openModal);
@@ -96,9 +86,37 @@ const markup = `<div class="movie_card" id="bright">
         </div>`;
 
 function openModal(event) {
-  console.log(`!!!!touch!!!!`);
   if (event.currentTarget == event.target) return;
   modal.innerHTML = markup;
   // modal.remove = false;
   modal.classList.remove('visually-hidden');
 }
+
+window.addEventListener('keydown', closeModalHandler);
+modal.addEventListener('click', closeBDModal);
+const modalItself = document.querySelector('.movie_card');
+
+function closeModalHandler(e) {
+  if (e.code === 'Escape') {
+    modal.classList.add('visually-hidden');
+    //   modal.close();
+    //   window.removeEventListener('keydown', closeModalHandler);
+  }
+}
+
+function closeBDModal(e) {
+  if (e.target === e.currentTarget) {
+    modal.classList.add('visually-hidden');
+  } else if (e.target.className === 'close-button') {
+    modal.classList.add('visually-hidden');
+    // console.log(`e.target`, e);
+    // console.log(`e.currentTarget`, e.currentTarget);
+  } else return;
+}
+
+// closeModalBtn.addEventListener('click', closeByBtn);
+// console.log(`qqqqqqqqqqqqqq`, closeModalBtn);
+
+// function closeByBtn() {
+//   modal.classList.add('visually-hidden');
+// }
