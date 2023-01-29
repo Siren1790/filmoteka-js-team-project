@@ -44,18 +44,9 @@ img {
 .list-films {
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
-  gap: 15px;
-}
-
-.item-films {
-  width: 395px;
-  min-height: 634px;
-  /* border: solid 1px blue; */
 }
 
 .img-cover {
-  height: 593px;
   border-radius: 5px;
 }
 
