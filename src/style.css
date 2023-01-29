@@ -44,23 +44,30 @@ img {
 .list-films {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  row-gap: 16px;
+  justify-content: left;
+  gap: 15px;
 }
 
 .item-films {
   width: 395px;
-  height: 634px;
+  min-height: 634px;
   /* border: solid 1px blue; */
+}
+
+.img-cover {
+  height: 593px;
+  border-radius: 5px;
 }
 
 .title {
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 20px;
   line-height: calc(24 / 20);
   color: black;
+
+  margin-top: 12px;
 }
 
 .film-info {
@@ -68,7 +75,7 @@ img {
   color: #ff6b01;
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 16px;
   line-height: calc(24 / 16);
 }
@@ -95,8 +102,10 @@ img {
   text-align: center;
   text-transform: uppercase;
   border-radius: 5px;
-  width: 40px;
+  width: 38px;
   height: 20px;
+  padding-top: 2px;
+  margin-top: 1px;
 }
 
 .btn-pagination {
