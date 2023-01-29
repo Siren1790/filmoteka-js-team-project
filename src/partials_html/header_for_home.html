@@ -1,27 +1,40 @@
 <header class="header">
   <section class="section">
-    <div class="container header-container">
+    <div class="container header-container_home">
       <ul class="list header-list">
-        <li>
+        <li class="logo-item">
           <a class="logo-link link" href="./index.html">
             <img class="logo-img" src="./images/film.png" alt="logo" />
             <p class="logo-txt">Filmoteka</p>
           </a>
         </li>
         <li class="header-input">
-          <label for="search">
+          <form class="search js-search-form">
             <input
-              class="input-search"
               type="text"
+              class="input-search js-search-form-input"
               placeholder="Movie search"
+              name="searchQuery"
+              autocomplete="off"
             />
-          </label>
+
+            <button class="btn-search js-search-form-button" type="submit">
+              <img
+                class="img-search"
+                src="./images/search 2.png"
+                alt="search"
+              />
+            </button>
+            <span class="search-txt js-search-badResult">
+              Search result not successful. Enter the correct movie name and
+            </span>
+          </form>
         </li>
 
         <nav class="nav">
           <ul class="list nav-list">
             <li class="nav-item">
-              <a class="link nav-link current" href="">HOME</a>
+              <a class="link nav-link nav-current-item" href="">HOME</a>
             </li>
             <li class="nav-item">
               <a class="link nav-link" href="./library.html">MY LIBRARY</a>

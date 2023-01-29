@@ -41,113 +41,24 @@ img {
   height: auto;
 }
 
-.header {
-  background-image: url(./images/header_background.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-/*
-.header-list {
-  display: flex;
-}
-
-.logo-link {
-  display: flex;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 35px;
-  color: #fff;
-  margin-right: 277px;
-}
-
-.logo-img {
-  width: 24px;
-  height: 23px;
-  margin-top: 45px;
-  margin-right: 10px;
-}
-
-.logo-txt {
-  margin-top: 40px;
-}
-
-.btn {
-  width: 148px;
-  height: 42px;
-  background-color: transparent;
-  border-radius: 4px;
-  border-color: #fff;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  color: #fff;
-}
-
-.header-btn:not(:last-child) {
-  margin-right: 16px;
-}
-
-.header-btn:hover,
-.header-btn:focus {
-  background: #ff6b01;
-  border-color: #ff6b01;
-  cursor: pointer;
-}
-
-.header-btn {
-  transition: all 200ms;
-}
-
-.header-item-btn {
-  margin-top: 114px;
-  margin-right: 310px;
-  display: flex;
-}
-
-.nav-link {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-  color: #fff;
-}
-
-.nav-list {
-  display: flex;
-  margin-top: 50px;
-}
-
-.nav-item:not(:last-child) {
-  margin-right: 40px;
-} */
-
 .list-films {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  row-gap: 16px;
 }
 
-.item-films {
-  width: 395px;
-  height: 634px;
-  /* border: solid 1px blue; */
+.img-cover {
+  border-radius: 5px;
 }
 
 .title {
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 20px;
   line-height: calc(24 / 20);
   color: black;
+
+  margin-top: 12px;
 }
 
 .film-info {
@@ -155,7 +66,7 @@ img {
   color: #ff6b01;
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 16px;
   line-height: calc(24 / 16);
 }
@@ -182,8 +93,10 @@ img {
   text-align: center;
   text-transform: uppercase;
   border-radius: 5px;
-  width: 40px;
+  width: 38px;
   height: 20px;
+  padding-top: 2px;
+  margin-top: 1px;
 }
 
 .btn-pagination {
@@ -250,6 +163,7 @@ img {
   line-height: calc(19 / 16);
   color: #545454;
 }
+
 .footer {
   background: #f7f7f7;
 }
@@ -383,14 +297,4 @@ img {
   color: #fff;
   background-color: #ff6b08;
   cursor: pointer;
-}
-
-.input-search {
-  width: 394px;
-  height: 20px;
-  background-color: transparent;
-  margin-top: 116px;
-  border: none;
-  border-bottom: 0.5px solid #ffffff;
-  color: #fff;
 }
