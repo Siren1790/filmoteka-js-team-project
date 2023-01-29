@@ -46,7 +46,7 @@ a {
 // Backdrop - DO NOT REMOVE // UNCOMMENT TO SEE MODAL
 
 .backdrop-modal {
-    background-color: tomato;
+    background-color: rgba(212, 202, 200, 0.014);
     top: 0;
     left: 0;
     z-index: 10;
@@ -62,7 +62,7 @@ a {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: tomato;
+        background-color: rgba(212, 202, 200, 0.014);
     }
 
     @media screen and (min-width: 480px) {
@@ -70,7 +70,7 @@ a {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: tomato;
+        background-color: rgba(212, 202, 200, 0.014);
     }
 
     @media screen and (min-width: 768px) {
@@ -79,7 +79,7 @@ a {
         left: 50%;
         transform: translate(-50%, -50%);
         // background-color: rgba(185, 58, 58, 0.473);
-        background-color: tomato;
+        background-color: rgba(212, 202, 200, 0.014);
     }
 
     &.is-open {
