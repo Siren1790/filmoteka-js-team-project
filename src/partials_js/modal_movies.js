@@ -9,13 +9,10 @@ heartOn.addEventListener(
 
 // modal - do later
 
-import * as basicLightbox from 'basiclightbox';
+// import * as basicLightbox from 'basiclightbox';
 // import modalURL from '../partials_html/modal.html';
 
-const markup = `<div class="backdrop-modal is-open">
-    
-<a href="#">
-        <div class="movie_card" id="bright">
+const markup = `<div class="movie_card" id="bright">
             <div class="button-container"><button class="close-button" id='close-button'>Close</button></div>
             <img class="card__main-poster"
                 src="https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg" />
@@ -71,24 +68,31 @@ const markup = `<div class="backdrop-modal is-open">
                 </div>
             </div>
             <!-- <button class="close-button" id='close' onClick='closeDialog()'>Close</button> -->
-        </div>
-</a>
-</div>`;
-const container = document.querySelector('#');
+        </div>`;
+// const container = document.querySelector('#');
 
-container.addEventListener('click', openModal);
+// container.addEventListener('click', openModal);
 
-const modal = basicLightbox.create(markup);
+// const modal = basicLightbox.create(markup);
 
-function openModal(e) {
-  modal.show();
+// function openModal(e) {
+//   modal.show();
 
-  window.addEventListener('keydown', closeModalHandler);
+//   window.addEventListener('keydown', closeModalHandler);
 
-  function closeModalHandler(e) {
-    if (e.code === 'Escape') {
-      modal.close();
-      window.removeEventListener('keydown', closeModalHandler);
-    }
-  }
-}
+//   function closeModalHandler(e) {
+//     if (e.code === 'Escape') {
+//       modal.close();
+//       window.removeEventListener('keydown', closeModalHandler);
+//     }
+//   }
+// }
+
+const divCard = document.querySelector('.js-modal-window');
+const modal = document.querySelector('.js-markup__modal');
+const openModal = event => {
+  if (event.currentTarget == event.target) return;
+  modal.innerHTML = markup;
+  modal.hidden = false;
+};
+divCard.addEventListener('click', openModal);
