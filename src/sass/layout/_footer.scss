@@ -1,3 +1,33 @@
-h5 {
-    width: 100px;
+.footer-txt {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: calc(19 / 16);
+  color: #545454;
+}
+
+.footer-list {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.footer-item:not(:last-child) {
+  margin-right: 10px;
+  display: flex;
+}
+
+.footer-link {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: calc(19 / 16);
+  color: #545454;
+}
+
+.footer {
+  background: #f7f7f7;
 }
