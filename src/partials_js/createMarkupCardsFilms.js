@@ -23,9 +23,15 @@ export default function createMarkupCardsFilms(arrayMovies) {
         ? `<img class="img-cover" src="${BASE_URL_POSTER}${poster_path}" />`
         : `<img class="img-cover" src="./images/no_image.jpg" alt="no photo" width="400" height="500">`;
 
+      const ratingRow = vote_average
+        ? `<p class="rating">${vote_average.toFixed(1)}</p>`
+        : `<p class="rating visually-hidden"></p>`;
+
       return `<li class="item-films">
                 ${imgRow}
-                <p class="title">${title ? title : 'Sorry, no information'} </p>
+                <p class="title">${
+                  title ? title.toUpperCase() : 'Sorry, no information'
+                } </p>
                 <div class="film-info">
                   <p class="genre">${genresLoad}</p>
                   <p class="year">${
@@ -33,11 +39,7 @@ export default function createMarkupCardsFilms(arrayMovies) {
                       ? release_date.slice(0, 4)
                       : 'Sorry, no information'
                   }</p>
-                  <p class="rating">${
-                    vote_average
-                      ? vote_average.toFixed(1)
-                      : 'Sorry, no information'
-                  }</p>
+                 ${ratingRow}
                 </div>
               </li>`;
     })
