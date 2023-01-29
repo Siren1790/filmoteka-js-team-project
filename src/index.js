@@ -1,7 +1,17 @@
 
 import { Movie } from './partials_js/api';
-import { Genres } from './partials_js/genres';
 import createMarkupCardsFilms from './partials_js/createMarkupCardsFilms';
+import { genresCreate } from './partials_js/local_genres-storage';
+
+import {
+  saveLocalStorageTrendingMovies,
+  saveLocalStorageToWatched,
+  saveLocalStorageToQueue,
+} from './partials_js/local_storage';
+import {
+  saveStorageGenres,
+  createGenresObject,
+} from './partials_js/local_genres-storage';
 
 const mainMarkFilms = document.querySelector('.list-films');
 const paginationWrapperNode = document.querySelector('.render-pagination-list');
@@ -17,7 +27,6 @@ const DEFAULT_END_PAGINATION = [1995,1996,1997,1998,1999];
 const movie = new Movie({
   searchValue: '',
 });
-
 lastPaginationItemNode.addEventListener('click', (e) => {
   movie.fetchTrendingMovies(parseInt(e.target.textContent))
       .then(data => {
