@@ -1,10 +1,13 @@
 
-const preloader = document.querySelector('#preloader');
+import { refs } from "./refs";
 
-preloader.classList.add('show-preloader');
+const preloaderHide = () => {
+	refs.preloader.classList.remove('show-preloader');
+}
 
-window.addEventListener('load', function () {
-	setTimeout(function(){
-    	preloader.classList.remove('show-preloader');
-	}, 2000);
-});
+const preloaderShow = () => {
+	refs.preloader.classList.add('show-preloader');
+}
+
+export { preloaderHide, preloaderShow }
+

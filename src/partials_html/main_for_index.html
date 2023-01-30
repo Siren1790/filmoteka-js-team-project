@@ -1,6 +1,6 @@
 <section class="section">
     <div class="container">
-        <ul class="list list-films">
+        <ul class="list list-films js-modal-window">
             <!-- JS createMarkupCardsFilms.js -->
         </ul>
     </div>
@@ -9,37 +9,21 @@
     <div class="container">
         <ul class="list list-pagination">
             <li class="item-pagination">
-                <button class="btn-pagination btn-arrow">←</button>
+                <button class="btn-pagination btn-arrow btn-arrow-prev">←</button>
             </li>
             <li class="item-pagination">
-                <button class="btn-pagination">1</button>
+                <button class="btn-pagination first-page">1</button>
+            </li>
+
+            <ul class="render-pagination-list" style="display: flex; padding: 0 0 0 0;">
+                <!-- render dynamic pagination -->
+            </ul>
+
+            <li class="item-pagination">
+                <button class="btn-pagination last-page">20</button>
             </li>
             <li class="item-pagination">
-                <button class="btn-pagination">...</button>
-            </li>
-            <li class="item-pagination">
-                <button class="btn-pagination">13</button>
-            </li>
-            <li class="item-pagination">
-                <button class="btn-pagination">14</button>
-            </li>
-            <li class="item-pagination">
-                <button class="btn-pagination">15</button>
-            </li>
-            <li class="item-pagination">
-                <button class="btn-pagination">16</button>
-            </li>
-            <li class="item-pagination">
-                <button class="btn-pagination">17</button>
-            </li>
-            <li class="item-pagination">
-                <button class="btn-pagination">...</button>
-            </li>
-            <li class="item-pagination">
-                <button class="btn-pagination">20</button>
-            </li>
-            <li class="item-pagination">
-                <button class="btn-pagination btn-arrow">→</button>
+                <button class="btn-pagination btn-arrow btn-arrow-next">→</button>
             </li>
         </ul>
     </div>

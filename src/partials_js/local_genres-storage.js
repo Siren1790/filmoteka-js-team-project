@@ -1,7 +1,4 @@
-import { Movie } from './api';
-const movie = new Movie({
-  searchValue: '',
-});
+import { movie } from './api';
 
 /**
  *
@@ -11,7 +8,7 @@ const movie = new Movie({
 function createGenresObject(array) {
   const genres = {};
 
-  array.forEach(({ id, name }) => {
+  array.genres.forEach(({ id, name }) => {
     genres[id] = name;
   });
   console.log('Genres created Object: ', genres);
@@ -59,13 +56,13 @@ function markUpModalGenres(genre_ids, loadGenres) {
  */
 function markUpMainGenres(genre_ids, loadGenres) {
   let genresForMain = markUpModalGenres(genre_ids, loadGenres);
-  if (genresForMain) {
-    if (genresForMain.length > 3) {
+  if (genresForMain && genresForMain.length >= 1) {
+    if (genresForMain.length > 3 || genresForMain.join('').length > 20) {
       genresForMain.splice(2, 0, ' Other');
       genresForMain.splice(3);
       return genresForMain;
     } else return genresForMain;
-  } else return (genresForMain = 'Sorry, but no information about genres');
+  } else return (genresForMain = 'No information about genres');
 }
 
 function genresCreate() {
