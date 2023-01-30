@@ -13,7 +13,6 @@ refs.searchButton.addEventListener('submit', onSubmit);
 
 async function onSubmit(event) {
   event.preventDefault();
-  search = event.currentTarget.searchQuery.value;
   if (event.currentTarget.searchQuery.value) {
     refs.searchBadResult.hidden = true;
     movie.setSearchValue(event.currentTarget.searchQuery.value);
