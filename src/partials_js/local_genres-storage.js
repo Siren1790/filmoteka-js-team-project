@@ -11,7 +11,6 @@ function createGenresObject(array) {
   array.genres.forEach(({ id, name }) => {
     genres[id] = name;
   });
-  console.log('Genres created Object: ', genres);
   return genres;
 }
 
