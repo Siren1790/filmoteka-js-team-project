@@ -15,3 +15,4 @@
 
 import './partials_js/pagination';
 import './partials_js/search';
+import './partials_js/local_storage';
