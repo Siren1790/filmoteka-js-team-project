@@ -1,4 +1,3 @@
-
 import { Movie } from './api';
 import createMarkupCardsFilms from './createMarkupCardsFilms';
 
@@ -31,10 +30,11 @@ async function onSubmit(event) {
 
     result.then(value => {
       const searchAnswer = value.results;
-      console.log('Siren', value)
+      // console.log('Siren', value);
       if (searchAnswer.length > 0) {
         // console.log('value =', searchAnswer);
         // markup();
+        localStorage.setItem('dataArray', JSON.stringify(searchAnswer));
         markSearchFilms.innerHTML = createMarkupCardsFilms(searchAnswer);
       } else {
         searchBadResult.hidden = false;
