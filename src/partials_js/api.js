@@ -3,13 +3,20 @@ import { refsApi } from './refs';
 
 
 class Movie {
-  constructor({ searchValue }) {
-    this.searchValue = searchValue;
+  // constructor({ searchValue }) {
+    constructor() {
+    this.searchValue = '';
     this.currentPage = 1;
     this.isFirstPageActive = true;
     this.isLastPageActive = false;
+    this.firstRequest = true;
   }
-
+  setSearchValue(value){
+    this.searchValue = value;
+  }
+  getSearchValue(){
+    return this.searchValue;
+  }
   // init(){
   //   return this.fetchTrendingMovies();
   // }
@@ -150,8 +157,6 @@ class Movie {
   }
 }
 
-const movie = new Movie({
-  searchValue: '',
-});
+const movie = new Movie();
 
 export { Movie, movie };

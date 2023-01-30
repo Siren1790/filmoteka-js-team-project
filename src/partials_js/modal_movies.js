@@ -22,7 +22,6 @@
 //   modal.show();
 const closeModalBtn = document.querySelector('#close-button-1');
 const divCard = document.querySelector('.js-modal-window');
-console.log(`divCard-ul`, divCard);
 divCard.addEventListener('click', openModal);
 
 const modal = document.querySelector('.js-markup__modal');

@@ -1,48 +1,35 @@
 
-import { Movie } from './api';
+import { movie } from './api';
 import createMarkupCardsFilms from './createMarkupCardsFilms';
+import { refs } from './refs';
 
-const markSearchFilms = document.querySelector('.list-films');
-let search = '';
-const searchValue = document.querySelector('.js-search-form-input');
-const searchButton = document.querySelector('.js-search-form');
-const searchBadResult = document.querySelector('.js-search-badResult');
-searchBadResult.hidden = true;
-searchValue.addEventListener('input', onInput);
-function onInput() {
-  // console.log('searchValue =', searchValue.value);
-  search = searchValue.value;
-}
+refs.searchBadResult.hidden = true;
 
 async function hideErrorMessage() {
-  setTimeout(() => (searchBadResult.hidden = true), 2000);
+  setTimeout(() => (refs.searchBadResult.hidden = true), 2000);
 }
 
-searchButton.addEventListener('submit', onSubmit);
+refs.searchButton.addEventListener('submit', onSubmit);
+
 async function onSubmit(event) {
   event.preventDefault();
-  const movie = new Movie({
-    searchValue: search,
-  });
-
-  if (search) {
-    searchBadResult.hidden = true;
+  if (event.currentTarget.searchQuery.value) {
+    refs.searchBadResult.hidden = true;
+    movie.setSearchValue(event.currentTarget.searchQuery.value);
+    event.currentTarget.searchQuery.value = '';
     const result = movie.fetchSearchMovies();
 
     result.then(value => {
       const searchAnswer = value.results;
-      console.log('Siren', value)
       if (searchAnswer.length > 0) {
-        // console.log('value =', searchAnswer);
-        // markup();
-        markSearchFilms.innerHTML = createMarkupCardsFilms(searchAnswer);
+        refs.markSearchFilms.innerHTML = createMarkupCardsFilms(searchAnswer);
       } else {
-        searchBadResult.hidden = false;
+        refs.searchBadResult.hidden = false;
         hideErrorMessage();
       }
     });
   } else {
-    searchBadResult.hidden = false;
+    refs.searchBadResult.hidden = false;
     hideErrorMessage();
   }
 }
