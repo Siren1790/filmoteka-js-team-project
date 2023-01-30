@@ -1,7 +1,4 @@
-import { Movie } from './api';
-const movie = new Movie({
-  searchValue: '',
-});
+import { movie } from './api';
 
 /**
  *
@@ -11,7 +8,7 @@ const movie = new Movie({
 function createGenresObject(array) {
   const genres = {};
 
-  array.forEach(({ id, name }) => {
+  array.genres.forEach(({ id, name }) => {
     genres[id] = name;
   });
   console.log('Genres created Object: ', genres);

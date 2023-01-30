@@ -150,4 +150,8 @@ class Movie {
   }
 }
 
-export { Movie };
+const movie = new Movie({
+  searchValue: '',
+});
+
+export { Movie, movie };
