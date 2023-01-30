@@ -10,9 +10,9 @@ class Movie {
     this.isLastPageActive = false;
   }
 
-  init(){
-    return this.fetchTrendingMovies();
-  }
+  // init(){
+  //   return this.fetchTrendingMovies();
+  // }
 
   setIsFirstPageActive(value){
     this.isFirstPageActive = value

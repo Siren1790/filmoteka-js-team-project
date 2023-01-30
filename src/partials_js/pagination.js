@@ -98,7 +98,7 @@ const renderPaginationDynamicList = (nodes) => {
 })
 
 
-movie.init().then(data => {
+movie.fetchTrendingMovies().then(data => {
   const { results, total_pages } = data;
 
   refs.lastPaginationItemNode.textContent = total_pages;
