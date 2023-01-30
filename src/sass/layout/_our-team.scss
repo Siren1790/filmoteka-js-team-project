@@ -1,8 +1,26 @@
-.basicLightbox {
-    overflow: scroll;
+.our-team-modal {
+    cursor: pointer;
+    text-decoration: none;
+
+    width: 500px;
 }
 
-.our-team {
-    cursor: pointer;
-    text-decoration: underline;
+.team-list {
+    display: flex;
+    flex-wrap: wrap;
 }
+
+.team-img {
+    display: flex;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 30%;
+    object-fit: cover;
+
+}
+
+.img {
+    object-fit: cover;
+}
+
