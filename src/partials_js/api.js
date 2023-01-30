@@ -10,9 +10,9 @@ class Movie {
     this.isLastPageActive = false;
   }
 
-  init(){
-    return this.fetchTrendingMovies();
-  }
+  // init(){
+  //   return this.fetchTrendingMovies();
+  // }
 
   setIsFirstPageActive(value){
     this.isFirstPageActive = value
@@ -44,7 +44,7 @@ class Movie {
       const { data } = response;
 
       this.setIsFirstPageActive([1,2,3].includes(pageIndex))
-      this.setIsLastPageActive([data.total_pages - 1, data.total_pages - 2, data.total_pages - 3].includes(pageIndex))
+      this.setIsLastPageActive([1000, 999, 998].includes(pageIndex))
 
       return data;
     } catch (error) {
