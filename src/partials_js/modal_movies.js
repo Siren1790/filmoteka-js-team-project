@@ -1,25 +1,3 @@
-// heart icon
-
-// let heartOn = document.querySelector('#heart');
-
-// heartOn.addEventListener(
-//   'click',
-//   () => (heartOn.style.backgroundColor = '#f8d792e5')
-// );
-
-// modal - do later
-
-// import * as basicLightbox from 'basiclightbox';
-// import modalURL from '../partials_html/modal.html';
-
-// const container = document.querySelector('#');
-
-// container.addEventListener('click', openModal);
-
-// const modal = basicLightbox.create(markup);
-
-// function openModal(e) {
-//   modal.show();
 const closeModalBtn = document.querySelector('#close-button-1');
 const divCard = document.querySelector('.js-modal-window');
 divCard.addEventListener('click', openModal);
@@ -87,7 +65,6 @@ const markup = `<div class="movie_card" id="bright">
 function openModal(event) {
   if (event.currentTarget == event.target) return;
   modal.innerHTML = markup;
-  // modal.remove = false;
   modal.classList.remove('visually-hidden');
 }
 
@@ -98,8 +75,6 @@ const modalItself = document.querySelector('.movie_card');
 function closeModalHandler(e) {
   if (e.code === 'Escape') {
     modal.classList.add('visually-hidden');
-    //   modal.close();
-    //   window.removeEventListener('keydown', closeModalHandler);
   }
 }
 
@@ -108,14 +83,5 @@ function closeBDModal(e) {
     modal.classList.add('visually-hidden');
   } else if (e.target.className === 'close-button') {
     modal.classList.add('visually-hidden');
-    // console.log(`e.target`, e);
-    // console.log(`e.currentTarget`, e.currentTarget);
   } else return;
 }
-
-// closeModalBtn.addEventListener('click', closeByBtn);
-// console.log(`qqqqqqqqqqqqqq`, closeModalBtn);
-
-// function closeByBtn() {
-//   modal.classList.add('visually-hidden');
-// }
