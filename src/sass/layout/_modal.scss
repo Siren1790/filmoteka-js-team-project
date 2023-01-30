@@ -412,6 +412,7 @@ a {
 .button-container {
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 5px;
     transform: translate(3%, 10%);
 }
 
@@ -428,6 +429,32 @@ a {
     transition: all 0.4s;
 
 
+
+    &:hover {
+        border-color: var(--accent-color);
+        background-color: var(--accent-color);
+        transform: scale(1.1);
+    }
+
+    &:focus {
+        border-color: var(--accent-color);
+        color: var(--accent-color);
+        transform: scale(1.1);
+    }
+}
+
+.watch-trailer {
+    width: 120px;
+    height: 30px;
+    padding: 5px;
+    z-index: 30;
+    border: 1px solid var(--accent-color);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+    border-radius: 5px;
+    font-style: inherit;
+    font-weight: 500;
+    background-color: rgb(226, 220, 220);
+    transition: all 0.4s;
 
     &:hover {
         border-color: var(--accent-color);
