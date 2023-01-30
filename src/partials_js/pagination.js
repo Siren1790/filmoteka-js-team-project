@@ -1,22 +1,8 @@
-import {Movie} from './api';
-import createMarkupCardsFilms from './createMarkupCardsFilms'
-const mainMarkFilms = document.querySelector('.list-films');
-const paginationWrapperNode = document.querySelector('.render-pagination-list');
-const lastPaginationItemNode = document.querySelector('.last-page');
-const firstPaginationItemNode = document.querySelector('.first-page');
+import {movie} from './api';
+import { refs } from './refs';
+import createMarkupCardsFilms from './createMarkupCardsFilms';
 
-const prevPaginationNode = document.querySelector('.btn-arrow-prev');
-const nextPaginationNode = document.querySelector('.btn-arrow-next');
-
-const DEFAULT_START_PAGINATION = [2,3,4,5,6];
-const DEFAULT_END_PAGINATION = [995,996,997,998,999];
-
-const movie = new Movie({
-  searchValue: '',
-});
-
-
-lastPaginationItemNode.addEventListener('click', (e) => {
+refs.lastPaginationItemNode.addEventListener('click', (e) => {
   movie.fetchTrendingMovies(parseInt(e.target.textContent))
       .then(data => {
         preparePaginationDynamicList();
@@ -24,7 +10,7 @@ lastPaginationItemNode.addEventListener('click', (e) => {
         return renderMovies(data.results)
       });
 })
-firstPaginationItemNode.addEventListener('click', () => {
+refs.firstPaginationItemNode.addEventListener('click', () => {
 movie.fetchTrendingMovies()
       .then(data => {
         preparePaginationDynamicList();
@@ -35,7 +21,7 @@ movie.fetchTrendingMovies()
 
 document.addEventListener('click', (e) => {
   const target = e.target.closest('.item-pagination');
-  const isTargetCorrect = target && target.parentElement.classList.contains(paginationWrapperNode.classList.value);
+  const isTargetCorrect = target && target.parentElement.classList.contains(refs.paginationWrapperNode.classList.value);
 
   if (isTargetCorrect) {
     if(target.textContent === '...') return;
@@ -64,12 +50,12 @@ const getNextValues = (currentPage) => {
 const getPaginationValues = (currentPage = 1) => {
   if (movie.isFirstPageActive) {
     // prevPaginationNode.style.display = none;
-    return DEFAULT_START_PAGINATION;
+    return refs.DEFAULT_START_PAGINATION;
   }
 
   if (movie.isLastPageActive) {
     // nextPaginationNode.style.display = none;
-    return DEFAULT_END_PAGINATION;
+    return refs.DEFAULT_END_PAGINATION;
   }
 
   return [getPrevValues(currentPage), currentPage, getNextValues(currentPage)];
@@ -88,16 +74,16 @@ const preparePaginationDynamicList = () => {
 }
 
 const renderPaginationDynamicList = (nodes) => {
-  if (paginationWrapperNode.childNodes.length > 0){
-    paginationWrapperNode.innerHTML = null;
+  if (refs.paginationWrapperNode.childNodes.length > 0){
+    refs.paginationWrapperNode.innerHTML = null;
   }
 
   if (nodes.length !== 0){
-    paginationWrapperNode.insertAdjacentHTML('afterbegin', nodes.join("").replace(',', '.'))
+    refs.paginationWrapperNode.insertAdjacentHTML('afterbegin', nodes.join("").replace(',', '.'))
   }
 }
 
-[prevPaginationNode, nextPaginationNode].map((node) => {
+[refs.prevPaginationNode, refs.nextPaginationNode].map((node) => {
   node && node.addEventListener('click', () => {
     const pageValue = node.classList.value.includes('prev') ?
       (movie.currentPage -= 1) : (movie.currentPage += 1);
@@ -115,7 +101,7 @@ const renderPaginationDynamicList = (nodes) => {
 movie.init().then(data => {
   const { results, total_pages } = data;
 
-  lastPaginationItemNode.textContent = total_pages;
+  refs.lastPaginationItemNode.textContent = total_pages;
 
   preparePaginationDynamicList();
 
@@ -123,5 +109,5 @@ movie.init().then(data => {
 });
 
 const renderMovies = (data) => {
-  mainMarkFilms.innerHTML = createMarkupCardsFilms(data);
+  refs.mainMarkFilms.innerHTML = createMarkupCardsFilms(data);
 }
