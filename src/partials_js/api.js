@@ -9,6 +9,7 @@ class Movie {
     this.currentPage = 1;
     this.isFirstPageActive = true;
     this.isLastPageActive = false;
+    this.firstRequest = true;
   }
   setSearchValue(value){
     this.searchValue = value;
@@ -139,7 +140,6 @@ class Movie {
               }
           });
 
-        console.log(response.data);
         return response.data;
       } catch (error) {
         console.error(error);
