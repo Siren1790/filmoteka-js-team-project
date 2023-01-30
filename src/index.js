@@ -22,7 +22,7 @@ const prevPaginationNode = document.querySelector('.btn-arrow-prev');
 const nextPaginationNode = document.querySelector('.btn-arrow-next');
 
 const DEFAULT_START_PAGINATION = [2,3,4,5,6];
-const DEFAULT_END_PAGINATION = [1995,1996,1997,1998,1999];
+const DEFAULT_END_PAGINATION = [995,996,997,998,999];
 
 const movie = new Movie({
   searchValue: '',
@@ -74,10 +74,12 @@ const getNextValues = (currentPage) => {
 
 const getPaginationValues = (currentPage = 1) => {
   if (movie.isFirstPageActive) {
+    // prevPaginationNode.style.display = none;
     return DEFAULT_START_PAGINATION;
   }
 
   if (movie.isLastPageActive) {
+    // nextPaginationNode.style.display = none;
     return DEFAULT_END_PAGINATION;
   }
 
