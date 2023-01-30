@@ -1,13 +1,26 @@
-.our-team-modal {
-    cursor: pointer;
-    text-decoration: none;
+.underlay {
+    background-color: rgba(232, 226, 226, 0.735);
+}
 
-    width: 500px;
+.our-team-modal {
+    text-decoration: none;
+    background-color: rgb(241, 238, 238);
+    margin: 0 auto;
+    // border: 2px solid rgb(247, 136, 1);
+    border-radius: 10px;
+
+
+    width: 555px;
+    padding: 15px;
+    padding-right: 0px;
+    box-shadow: rgba(227, 164, 39, 0.61) 0px 60px 40px -7px;
+
 }
 
 .team-list {
     display: flex;
     flex-wrap: wrap;
+    gap: 15px;
 }
 
 .team-img {
@@ -15,12 +28,54 @@
     width: 120px;
     height: 120px;
     overflow: hidden;
-    border-radius: 30%;
+    border-radius: 40%;
     object-fit: cover;
+    margin-bottom: -50px;
 
 }
 
 .img {
     object-fit: cover;
+}
+
+.member-name {
+    font-weight: 500;
+    color: white;
+    position: relative;
+    padding: 2px;
+    transform: translateY(20px);
+    width: 65px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgba(247, 136, 1, 0.879);
+    cursor: default;
+}
+
+.member-role {
+    font-weight: 500;
+    color: white;
+    position: relative;
+    transform: translateY(25px);
+    padding: 2px;
+    width: 80px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgba(247, 136, 1, 0.836);
+    cursor: default;
+}
+
+.git-logo {
+    position: relative;
+    transform: translateY(-110px);
+    width: 20px;
+    text-align: center;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.4s;
+        
+            &:focus,
+            &:hover {
+                fill: rgb(247, 136, 1);
+            }
 }
 
