@@ -1,33 +1,57 @@
+.footer {
+  background: #f7f7f7;
+}
+
 .footer-txt {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: calc(19 / 16);
   color: #545454;
-}
+  width: 280px;
 
-.footer-list {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
   padding-top: 30px;
   padding-bottom: 30px;
+  margin: 0 auto;
 }
 
-.footer-item:not(:last-child) {
-  margin-right: 10px;
+.row-two {
   display: flex;
+  gap: 10px;
 }
 
-.footer-link {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: calc(19 / 16);
-  color: #545454;
+.footer-icon {
+  width: 14px;
+  height: 12.88px;
+  margin-top: 2px;
+  background-image: url('../images/like.png');
 }
 
-.footer {
-  background: #f7f7f7;
+.team-ref {
+  color: var(--color-black);
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover, 
+  &:focus {
+    color: var(--accent-color);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .footer-txt {
+    flex-direction: row;
+    width: 484px;
+    font-size: 16px;
+  }
+
+  .footer-icon {
+    margin-top: 3px;
+  }
 }
