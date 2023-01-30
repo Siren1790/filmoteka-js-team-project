@@ -1,0 +1,2 @@
+const e=document.querySelector(".js-underlay");document.querySelector(".js-our-team").addEventListener("click",(function(t){e.classList.remove("visually-hidden")})),window.addEventListener("keydown",(function(t){"Escape"===t.code&&e.classList.add("visually-hidden")})),e.addEventListener("click",(function(t){if(t.target!==t.currentTarget)return;e.classList.add("visually-hidden")}));document.querySelector(".our-team-modal");
+//# sourceMappingURL=index.3d3ef005.js.map
