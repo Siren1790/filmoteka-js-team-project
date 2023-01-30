@@ -1,6 +1,8 @@
 const refs = {
+    //spiner.js
     preloader: document.querySelector('#preloader'),
     mainMarkFilms: document.querySelector('.list-films'),
+    //pagination.js
     paginationWrapperNode: document.querySelector('.render-pagination-list'),
     lastPaginationItemNode: document.querySelector('.last-page'),
     firstPaginationItemNode: document.querySelector('.first-page'),
@@ -8,6 +10,10 @@ const refs = {
     nextPaginationNode: document.querySelector('.btn-arrow-next'),
     DEFAULT_START_PAGINATION: [2,3,4,5,6],
     DEFAULT_END_PAGINATION: [995,996,997,998,999],
+    //serch.js
+    markSearchFilms: document.querySelector('.list-films'),
+    searchButton: document.querySelector('.js-search-form'),
+    searchBadResult: document.querySelector('.js-search-badResult'),
 
 }
 
