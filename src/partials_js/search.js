@@ -31,8 +31,7 @@ async function onSubmit(event) {
 
     result.then(value => {
       const searchAnswer = value.results;
-      // console.log('value.length =', searchAnswer.length);
-      searchValue.value = '';
+      console.log('Siren', value)
       if (searchAnswer.length > 0) {
         // console.log('value =', searchAnswer);
         // markup();

@@ -1,11 +1,6 @@
 import axios from 'axios';
+import { refsApi } from './refs';
 
-const API_KEY = 'fed7db976d902fcdece547680e82ff9e';
-const API_URL_TRENDING_MOVIE =
-  'https://api.themoviedb.org/3/trending/movie/day';
-const API_URL_SEARCH_MOVIE = 'https://api.themoviedb.org/3/search/movie';
-const API_URL_MOVIE_DETAILS = 'https://api.themoviedb.org/3/movie/';
-const API_URL_MOVIE_GENRES = 'https://api.themoviedb.org/3/genre/movie/list';
 
 class Movie {
   constructor({ searchValue }) {
@@ -39,9 +34,9 @@ class Movie {
     this.setCurrentPage(pageIndex);
 
     try {
-      const response = await axios.get(API_URL_TRENDING_MOVIE, {
+      const response = await axios.get(refsApi.API_URL_TRENDING_MOVIE, {
         params: {
-          api_key: API_KEY,
+          api_key: refsApi.API_KEY,
           page: pageIndex,
         },
       });
@@ -63,9 +58,9 @@ class Movie {
    */
   async fetchSearchMovies() {
     try {
-      const response = await axios.get(API_URL_SEARCH_MOVIE, {
+      const response = await axios.get(refsApi.API_URL_SEARCH_MOVIE, {
         params: {
-          api_key: API_KEY,
+          api_key: refsApi.API_KEY,
           query: this.searchValue,
           language: 'en-US',
           page: this.currentPage,
@@ -88,9 +83,9 @@ class Movie {
    */
   async fetchMovieDetails(id = `39860`) {
     try {
-      const response = await axios.get(`${API_URL_MOVIE_DETAILS}${id}`, {
+      const response = await axios.get(`${refsApi.API_URL_MOVIE_DETAILS}${id}`, {
         params: {
-          api_key: API_KEY,
+          api_key: refsApi.API_KEY,
           language: 'en-US',
         },
       });
@@ -113,7 +108,7 @@ class Movie {
         `https://api.themoviedb.org/3/movie/${id}/videos`,
         {
           params: {
-            api_key: API_KEY,
+            api_key: refsApi.API_KEY,
           },
         }
       );
@@ -132,9 +127,9 @@ class Movie {
    */
   async fetchMovieGenres() {
       try {
-          const response = await axios.get(API_URL_MOVIE_GENRES, {
+          const response = await axios.get(refsApi.API_URL_MOVIE_GENRES, {
               params: {
-                  api_key: API_KEY,
+                  api_key: refsApi.API_KEY,
               }
           });
 
