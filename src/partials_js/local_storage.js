@@ -6,7 +6,7 @@ import { refs, refsStorage } from './refs';
  */
 async function saveLocalStorageTrendingMovies() {
   const trendingMovies = await movie.fetchTrendingMovies();
-  localStorage.setItem(refsStorage.CURRENT_MOVIES, JSON.stringify(trendingMovies.results));
+  localStorage.setItem(refsStorage.CURRENT_FILMS, JSON.stringify(trendingMovies.results));
 }
 saveLocalStorageTrendingMovies();
 
@@ -31,7 +31,7 @@ async function saveLocalStorageToQueue() {
  */
 async function saveLocalStorageSearchMovie() {
   const searchMovie = await movie.fetchSearchMovies();
-  localStorage.setItem(refsStorage.CURRENT_MOVIES, JSON.stringify(searchMovie.results));
+  localStorage.setItem(refsStorage.CURRENT_FILMS, JSON.stringify(searchMovie.results));
 }
 
 refs.btnToWatched.addEventListener('click', saveLocalStorageToWatched);
