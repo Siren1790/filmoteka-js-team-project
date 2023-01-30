@@ -139,7 +139,7 @@
 //   modal.classList.remove('visually-hidden');
 // }
 
-const modalTeam = document.querySelector('.underlay');
+const modalTeam = document.querySelector('.js-underlay');
 const teamOpenModal = document.querySelector('.js-our-team');
 
 teamOpenModal.addEventListener('click', openTeam);
