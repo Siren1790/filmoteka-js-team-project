@@ -38,6 +38,6 @@ function onSubmit(event) {
   } else {
     refs.searchBadResult.hidden = false;
     hideErrorMessage();
-  preloaderHide();
   }
+  preloaderHide();
 }
