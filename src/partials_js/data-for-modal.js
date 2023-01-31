@@ -10,7 +10,7 @@ import { refs, refsApi, refsStorage } from './refs';
 function restDataForModal(e) {
   // if (e.currentTarget === e.target) return;
 
-  console.log('err');
+  // console.log('err');
 
   const targetClickMovieCard = e.target.closest('.item-films');
   const currentMoviesFromStorage = JSON.parse(
@@ -21,12 +21,12 @@ function restDataForModal(e) {
   const movieIdFromClick = targetClickMovieCard.dataset.indexFilm;
   // .textContent.trim();
 
-  console.log(currentMoviesFromStorage);
+  // console.log(currentMoviesFromStorage);
 
   const indexOfMovie = currentMoviesFromStorage.findIndex(
     movieObj => movieObj.id == movieIdFromClick
   );
-  console.log(currentMoviesFromStorage[indexOfMovie]);
+  // console.log(currentMoviesFromStorage[indexOfMovie]);
 
   return currentMoviesFromStorage[indexOfMovie];
   // const currentMovie = currentMoviesFromStorage[indexOfMovie];
@@ -46,33 +46,33 @@ function createStringOfGenres(arrayCodesOfGenres) {
   return arrayStringGenresMovie.join(', ');
 }
 
-function createDataObjectForModal(fullObjectMovie) {
-  const {
-    // poster_path,
-    // title,
-    original_title,
-    vote_average,
-    vote_count,
-    popularity,
-    genre_ids,
-    overview,
-  } = fullObjectMovie;
+// function createDataObjectForModal(fullObjectMovie) {
+//   const {
+//     // poster_path,
+//     // title,
+//     original_title,
+//     vote_average,
+//     vote_count,
+//     popularity,
+//     genre_ids,
+//     overview,
+//   } = fullObjectMovie;
 
-  const dataObjForModal = {
-    poster: BASE_URL_POSTER + poster_path,
-    title,
-    original_title,
-    rating: vote_average,
-    votes: vote_count,
-    popularity,
-    genres: createStringOfGenres(genre_ids),
-    about: overview,
-  };
+//   const dataObjForModal = {
+//     poster: BASE_URL_POSTER + poster_path,
+//     title,
+//     original_title,
+//     rating: vote_average,
+//     votes: vote_count,
+//     popularity,
+//     genres: createStringOfGenres(genre_ids),
+//     about: overview,
+//   };
 
-  return dataObjForModal;
-}
+//   return dataObjForModal;
+// }
 
-export { restDataForModal };
+export { restDataForModal, createStringOfGenres };
 
 async function fetchMovieVideo(id = 505642) {
   try {

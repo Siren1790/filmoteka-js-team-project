@@ -1,4 +1,5 @@
-import { restDataForModal } from './data-for-modal';
+import { restDataForModal, createStringOfGenres } from './data-for-modal';
+import { markUpGenresInModal } from './createMarkupCardsFilms';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 
@@ -48,7 +49,7 @@ function createMarkupModal(objMovieInfo) {
                     </tr>
                     <tr class="row">
                         <td class="row-title">Genre</td>
-                        <td>${genre_ids}</td>
+                        <td>${createStringOfGenres(genre_ids)}</td>
                     </tr>
                 </table>
         
