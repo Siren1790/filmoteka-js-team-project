@@ -3,6 +3,8 @@
   min-height: 443px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+
   @media screen and (min-width: 768px) {
     width: 336px;
     min-height: 494px;
@@ -12,9 +14,6 @@
     width: 395px;
     min-height: 634px;
     margin-bottom: 15px;
-
-    // ========= 4 cards
-    // width: 292px;
   }
 }
 

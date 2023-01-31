@@ -1,3 +1,5 @@
+import {saveLocalStorageToWatched, saveLocalStorageToQueue} from "./local_storage"
+
 const closeModalBtn = document.querySelector('#close-button-1');
 const divCard = document.querySelector('.js-modal-window');
 divCard.addEventListener('click', openModal);
@@ -75,10 +77,18 @@ const markup = `<div class="movie-card" id="bright">
 
         </div>`;
 
+function addEventListenerToBtn ()  {
+    const watchBtn = modal.querySelector('.watch-btn');
+    const queueBtn = modal.querySelector('.queue-btn');
+    watchBtn.addEventListener('click', saveLocalStorageToWatched);
+    queueBtn.addEventListener('click', saveLocalStorageToQueue);
+}
+
 function openModal(event) {
   if (event.currentTarget == event.target) return;
   modal.innerHTML = markup;
   modal.classList.remove('visually-hidden');
+  addEventListenerToBtn ()
 }
 
 window.addEventListener('keydown', closeModalHandler);
