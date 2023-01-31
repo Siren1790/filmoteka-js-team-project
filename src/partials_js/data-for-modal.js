@@ -1,29 +1,38 @@
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 const genres = JSON.parse(localStorage.getItem('genres'));
+import axios from 'axios';
+import { refs, refsApi, refsStorage } from './refs';
 
-const divCard = document.querySelector('.list-films');
+// const divCard = document.querySelector('.list-films');
 
-divCard.addEventListener('click', restDataForModal);
+// refs.mainMarkFilms.addEventListener('click', restDataForModal);
 
 function restDataForModal(e) {
-  if (e.currentTarget === e.target) return;
+  // if (e.currentTarget === e.target) return;
+
+  console.log('err');
 
   const targetClickMovieCard = e.target.closest('.item-films');
   const currentMoviesFromStorage = JSON.parse(
-    localStorage.getItem('currentMovies')
+    localStorage.getItem('currentFilms')
   );
-  const titleMoviesFromClick = targetClickMovieCard
-    .querySelector('.title')
-    .textContent.trim();
+
+  // console.dir(targetClickMovieCard);
+  const movieIdFromClick = targetClickMovieCard.dataset.indexFilm;
+  // .textContent.trim();
+
+  console.log(currentMoviesFromStorage);
 
   const indexOfMovie = currentMoviesFromStorage.findIndex(
-    movieObj => movieObj.title === titleMoviesFromClick
+    movieObj => movieObj.id == movieIdFromClick
   );
+  console.log(currentMoviesFromStorage[indexOfMovie]);
 
-  const currentMovie = currentMoviesFromStorage[indexOfMovie];
+  return currentMoviesFromStorage[indexOfMovie];
+  // const currentMovie = currentMoviesFromStorage[indexOfMovie];
 
-  dataObjForModal = createDataObjectForModal(currentMovie);
-  console.log(dataObjForModal);
+  // dataObjForModal = createDataObjectForModal(currentMovie);
+  // console.log(dataObjForModal);
 }
 
 function createStringOfGenres(arrayCodesOfGenres) {
@@ -39,8 +48,8 @@ function createStringOfGenres(arrayCodesOfGenres) {
 
 function createDataObjectForModal(fullObjectMovie) {
   const {
-    poster_path,
-    title,
+    // poster_path,
+    // title,
     original_title,
     vote_average,
     vote_count,
@@ -64,3 +73,25 @@ function createDataObjectForModal(fullObjectMovie) {
 }
 
 export { restDataForModal };
+
+async function fetchMovieVideo(id = 505642) {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/videos`,
+      {
+        params: {
+          api_key: refsApi.API_KEY,
+        },
+      }
+    );
+
+    console.log(response.data);
+    console.log('Trailer Response Results', response.data.results);
+    console.log('Trailer Response Results Key', response.data.results[0].key);
+    return response.data.results[0].key;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// fetchMovieVideo();

@@ -1,10 +1,24 @@
+import { restDataForModal } from './data-for-modal';
+
 const closeModalBtn = document.querySelector('#close-button-1');
 const divCard = document.querySelector('.js-modal-window');
 divCard.addEventListener('click', openModal);
 
 const modal = document.querySelector('.js-markup__modal');
 
-const markup = `<div class="movie_card" id="bright">
+function createMarkupModal(objMovieInfo) {
+  const {
+    poster_path,
+    title,
+    original_title,
+    vote_average,
+    vote_count,
+    popularity,
+    genre_ids,
+    overview,
+  } = objMovieInfo;
+
+  const markup = `<div class="movie_card" id="bright">
             <div class="button-container">
                 <button class="close-button" id='close-button'>Close</button>
             </div>
@@ -67,9 +81,13 @@ const markup = `<div class="movie_card" id="bright">
 
         </div>`;
 
+  return markup;
+}
+
 function openModal(event) {
   if (event.currentTarget == event.target) return;
-  modal.innerHTML = markup;
+  const dataForModal = restDataForModal(event);
+  modal.innerHTML = createMarkupModal(dataForModal);
   modal.classList.remove('visually-hidden');
 }
 
