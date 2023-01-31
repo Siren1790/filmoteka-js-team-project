@@ -25,9 +25,7 @@ function saveStorageGenres(genres) {
     localStorage.setItem(key, genresState);
 }
 
-movie.fetchMovieGenres()
-  .then(createGenresObject)
-  .then(saveStorageGenres)
+
 
 /**
  *
@@ -35,3 +33,4 @@ movie.fetchMovieGenres()
  * @param {*} loadGenres
  * @returns array of genres and can use for modal
  */
+export {saveStorageGenres, createGenresObject}
