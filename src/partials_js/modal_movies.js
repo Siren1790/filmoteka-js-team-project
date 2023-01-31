@@ -1,5 +1,7 @@
 import { restDataForModal } from './data-for-modal';
 
+const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
+
 const closeModalBtn = document.querySelector('#close-button-1');
 const divCard = document.querySelector('.js-modal-window');
 divCard.addEventListener('click', openModal);
@@ -26,35 +28,33 @@ function createMarkupModal(objMovieInfo) {
                 <button class="watch-trailer js-watch-trailer" id='watch-trailer'>Watch Trailer</button>
             </div>
             <img class="card__main-poster"
-                src="https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg" />
+                src="${BASE_URL_POSTER}${poster_path}" />
             <div class="info_section">
         
-                <h1 class="card__movie-title title">Bright</h1>
+                <h1 class="card__movie-title title">${title}</h1>
         
                 <table class="card__movie-info">
                     <tr class="row">
                         <td class="row-title">Vote / Votes</td>
-                        <td><span class="votes">7.3</span> / 1260</td>
+                        <td><span class="votes">${vote_average}</span> / ${vote_count}</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Popularity</td>
-                        <td>100.2</td>
+                        <td>${popularity}</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Original Title</td>
-                        <td>A FISTFUL OF LEAD</td>
+                        <td>${original_title}</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Genre</td>
-                        <td>Western</td>
+                        <td>${genre_ids}</td>
                     </tr>
                 </table>
         
                 <div class="movie_descr">
                     <p class="movie-descr__about">About</p>
-                    <p class="movie-descr__text">
-                        Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work with
-                        an Orc to find a weapon everyone is prepared to kill for.
+                    <p class="movie-descr__text">${overview}
                     </p>
                 </div>
         
