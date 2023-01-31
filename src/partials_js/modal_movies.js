@@ -5,12 +5,15 @@ divCard.addEventListener('click', openModal);
 const modal = document.querySelector('.js-markup__modal');
 
 const markup = `<div class="movie_card" id="bright">
+            <div class="button-wrapper">
             <div class="button-container">
                 <button class="close-button" id='close-button'>Close</button>
             </div>
             <div class="button-container">
                 <button class="watch-trailer js-watch-trailer" id='watch-trailer'>Watch Trailer</button>
             </div>
+            </div>
+            <div class="info-wrapper">
             <img class="card__main-poster"
                 src="https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg" />
             <div class="info_section">
@@ -63,6 +66,7 @@ const markup = `<div class="movie_card" id="bright">
                             </svg></li>
                     </ul>
                 </div>
+            </div>
             </div>
 
         </div>`;
