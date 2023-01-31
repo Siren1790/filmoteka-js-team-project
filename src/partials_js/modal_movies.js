@@ -4,55 +4,59 @@ divCard.addEventListener('click', openModal);
 
 const modal = document.querySelector('.js-markup__modal');
 
-const markup = `<div class="movie_card" id="bright">
+const markup = `<div class="movie-card" id="bright">
             <div class="button-wrapper">
-            <div class="button-container">
+             <div class="button-container">
                 <button class="close-button" id='close-button'>Close</button>
             </div>
             <div class="button-container">
                 <button class="watch-trailer js-watch-trailer" id='watch-trailer'>Watch Trailer</button>
             </div>
             </div>
+
             <div class="info-wrapper">
-            <img class="card__main-poster"
-                src="https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg" />
-            <div class="info_section">
-        
-                <h1 class="card__movie-title title">Bright</h1>
-        
-                <table class="card__movie-info">
+
+      <div class="card-thumb">
+        <img class="card-main-poster"
+          src="https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg" />
+      </div>
+
+            <div class="info-section">
+                <h1 class="card-movie-title title reset">Bright</h1>
+
+                <table class="card-movie-info">
                     <tr class="row">
                         <td class="row-title">Vote / Votes</td>
-                        <td><span class="votes">7.3</span> / 1260</td>
+                        <td class="row-value" ><span class="votes">7.3</span> <span class="row-slash">/</span> 1260</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Popularity</td>
-                        <td>100.2</td>
+                        <td class="row-value">100.2</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Original Title</td>
-                        <td>A FISTFUL OF LEAD</td>
+                        <td class="row-value row-title-original">123456789,123456789</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Genre</td>
-                        <td>Western</td>
+                        <td class="row-value">Western</td>
                     </tr>
                 </table>
-        
-                <div class="movie_descr">
+
+                <div class="movie-descr">
                     <p class="movie-descr__about">About</p>
                     <p class="movie-descr__text">
                         Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work with
                         an Orc to find a weapon everyone is prepared to kill for.
                     </p>
                 </div>
-        
+
                 <ul class="modal-buttons">
-                    <li><button type="button" class="watch-btn">Add to Watched</button></li>
-                    <li><button type="button" class="queue-btn">Add to queue</button></li>
+                    <li><button type="button" class="watch-btn js-btn-watched">Add to Watched</button></li>
+                    <li><button type="button" class="queue-btn js-btn-queue">Add to Queue</button></li>
                 </ul>
-        
-                <div class="movie_social">
+
+                <div class="movie-social">
                     <ul class="social-icons">
                         <li><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-share" viewBox="0 0 16 16">
@@ -79,7 +83,7 @@ function openModal(event) {
 
 window.addEventListener('keydown', closeModalHandler);
 modal.addEventListener('click', closeBDModal);
-const modalItself = document.querySelector('.movie_card');
+const modalItself = document.querySelector('.movie-card');
 
 function closeModalHandler(e) {
   if (e.code === 'Escape') {
