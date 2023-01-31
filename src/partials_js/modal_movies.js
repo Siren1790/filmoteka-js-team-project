@@ -67,10 +67,18 @@ const markup = `<div class="movie_card" id="bright">
 
         </div>`;
 
+function addEventListenerToBtn ()  {
+    const watchBtn = modal.querySelector('.watch-btn');
+    const queueBtn = modal.querySelector('.queue-btn');
+    watchBtn.addEventListener('click', saveLocalStorageToWatched);
+    queueBtn.addEventListener('click', saveLocalStorageToQueue);
+}
+
 function openModal(event) {
   if (event.currentTarget == event.target) return;
   modal.innerHTML = markup;
   modal.classList.remove('visually-hidden');
+  addEventListenerToBtn ()
 }
 
 window.addEventListener('keydown', closeModalHandler);
