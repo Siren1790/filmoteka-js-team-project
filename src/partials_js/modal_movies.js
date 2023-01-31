@@ -35,7 +35,7 @@ const markup = `<div class="movie-card" id="bright">
                     </tr>
                     <tr class="row">
                         <td class="row-title">Original Title</td>
-                        <td class="row-value row-title-original">123456789,123456789</td>
+                        <td class="row-value row-title-original">fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Genre</td>

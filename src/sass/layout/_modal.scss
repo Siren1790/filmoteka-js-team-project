@@ -301,7 +301,6 @@ a {
 
 .card-movie-title {
   // font-family: "Roboto", sans-serif;
-  font-weight: 500;
   margin-bottom: 20px;
 
   // @media screen and (min-width: 480px) {
@@ -324,6 +323,8 @@ a {
 
 .card-movie-title.reset {
   margin-top: 0;
+  font-size: 20px;
+  line-height: 1.15;
 }
 .card-movie-info {
   // margin-top: 20px;
@@ -339,19 +340,24 @@ a {
 table td {
   padding-bottom: 8px;
 }
+
+table tr td:nth-child(2) {
+  word-break: break-all;
+}
+
 .row {
   text-align: left;
   font-weight: 500;
   size: 12px;
   line-height: 1.33;
-  display: flex;
+  // display: flex;
 }
 
 .row-title {
   color: var(--icon-color);
-  // display: flex;
+  display: flex;
 
-  min-width: 70px;
+  min-width: 75px;
   margin-right: 37px;
 
   @media screen and (min-width: 1280px) {
@@ -360,7 +366,6 @@ table td {
 }
 
 // .row-value {
-
 //   padding-left: 38px;
 
 //   @media screen and (min-width: 1280px) {
