@@ -47,96 +47,64 @@ a {
 
 .backdrop-modal {
   background-color: rgba(187, 49, 21, 0.566);
-  top: 0;
-  left: 0;
   z-index: 10;
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: auto;
   // transition: all 0.4s;
+ 
+    // @media screen and (min-width: 480px) {
+
+    // }
+    
+    // @media screen and (min-width: 768px) {
+
+    // }
+    
+    // @media screen and (min-width: 1280px) {
+
+    // }
 }
 
-//*МОДАЛКА
+// Modal
+
 .movie-card {
-  font-family: "Roboto", sans-serif;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 20;
-  // width: 280px;
-  // height: 940px;
-  background-color: var(--color-white);
-  border: 1px solid var(--accent-color);
-  border-radius: 10px;
-  // transition: all 0.4s;
-
-  @media screen and (max-width: 479px) {
+    font-family: "Roboto", sans-serif;
     position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  @media screen and (min-width: 480px) {
-    width: 420px;
-    height: 940px;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  @media screen and (min-width: 768px) {
-    // width: 704px;
-    // height: 552px;
-    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-
-  // @media screen and (min-width: 1280px) {
-  //   width: 806px;
-  //   height: 558px;
-  // }
-
-  // *MOДАЛКА ===============
-
-  @media screen and (max-width: 767px) {
+    z-index: 20;
     width: 280px;
     height: 940px;
-    padding: 48px 20px 40px;
-  }
+    background-color: var(--color-white);
+    border: 1px solid var(--accent-color);
+    border-radius: 10px;
+    // transition: all 0.4s;
 
-  // @media screen and (min-width: 480px) and (max-width: 767px) {
-  //   width: 420;
-  //   height: 940px;
-  //   padding: 48px 20px 40px;
-  // }
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.87), rgba(85, 78, 78, 0.274));
 
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
-    width: 704px;
-    height: 552px;
-    padding: 40px 36px;
-  }
+    animation: flicker 1.5s infinite alternate;
+    box-shadow: 0 0 4px rgb(128, 91, 91), 0 0 11px rgb(175, 112, 112), 0 0 80px rgb(109, 100, 100);
 
-  @media screen and (min-width: 1280px) {
-    min-width: 806px;
-    min-height: 558px;
-    padding: 40px 12px;
-  }
-
-  // */ MOДАЛКА=======================================
-
-  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.87), rgba(85, 78, 78, 0.274));
-
-  animation: flicker 1.5s infinite alternate;
-  box-shadow: 0 0 4px rgb(128, 91, 91), 0 0 11px rgb(175, 112, 112), 0 0 80px rgb(109, 100, 100);
+    @media screen and (min-width: 480px) {
+        width: 420px;
+        height: 940px;
+    }
+    
+    @media screen and (min-width: 768px) {
+        width: 704px;
+        height: 552px;    
+    }
+    
+    @media screen and (min-width: 1280px) {
+        width: 806px;
+        height: 558px;
+    }
 }
 
 .button-wrapper {
@@ -208,57 +176,44 @@ a {
 .info-wrapper {
   @media screen and (min-width: 768px) {
     display: flex;
-  }
-  // display: flex;
-  // flex-direction: column;
-  // padding-top: 20px;
-  // padding-bottom: 10px;
-
-  // @media screen and (min-width: 768px) {
-  //   flex-direction: row;
-
-  //     padding-top: 40px;
-  //     width: 704px;
-  //     height: 552px;
-}
-
-//   @media screen and (min-width: 1280px) {
-//     width: 806px;
-//     height: 558px;
-//   }
-
-.card-thumb {
-  // height: 200px;
-  width: 100%;
-  margin-bottom: 10px;
-
-  @media screen and (max-width: 767px) {
-    height: 357px;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 10px;
   }
 
-  @media screen and (min-width: 768px) and (min-width: 1279px) {
-    height: 374px;
-    margin-right: 68px;
-  }
+        // @media screen and (min-width: 480px) {
+    
+        // }
+    
+        // @media screen and (min-width: 768px) {
+    
+        // }
+    
+        // @media screen and (min-width: 1280px) {
+    
+        // }
 
-  @media screen and (min-width: 1280px) {
-    height: 375px;
-  }
-}
-
-.card-thumb > img {
-  display: block;
-  // width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .card-main-poster {
-  // width: 240px;
-  // height: 357px;
-  // margin: 0 auto;
-  border-radius: 5px;
-  overflow: hidden;
+    width: 240px;
+    height: 357px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+
+    // @media screen and (min-width: 480px) {
+        
+    // }
+        
+    // @media screen and (min-width: 768px) {
+        
+    // }
+        
+    // @media screen and (min-width: 1280px) {
+        
+    // }
 
   // @media screen and (min-width: 768px) {
   //   width: 264px;
@@ -274,34 +229,25 @@ a {
 }
 
 .info-section {
-  // padding: 20px 20px;
+  padding: 0px 20px;
   margin-top: 20px;
-  @media screen and (min-width: 768px) {
-    margin-top: 0;
-  }
-  @media screen and (min-width: 480px) {
-    // padding: 25px 36px;
-  }
 
-  // @media screen and (min-width: 768px) {
-  //   position: relative;
-  //   transform: translate(130%, -75%);
-  //   margin: o auto;
-  //   width: 284px;
-  //   // padding: 0px 0px;
-  // }
+//   @media screen and (min-width: 768px) {
+//     margin-top: 0;
+//   }
 
-  // @media screen and (min-width: 1280px) {
-  //   position: relative;
-  //   transform: translate(102%, -270%);
-  //   width: 391px;
-  //   height: 184px;
-  // }
+//   @media screen and (min-width: 480px) {
+//     // padding: 25px 36px;
+//   }
 }
 
 .card-movie-title {
-  // font-family: "Roboto", sans-serif;
-  margin-bottom: 20px;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    line-height: 1.15;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    height: min-content;
 
   // @media screen and (min-width: 480px) {
   //   margin-top: 20px;
@@ -321,11 +267,6 @@ a {
   }
 }
 
-.card-movie-title.reset {
-  margin-top: 0;
-  font-size: 20px;
-  line-height: 1.15;
-}
 .card-movie-info {
   // margin-top: 20px;
   width: 100%;
@@ -337,13 +278,13 @@ a {
 
   // display: flex;
 }
-table td {
-  padding-bottom: 8px;
-}
+// table td {
+//   padding-bottom: 8px;
+// }
 
-table tr td:nth-child(2) {
-  word-break: break-all;
-}
+// table tr td:nth-child(2) {
+//   word-break: break-all;
+// }
 
 .row {
   text-align: left;
@@ -365,13 +306,13 @@ table tr td:nth-child(2) {
   }
 }
 
-// .row-value {
-//   padding-left: 38px;
+.row-value {
+  padding-left: 38px;
 
-//   @media screen and (min-width: 1280px) {
-//     padding-left: 83px;
-//   }
-// }
+  @media screen and (min-width: 1280px) {
+    padding-left: 83px;
+  }
+}
 
 .row-title-original {
   text-transform: uppercase;
