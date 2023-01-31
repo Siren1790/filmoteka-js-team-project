@@ -15,9 +15,9 @@ refs.searchButton.addEventListener('submit', onSubmit);
 
 function onSubmit(event) {
   event.preventDefault();
+  preloaderShow();
   if (event.currentTarget.searchQuery.value) {
     refs.searchBadResult.hidden = true;
-    preloaderShow();
     movie.setSearchValue(event.currentTarget.searchQuery.value);
     event.currentTarget.searchQuery.value = '';
     movie.fetchSearchMovies()
@@ -28,14 +28,16 @@ function onSubmit(event) {
           saveLocalStorageMovies(searchAnswer);
           cardsMovies = getLocalStorage()
           createMarkupCardsFilms(cardsMovies);
-          preloaderHide();
+          // preloaderHide();
         } else {
           refs.searchBadResult.hidden = false;
           hideErrorMessage();
+          // preloaderHide();
         }
     });
   } else {
     refs.searchBadResult.hidden = false;
     hideErrorMessage();
+  preloaderHide();
   }
 }
