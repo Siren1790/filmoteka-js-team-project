@@ -1,10 +1,9 @@
-
 import { movie } from './api';
 import createMarkupCardsFilms from './createMarkupCardsFilms';
 import { refs } from './refs';
-import {saveLocalStorageMovies, getLocalStorage} from './local_storage';
-import {preloaderHide, preloaderShow } from './spinner';
-import { pagination } from "./pagination";
+import { saveLocalStorageMovies, getLocalStorage } from './local_storage';
+import { preloaderHide, preloaderShow } from './spinner';
+import { preparePaginationDynamicList } from './pagination';
 
 refs.searchBadResult.hidden = true;
 
@@ -14,35 +13,36 @@ async function hideErrorMessage() {
 
 refs.searchButton.addEventListener('submit', onSubmit);
 
-function onSubmit(event) {
+async function onSubmit(event) {
   event.preventDefault();
   preloaderShow();
   if (event.currentTarget.searchQuery.value) {
     refs.searchBadResult.hidden = true;
     movie.setSearchValue(event.currentTarget.searchQuery.value);
     event.currentTarget.searchQuery.value = '';
-    movie.fetchSearchMovies()
-      .then(data => {
-        const searchAnswer = data.results;
+    movie.resetPage();
+    const response = await movie.fetchSearchMovies();
+    const searchAnswer = response.results;
 
-        if (searchAnswer.length > 0) {
-          saveLocalStorageMovies(searchAnswer);
-          let cardsMovies = getLocalStorage()
-          createMarkupCardsFilms(cardsMovies);
-          movie.setCurrentPage(data.page);
-          movie.setTotalPages(data.total_pages);
-          movie.firstRequest = false;
-          pagination();
-          // preloaderHide();
-        } else {
-          refs.searchBadResult.hidden = false;
-          hideErrorMessage();
-          // preloaderHide();
-        }
-    });
+    movie.setCurrentPage(response.page);
+    movie.setTotalPages(response.total_pages);
+
+    if (searchAnswer.length > 0) {
+      saveLocalStorageMovies(searchAnswer);
+      let cardsMovies = getLocalStorage();
+      createMarkupCardsFilms(cardsMovies);
+
+      movie.firstRequest = false;
+      preparePaginationDynamicList();
+    } else {
+      refs.searchBadResult.hidden = false;
+      hideErrorMessage();
+    }
   } else {
     refs.searchBadResult.hidden = false;
     hideErrorMessage();
   }
   preloaderHide();
 }
+
+export { onSubmit };

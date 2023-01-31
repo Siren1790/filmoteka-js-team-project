@@ -2,8 +2,9 @@ import { movie } from "./api";
 import createMarkupCardsFilms from "./createMarkupCardsFilms";
 import {saveLocalStorageMovies, getLocalStorage} from './local_storage';
 import {preloaderHide, preloaderShow } from './spinner';
-import { pagination } from "./pagination";
+import { preparePaginationDynamicList} from "./pagination";
 import { saveStorageGenres, createGenresObject } from './local_genres-storage';
+
 
 async function fetchData (){
     preloaderShow();
@@ -16,24 +17,9 @@ async function fetchData (){
     saveStorageGenres(objGenres);
     let cardsMovies = getLocalStorage()
     createMarkupCardsFilms(cardsMovies.results);
-    pagination();
+    preparePaginationDynamicList();
     preloaderHide();
 }
 fetchData();
 
-// preloaderShow();
-
-// movie.fetchMovieGenres()
-//   .then(createGenresObject)
-//   .then(saveStorageGenres)
-
-// movie.fetchTrendingMovies()
-//     .then(async data => {
-//         saveLocalStorageMovies(data);
-//         // let cardsMovies = await getLocalStorage()
-//         createMarkupCardsFilms(cardsMovies.results);
-//         preloaderHide();
-//         movie.setCurrentPage(data.page);
-//         movie.setTotalPages(data.total_pages);
-//         pagination();
-// });
+export {fetchData};
