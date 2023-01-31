@@ -7,7 +7,7 @@ preloaderShow();
 movie.fetchTrendingMovies()
     .then(data => {
         saveLocalStorageMovies(data);
-        cardsMovies = getLocalStorage()
+        let cardsMovies = getLocalStorage()
         createMarkupCardsFilms(cardsMovies.results);
         preloaderHide();
 });
