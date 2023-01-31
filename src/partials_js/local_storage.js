@@ -31,4 +31,4 @@ async function saveLocalStorageToQueue() {
 refs.btnToWatched.addEventListener('click', saveLocalStorageToWatched);
 refs.btnToQueue.addEventListener('click', saveLocalStorageToQueue);
 
-export {saveLocalStorageMovies, getLocalStorage};
+export {saveLocalStorageMovies, getLocalStorage, saveLocalStorageToWatched, saveLocalStorageToQueue};
