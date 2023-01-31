@@ -3,34 +3,50 @@ import { refsApi } from './refs';
 
 
 class Movie {
-  // constructor({ searchValue }) {
     constructor() {
     this.searchValue = '';
-    this.currentPage = 1;
-    this.isFirstPageActive = true;
-    this.isLastPageActive = false;
+    this.currentPage
+    this.totalpages
+    // this.isFirstPageActive = true;
+    // this.isLastPageActive = false;
     this.firstRequest = true;
   }
+
   setSearchValue(value){
     this.searchValue = value;
   }
   getSearchValue(){
     return this.searchValue;
   }
-  // init(){
-  //   return this.fetchTrendingMovies();
+
+  // setIsFirstPageActive(value){
+  //   this.isFirstPageActive = value
   // }
 
-  setIsFirstPageActive(value){
-    this.isFirstPageActive = value
-  }
-
-  setIsLastPageActive(value){
-    this.isLastPageActive = value
-  }
+  // setIsLastPageActive(value){
+  //   this.isLastPageActive = value
+  // }
 
   setCurrentPage(value){
     this.currentPage = value;
+  }
+  setTotalPages(value){
+    this.totalpages = value;
+  }
+  getTotalPages(){
+    return this.totalpages;
+  }
+  getCurrentPage(){
+    return this.currentPage;
+  }
+  nextPage() {
+    console.log('nextPage')
+    this.setCurrentPage(this.currentPage += 1);
+  }
+
+  resetPage() {
+    console.log('resetPage')
+    this.currentPage = 1;
   }
 
   /**
@@ -47,13 +63,11 @@ class Movie {
           page: pageIndex,
         },
       });
+      return response.data;
 
-      const { data } = response;
-
-      this.setIsFirstPageActive([1,2,3].includes(pageIndex))
-      this.setIsLastPageActive([1000, 999, 998].includes(pageIndex))
-
-      return data;
+      // this.setIsFirstPageActive([1,2,3].includes(pageIndex))
+      // this.setIsLastPageActive([1000, 999, 998].includes(pageIndex))
+      
     } catch (error) {
       console.error(error);
     }
@@ -65,7 +79,7 @@ class Movie {
    */
   async fetchSearchMovies() {
     try {
-      const response = await axios.get(refsApi.API_URL_SEARCH_MOVIE, {
+      const response =  await axios.get(refsApi.API_URL_SEARCH_MOVIE, {
         params: {
           api_key: refsApi.API_KEY,
           query: this.searchValue,
@@ -74,8 +88,6 @@ class Movie {
           include_adult: 'false,',
         },
       });
-
-      console.log(response.data);
 
       return response.data;
     } catch (error) {
@@ -88,7 +100,7 @@ class Movie {
    * @param {String} id
    * @returns full information about the movie
    */
-  async fetchMovieDetails(id = `39860`) {
+  async fetchMovieDetails(id = `3986`) {
     try {
       const response = await axios.get(`${refsApi.API_URL_MOVIE_DETAILS}${id}`, {
         params: {
@@ -140,23 +152,13 @@ class Movie {
               }
           });
 
-        console.log(response.data);
         return response.data;
       } catch (error) {
         console.error(error);
       }
     }
- nextPage() {
-    console.log('nextPage')
-    this.setCurrentPage(this.currentPage += 1);
-  }
-
-  resetPage() {
-    console.log('resetPage')
-    this.setCurrentPage(1);
-  }
 }
 
 const movie = new Movie();
 
-export { Movie, movie };
+export { movie };

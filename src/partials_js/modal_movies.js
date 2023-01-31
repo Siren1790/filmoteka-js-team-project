@@ -1,26 +1,3 @@
-import { saveLocalStorageToWatched, saveLocalStorageToQueue, saveLocalStorageSearchMovie } from "./local_storage"
-// heart icon
-
-// let heartOn = document.querySelector('#heart');
-
-// heartOn.addEventListener(
-//   'click',
-//   () => (heartOn.style.backgroundColor = '#f8d792e5')
-// );
-
-// modal - do later
-
-// import * as basicLightbox from 'basiclightbox';
-// import modalURL from '../partials_html/modal.html';
-
-// const container = document.querySelector('#');
-
-// container.addEventListener('click', openModal);
-
-// const modal = basicLightbox.create(markup);
-
-// function openModal(e) {
-//   modal.show();
 const closeModalBtn = document.querySelector('#close-button-1');
 const divCard = document.querySelector('.js-modal-window');
 divCard.addEventListener('click', openModal);
@@ -28,7 +5,12 @@ divCard.addEventListener('click', openModal);
 const modal = document.querySelector('.js-markup__modal');
 
 const markup = `<div class="movie_card" id="bright">
-            <div class="button-container"><button class="close-button" id='close-button'>Close</button></div>
+            <div class="button-container">
+                <button class="close-button" id='close-button'>Close</button>
+            </div>
+            <div class="button-container">
+                <button class="watch-trailer js-watch-trailer" id='watch-trailer'>Watch Trailer</button>
+            </div>
             <img class="card__main-poster"
                 src="https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg" />
             <div class="info_section">
@@ -82,7 +64,7 @@ const markup = `<div class="movie_card" id="bright">
                     </ul>
                 </div>
             </div>
-            <!-- <button class="close-button" id='close' onClick='closeDialog()'>Close</button> -->
+
         </div>`;
 
 function addEventListenerToBtn ()  {
@@ -95,7 +77,6 @@ function addEventListenerToBtn ()  {
 function openModal(event) {
   if (event.currentTarget == event.target) return;
   modal.innerHTML = markup;
-  // modal.remove = false;
   modal.classList.remove('visually-hidden');
   addEventListenerToBtn ()
 }
@@ -107,8 +88,6 @@ const modalItself = document.querySelector('.movie_card');
 function closeModalHandler(e) {
   if (e.code === 'Escape') {
     modal.classList.add('visually-hidden');
-    //   modal.close();
-    //   window.removeEventListener('keydown', closeModalHandler);
   }
 }
 
@@ -117,14 +96,5 @@ function closeBDModal(e) {
     modal.classList.add('visually-hidden');
   } else if (e.target.className === 'close-button') {
     modal.classList.add('visually-hidden');
-    // console.log(`e.target`, e);
-    // console.log(`e.currentTarget`, e.currentTarget);
   } else return;
 }
-
-// closeModalBtn.addEventListener('click', closeByBtn);
-// console.log(`qqqqqqqqqqqqqq`, closeModalBtn);
-
-// function closeByBtn() {
-//   modal.classList.add('visually-hidden');
-// }
