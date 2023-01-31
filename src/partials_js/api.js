@@ -3,7 +3,6 @@ import { refsApi } from './refs';
 
 
 class Movie {
-  // constructor({ searchValue }) {
     constructor() {
     this.searchValue = '';
     this.currentPage = 1;
@@ -17,9 +16,6 @@ class Movie {
   getSearchValue(){
     return this.searchValue;
   }
-  // init(){
-  //   return this.fetchTrendingMovies();
-  // }
 
   setIsFirstPageActive(value){
     this.isFirstPageActive = value
@@ -47,13 +43,11 @@ class Movie {
           page: pageIndex,
         },
       });
+      return response.data;
 
-      const { data } = response;
-
-      this.setIsFirstPageActive([1,2,3].includes(pageIndex))
-      this.setIsLastPageActive([1000, 999, 998].includes(pageIndex))
-
-      return data;
+      // this.setIsFirstPageActive([1,2,3].includes(pageIndex))
+      // this.setIsLastPageActive([1000, 999, 998].includes(pageIndex))
+      
     } catch (error) {
       console.error(error);
     }
@@ -65,7 +59,7 @@ class Movie {
    */
   async fetchSearchMovies() {
     try {
-      const response = await axios.get(refsApi.API_URL_SEARCH_MOVIE, {
+      const response =  await axios.get(refsApi.API_URL_SEARCH_MOVIE, {
         params: {
           api_key: refsApi.API_KEY,
           query: this.searchValue,
@@ -74,8 +68,6 @@ class Movie {
           include_adult: 'false,',
         },
       });
-
-      console.log(response.data);
 
       return response.data;
     } catch (error) {
@@ -158,4 +150,4 @@ class Movie {
 
 const movie = new Movie();
 
-export { Movie, movie };
+export { movie };

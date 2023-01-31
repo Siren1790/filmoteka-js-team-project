@@ -2,6 +2,8 @@
 import { movie } from './api';
 import createMarkupCardsFilms from './createMarkupCardsFilms';
 import { refs } from './refs';
+import {saveLocalStorageMovies, getLocalStorage} from './local_storage';
+import {preloaderHide, preloaderShow } from './spinner';
 
 refs.searchBadResult.hidden = true;
 
@@ -11,22 +13,26 @@ async function hideErrorMessage() {
 
 refs.searchButton.addEventListener('submit', onSubmit);
 
-async function onSubmit(event) {
+function onSubmit(event) {
   event.preventDefault();
   if (event.currentTarget.searchQuery.value) {
     refs.searchBadResult.hidden = true;
+    preloaderShow();
     movie.setSearchValue(event.currentTarget.searchQuery.value);
     event.currentTarget.searchQuery.value = '';
-    const result = movie.fetchSearchMovies();
+    movie.fetchSearchMovies()
+      .then(data => {
+        const searchAnswer = data.results;
 
-    result.then(value => {
-      const searchAnswer = value.results;
-      if (searchAnswer.length > 0) {
-        refs.markSearchFilms.innerHTML = createMarkupCardsFilms(searchAnswer);
-      } else {
-        refs.searchBadResult.hidden = false;
-        hideErrorMessage();
-      }
+        if (searchAnswer.length > 0) {
+          saveLocalStorageMovies(searchAnswer);
+          cardsMovies = getLocalStorage()
+          createMarkupCardsFilms(cardsMovies);
+          preloaderHide();
+        } else {
+          refs.searchBadResult.hidden = false;
+          hideErrorMessage();
+        }
     });
   } else {
     refs.searchBadResult.hidden = false;
