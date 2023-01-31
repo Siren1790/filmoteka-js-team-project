@@ -31,6 +31,7 @@ function onSubmit(event) {
           createMarkupCardsFilms(cardsMovies);
           movie.setCurrentPage(data.page);
           movie.setTotalPages(data.total_pages);
+          movie.firstRequest = false;
           pagination();
           // preloaderHide();
         } else {

@@ -5,11 +5,15 @@ import createMarkupCardsFilms from './createMarkupCardsFilms';
 function pagination (){
   const currentPage = movie.getCurrentPage();
   const total = movie.getTotalPages();
+
   console.log(`<li class="item-pagination"><button class="btn-pagination active">${currentPage}</button></li>`)
   console.log(`<li class="item-pagination"><button class="btn-pagination">${total}</button></li>`)
 }
-  
 
+function xxx(){
+
+}
+// document.addEventListener(click, xxx)
 export { pagination }
 
 // `<li class="item-pagination"><button class="btn-pagination ${currentPage === value ? 'active' : ''}">${value}</button></li>`

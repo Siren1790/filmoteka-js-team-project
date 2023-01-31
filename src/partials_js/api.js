@@ -9,7 +9,7 @@ class Movie {
     this.totalpages
     // this.isFirstPageActive = true;
     // this.isLastPageActive = false;
-    // this.firstRequest = true;
+    this.firstRequest = true;
   }
 
   setSearchValue(value){
