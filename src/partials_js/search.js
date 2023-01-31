@@ -26,7 +26,7 @@ function onSubmit(event) {
 
         if (searchAnswer.length > 0) {
           saveLocalStorageMovies(searchAnswer);
-          cardsMovies = getLocalStorage()
+          let cardsMovies = getLocalStorage()
           createMarkupCardsFilms(cardsMovies);
           // preloaderHide();
         } else {
