@@ -5,11 +5,13 @@ import { refsApi } from './refs';
 class Movie {
     constructor() {
     this.searchValue = '';
-    this.currentPage = 1;
-    this.isFirstPageActive = true;
-    this.isLastPageActive = false;
-    this.firstRequest = true;
+    this.currentPage
+    this.totalpages
+    // this.isFirstPageActive = true;
+    // this.isLastPageActive = false;
+    // this.firstRequest = true;
   }
+
   setSearchValue(value){
     this.searchValue = value;
   }
@@ -17,16 +19,34 @@ class Movie {
     return this.searchValue;
   }
 
-  setIsFirstPageActive(value){
-    this.isFirstPageActive = value
-  }
+  // setIsFirstPageActive(value){
+  //   this.isFirstPageActive = value
+  // }
 
-  setIsLastPageActive(value){
-    this.isLastPageActive = value
-  }
+  // setIsLastPageActive(value){
+  //   this.isLastPageActive = value
+  // }
 
   setCurrentPage(value){
     this.currentPage = value;
+  }
+  setTotalPages(value){
+    this.totalpages = value;
+  }
+  getTotalPages(){
+    return this.totalpages;
+  }
+  getCurrentPage(){
+    return this.currentPage;
+  }
+  nextPage() {
+    console.log('nextPage')
+    this.setCurrentPage(this.currentPage += 1);
+  }
+
+  resetPage() {
+    console.log('resetPage')
+    this.currentPage = 1;
   }
 
   /**
@@ -80,7 +100,7 @@ class Movie {
    * @param {String} id
    * @returns full information about the movie
    */
-  async fetchMovieDetails(id = `39860`) {
+  async fetchMovieDetails(id = `3986`) {
     try {
       const response = await axios.get(`${refsApi.API_URL_MOVIE_DETAILS}${id}`, {
         params: {
@@ -137,15 +157,6 @@ class Movie {
         console.error(error);
       }
     }
- nextPage() {
-    console.log('nextPage')
-    this.setCurrentPage(this.currentPage += 1);
-  }
-
-  resetPage() {
-    console.log('resetPage')
-    this.setCurrentPage(1);
-  }
 }
 
 const movie = new Movie();

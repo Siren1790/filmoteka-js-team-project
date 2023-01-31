@@ -4,6 +4,7 @@ import createMarkupCardsFilms from './createMarkupCardsFilms';
 import { refs } from './refs';
 import {saveLocalStorageMovies, getLocalStorage} from './local_storage';
 import {preloaderHide, preloaderShow } from './spinner';
+import { pagination } from "./pagination";
 
 refs.searchBadResult.hidden = true;
 
@@ -28,6 +29,9 @@ function onSubmit(event) {
           saveLocalStorageMovies(searchAnswer);
           let cardsMovies = getLocalStorage()
           createMarkupCardsFilms(cardsMovies);
+          movie.setCurrentPage(data.page);
+          movie.setTotalPages(data.total_pages);
+          pagination();
           // preloaderHide();
         } else {
           refs.searchBadResult.hidden = false;
