@@ -29,7 +29,7 @@ const refsApi = {
 }
 
 const refsStorage = {
-  CURRENT_MOVIES: 'currentMovies',
+  CURRENT_FILMS: 'currentFilms',
   STORAGE_KEY_WATCHED: 'addToWatched',
   STORAGE_KEY_QUEUE: 'addToQueue',
 }

@@ -1,6 +1,7 @@
 import { markUpMainGenres, genresCreate } from './local_genres-storage';
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 import noPhoto from '../images/no_image.jpg';
+import { refs } from './refs';
 genresCreate();
 /**
  *
@@ -46,6 +47,8 @@ export default function createMarkupCardsFilms(arrayMovies) {
       }
     )
     .join('');
+
+  refs.searchButton.scrollIntoView({ block: 'center', behavior: 'smooth' });
 
   return markup;
 }
