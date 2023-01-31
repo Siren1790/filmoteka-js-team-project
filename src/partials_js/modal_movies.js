@@ -1,3 +1,5 @@
+import {saveLocalStorageToWatched, saveLocalStorageToQueue} from "./local_storage"
+
 const closeModalBtn = document.querySelector('#close-button-1');
 const divCard = document.querySelector('.js-modal-window');
 divCard.addEventListener('click', openModal);
