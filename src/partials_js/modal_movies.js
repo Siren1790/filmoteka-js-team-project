@@ -1,3 +1,4 @@
+import { saveLocalStorageToWatched, saveLocalStorageToQueue, saveLocalStorageSearchMovie } from "./local_storage"
 // heart icon
 
 // let heartOn = document.querySelector('#heart');
@@ -84,11 +85,19 @@ const markup = `<div class="movie_card" id="bright">
             <!-- <button class="close-button" id='close' onClick='closeDialog()'>Close</button> -->
         </div>`;
 
+function addEventListenerToBtn ()  {
+    const watchBtn = modal.querySelector('.watch-btn');
+    const queueBtn = modal.querySelector('.queue-btn');
+    watchBtn.addEventListener('click', saveLocalStorageToWatched);
+    queueBtn.addEventListener('click', saveLocalStorageToQueue);
+}
+
 function openModal(event) {
   if (event.currentTarget == event.target) return;
   modal.innerHTML = markup;
   // modal.remove = false;
   modal.classList.remove('visually-hidden');
+  addEventListenerToBtn ()
 }
 
 window.addEventListener('keydown', closeModalHandler);
