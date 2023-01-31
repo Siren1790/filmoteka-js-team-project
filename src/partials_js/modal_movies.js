@@ -1,4 +1,7 @@
-import {saveLocalStorageToWatched, saveLocalStorageToQueue} from "./local_storage"
+import { restDataForModal, createStringOfGenres } from './data-for-modal';
+import { markUpGenresInModal } from './createMarkupCardsFilms';
+
+const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 
 const closeModalBtn = document.querySelector('#close-button-1');
 const divCard = document.querySelector('.js-modal-window');
@@ -6,7 +9,19 @@ divCard.addEventListener('click', openModal);
 
 const modal = document.querySelector('.js-markup__modal');
 
-const markup = `<div class="movie_card" id="bright">
+function createMarkupModal(objMovieInfo) {
+  const {
+    poster_path,
+    title,
+    original_title,
+    vote_average,
+    vote_count,
+    popularity,
+    genre_ids,
+    overview,
+  } = objMovieInfo;
+
+  const markup = `<div class="movie_card" id="bright">
             <div class="button-container">
                 <button class="close-button" id='close-button'>Close</button>
             </div>
@@ -14,35 +29,33 @@ const markup = `<div class="movie_card" id="bright">
                 <button class="watch-trailer js-watch-trailer" id='watch-trailer'>Watch Trailer</button>
             </div>
             <img class="card__main-poster"
-                src="https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg" />
+                src="${BASE_URL_POSTER}${poster_path}" />
             <div class="info_section">
         
-                <h1 class="card__movie-title title">Bright</h1>
+                <h1 class="card__movie-title title">${title}</h1>
         
                 <table class="card__movie-info">
                     <tr class="row">
                         <td class="row-title">Vote / Votes</td>
-                        <td><span class="votes">7.3</span> / 1260</td>
+                        <td><span class="votes">${vote_average}</span> / ${vote_count}</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Popularity</td>
-                        <td>100.2</td>
+                        <td>${popularity}</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Original Title</td>
-                        <td>A FISTFUL OF LEAD</td>
+                        <td>${original_title}</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Genre</td>
-                        <td>Western</td>
+                        <td>${createStringOfGenres(genre_ids)}</td>
                     </tr>
                 </table>
         
                 <div class="movie_descr">
                     <p class="movie-descr__about">About</p>
-                    <p class="movie-descr__text">
-                        Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work with
-                        an Orc to find a weapon everyone is prepared to kill for.
+                    <p class="movie-descr__text">${overview}
                     </p>
                 </div>
         
@@ -69,18 +82,22 @@ const markup = `<div class="movie_card" id="bright">
 
         </div>`;
 
-function addEventListenerToBtn ()  {
-    const watchBtn = modal.querySelector('.watch-btn');
-    const queueBtn = modal.querySelector('.queue-btn');
-    watchBtn.addEventListener('click', saveLocalStorageToWatched);
-    queueBtn.addEventListener('click', saveLocalStorageToQueue);
+  return markup;
+}
+
+function addEventListenerToBtn() {
+  const watchBtn = modal.querySelector('.watch-btn');
+  const queueBtn = modal.querySelector('.queue-btn');
+  watchBtn.addEventListener('click', saveLocalStorageToWatched);
+  queueBtn.addEventListener('click', saveLocalStorageToQueue);
 }
 
 function openModal(event) {
   if (event.currentTarget == event.target) return;
-  modal.innerHTML = markup;
+  const dataForModal = restDataForModal(event);
+  modal.innerHTML = createMarkupModal(dataForModal);
   modal.classList.remove('visually-hidden');
-  addEventListenerToBtn ()
+  addEventListenerToBtn();
 }
 
 window.addEventListener('keydown', closeModalHandler);
