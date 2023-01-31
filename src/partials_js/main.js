@@ -8,6 +8,8 @@ movie.fetchTrendingMovies()
     .then(data => {
         saveLocalStorageMovies(data);
         let cardsMovies = getLocalStorage()
+        console.log("Paga", data.page);
+        console.log('Total', data.total_pages)
         createMarkupCardsFilms(cardsMovies.results);
         preloaderHide();
 });

@@ -1,4 +1,3 @@
-import { markUpMainGenres} from './local_genres-storage';
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 import noPhoto from '../images/no_image.jpg';
 import { refs } from './refs';
@@ -22,13 +21,24 @@ function markUpGenresInModal(genre_ids, loadGenres) {
   return genersArray;
 }
 
+function markUpMainGenres(genre_ids, loadGenres) {
+  let genresForMain = markUpGenresInModal(genre_ids, loadGenres);
+  if (genresForMain && genresForMain.length >= 1) {
+    if (genresForMain.length > 3 || genresForMain.join('').length > 20) {
+      genresForMain.splice(2, 0, ' Other');
+      genresForMain.splice(3);
+      return genresForMain;
+    } else return genresForMain;
+  } else return (genresForMain = 'No information about genres');
+}
+
 export default function createMarkupCardsFilms(arrayMovies) {
   let markup = arrayMovies.map(
       ({ poster_path, title, genre_ids, release_date, vote_average, id }) => {
         let genresState = localStorage.getItem('genres');
         const loadGenres = JSON.parse(genresState);
 
-        let genresLoad = markUpGenresInModal(genre_ids, loadGenres);
+        let genresLoad = markUpMainGenres(genre_ids, loadGenres);
 
         const imgRow = poster_path
           ? `<img class="img-cover" src="${BASE_URL_POSTER}${poster_path}" />`
