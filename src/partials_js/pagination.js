@@ -1,112 +1,139 @@
 import { movie } from './api';
 import { refs } from './refs';
+import createMarkupCardsFilms from './createMarkupCardsFilms';
+import { saveLocalStorageMovies } from './local_storage';
 
 import { fetchData } from './main';
 
-const HIDE_STYLES = "opacity: 0; position: relative; z-index: -100";
-const DEFAULT_STYLES = "opacity: 1; position: relative; z-index: 1";
+const HIDE_STYLES = 'opacity: 0; position: relative; z-index: -100'; // сховати кнопку
+const DEFAULT_STYLES = 'opacity: 1; position: relative; z-index: 1'; // показати кнопку
 
-document.addEventListener('click', (e) => {
+document.addEventListener('click', e => { //реакція на кнопки які нарисовані динамічно
   const target = e.target.closest('.item-pagination');
-  const isTargetCorrect = target && target.parentElement.classList.contains(refs.paginationWrapperNode.classList.value);
+  const isTargetCorrect =
+    target &&
+    target.parentElement.classList.contains(
+      refs.paginationWrapperNode.classList.value
+    );
 
-  if (isTargetCorrect) {
-
+  if (isTargetCorrect) { // нічого не робити, якщо натиснуто на крапки
     if (target.textContent === '...') return;
 
-    movie.setCurrentPage(parseInt(target.textContent));
-
-    fetchData();
+    movie.setCurrentPage(parseInt(target.textContent)); // тягнемо з кнопки номер
+          if (movie.firstRequest) {
+              fetchData();
+      } else {
+        searchPagination();
+    }
   }
 });
 
-const getPrevValues = (currentPage) => {
-  if (currentPage >= 5) {
-    return ['...', currentPage -2, currentPage -1]
-  }
-  //
-  if (currentPage > 2 && currentPage < 5){
-    return ["...", currentPage -1]
-  }
-
-  if(currentPage <= 2){
-    return['...']
-  }
-
-  return [currentPage -2, currentPage -1]
+const getPrevValues = (currentPage) => { //формуємо другу кнопку
+    return ['...', currentPage - 2, currentPage - 1];
 };
 
-const getNextValues = (currentPage) => {
-  return [currentPage + 1, currentPage + 2, '...'];
+const getNextValues = (currentPage, total_pages) => { //формуємо передостанню кнопку
+  return [currentPage + 1, currentPage + 2, '...', total_pages];
 };
 
-const getPaginationValues = (currentPage, total_pages = 1000) => {
-  if (currentPage === total_pages || currentPage === 999 || currentPage === 998 || currentPage === 997) {
-    refs.nextPaginationNode.style.cssText = HIDE_STYLES
-    return ['...', total_pages - 5, total_pages - 4, total_pages - 3, total_pages - 2, total_pages - 1]
-
+const getPaginationValues = (currentPage, total_pages) => { // формує початковий набір кнопок
+      if (currentPage === 1) {
+    refs.prevPaginationNode.style.cssText = HIDE_STYLES; // сховати стрілку <--
+    refs.nextPaginationNode.style.cssText = DEFAULT_STYLES; // показати стрілку -->
   }
-
-  if (currentPage === 1) {
-    refs.prevPaginationNode.style.display = 'none';
-    return [2, 3, 4, 5, 6, '...'];
+    if (currentPage === total_pages) {
+    refs.prevPaginationNode.style.cssText = DEFAULT_STYLES; // показати стрілку <--
+    refs.nextPaginationNode.style.cssText = HIDE_STYLES; // сховати стрілку -->
   }
+  if (currentPage > 1 && currentPage < total_pages) {
+    refs.prevPaginationNode.style.cssText = DEFAULT_STYLES; // показати стрілку <--
+    refs.nextPaginationNode.style.cssText = DEFAULT_STYLES; // показати стрілку -->
+  }
+  if (currentPage === 1 && total_pages > 9) return [1, 2, 3, 4, 5, 6, 7, '...', total_pages];
+  if ((total_pages - currentPage) < 4 && total_pages > 9) return [1, '...', total_pages - 6, total_pages - 5, total_pages - 4, total_pages - 3, total_pages - 2, total_pages - 1, total_pages];
+  if (currentPage > 1 && currentPage < 5 && total_pages > 9) return [1, 2, 3, 4, 5, 6, 7, '...', total_pages];
+  if (currentPage > 4 && total_pages > 9) return [1, getPrevValues(currentPage), currentPage, getNextValues(currentPage, total_pages)];
 
-  refs.nextPaginationNode.style.cssText = DEFAULT_STYLES;
-  refs.prevPaginationNode.style.cssText = DEFAULT_STYLES;
-  return [getPrevValues(currentPage), currentPage, getNextValues(currentPage)];
+  if (total_pages > 1 && total_pages < 10) {
+    let arr= [];
+    for (let i = 1; i <= total_pages; i++) {
+      arr[i-1] = i;
+    }
+    return arr;
+  }
 };
 
-const preparePaginationDynamicList = () => {
-  const { currentPage, total_pages } = movie;
-  refs.paginationWrapperNode.innerHTML = '';
+const preparePaginationDynamicList = () => { // відповірає за формування масиву з кнопками
+  // const { currentPage, total_pages } = movie;
+  const currentPage = movie.getCurrentPage();
+  const total_pages = movie.getTotalPages();
+  console.log(total_pages);
+  refs.paginationWrapperNode.innerHTML = ''; // очищаємо блок для кнопок пагінації
+  if (total_pages === 1) {
+    refs.prevPaginationNode.style.cssText = HIDE_STYLES; // сховати стрілку <--
+    refs.nextPaginationNode.style.cssText = HIDE_STYLES; // сховати стрілку -->
+        return;
+  }
 
   const paginationValues = getPaginationValues(currentPage, total_pages);
   let nodesArray;
 
-  nodesArray = paginationValues.flat(1).map((value) => {
-    return `<li class="item-pagination"><button class="btn-pagination ${currentPage === value ? 'active' : ''}">${value}</button></li>`
+  nodesArray = paginationValues.flat(1).map(value => { // формує масив кнопок
+    return `<li class="item-pagination"><button class="btn-pagination ${
+      currentPage === value ? 'active' : ''
+    }">${value}</button></li>`;
   });
-  renderPaginationDynamicList(nodesArray);
+  renderPaginationDynamicList(nodesArray);  // ТУТ МАЛЮЄМО КНОПКИ
 };
 
-const renderPaginationDynamicList = (nodes) => {
-  if (refs.paginationWrapperNode.childNodes.length > 0){
+const renderPaginationDynamicList = nodes => { // відповірає за малювання кнопок
+  if (refs.paginationWrapperNode.childNodes.length > 0) {
     refs.paginationWrapperNode.innerHTML = null;
   }
-  if (nodes.length !== 0){
-    refs.paginationWrapperNode.insertAdjacentHTML('afterbegin', nodes.join("").replace(',', '.'))
+  if (nodes.length !== 0) {
+    refs.paginationWrapperNode.insertAdjacentHTML(
+      'afterbegin',
+      nodes.join('').replace(',', '.')
+    );
   }
 };
 
-[refs.prevPaginationNode, refs.nextPaginationNode].map((node) => {
-  node && node.addEventListener('click', async () => {
-    const pageValue = node.classList.value.includes('prev') ? (movie.currentPage -= 1) : (movie.currentPage += 1);
+[refs.prevPaginationNode, refs.nextPaginationNode].map(node => { // відповірає за реакцію на стрілки
+  node &&
+    node.addEventListener('click', async () => {
+      const pageValue = node.classList.value.includes('prev')
+        ? (movie.currentPage -= 1)
+        : (movie.currentPage += 1);
 
-    movie.setCurrentPage(pageValue);
+      // movie.setCurrentPage(pageValue); // записуємо номер поточної сторінки
 
-    const data = movie.isSearched ? await movie.fetchSearchMovies() : await movie.fetchTrendingMovies()
+      // const data = movie.isSearched
+      //   ? await movie.fetchSearchMovies() // запит на популярні фільми
+      //   : await movie.fetchTrendingMovies(); // запит на пошук фільмів
 
-    if (data.results.length) {
-      fetchData(data.results);
+      // if (data.results.length) {
+      //   fetchData(); // робимо запит і відмальовуємо популярні фільми
+      // }
+
+      if (movie.firstRequest) {
+              fetchData();
+      } else {
+        searchPagination();
     }
-  })
+    });
 });
 
-[refs.lastPaginationItemNode, refs.firstPaginationItemNode].map((node) => {
-  node && node.addEventListener('click', async (e) => {
-    movie.setCurrentPage(parseInt(e.target.textContent));
 
-    const data = await movie.fetchTrendingMovies();
-
-    if (data.results.length) {
-      fetchData(data.results);
-    }
-  })
-});
-// Replace with init method
-if(refs.lastPaginationItemNode != null){
-  refs.lastPaginationItemNode.innerText  = '1000';
-}
+async function searchPagination () {
+      //SEARCH PAGINATION
+      //preloaderShow();
+      const moviesSearch = await movie.fetchSearchMovies();
+      // console.log('moviesSearch', moviesSearch);
+      saveLocalStorageMovies(moviesSearch);
+      movie.setCurrentPage(moviesSearch.page);
+      createMarkupCardsFilms(moviesSearch.results);
+      preparePaginationDynamicList();
+      //preloaderHide();
+  }
 
 export { preparePaginationDynamicList };
