@@ -1,5 +1,4 @@
 // const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
-const genres = JSON.parse(localStorage.getItem('genres'));
 // import axios from 'axios';
 // import { refs, refsApi, refsStorage } from './refs';
 
@@ -18,6 +17,7 @@ function restDataForModal(e) {
 }
 
 function createStringOfGenres(arrayCodesOfGenres) {
+  const genres = JSON.parse(localStorage.getItem('genres'));
   return arrayCodesOfGenres.reduce((stringGenres, keyOfGenre) => {
     if (!stringGenres) {
       return genres[keyOfGenre];

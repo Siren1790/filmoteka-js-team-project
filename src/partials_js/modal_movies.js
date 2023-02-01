@@ -1,6 +1,7 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 import { markUpGenresInModal } from './createMarkupCardsFilms';
 import { saveLocalStorageToWatched, saveLocalStorageToQueue } from './local_storage';
+import { refsStorage } from './refs';
 import noPhoto from '../images/no_image.jpg';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
@@ -16,12 +17,16 @@ function openModal(event) {
   const objectInfoMovie = restDataForModal(event);
   const markup = createMarkupModal(objectInfoMovie);
   backdropModal.innerHTML = markup;
+
+
+
   document.body.classList.add('stop-scrolling');
   addEventListenerToBtn();
 }
 
 function createMarkupModal(objMovieInfo) {
   const {
+    id,
     poster_path,
     title,
     original_title,
@@ -46,7 +51,7 @@ function createMarkupModal(objMovieInfo) {
 
         <div class="info-wrapper">
 
-            <div class="#">
+            <div class="">
                 <img class="card-main-poster"
                     src="${imgSource}" />
             </div>
@@ -86,8 +91,8 @@ function createMarkupModal(objMovieInfo) {
 
                 <div class="desktop-wrapper">
                 <ul class="modal-buttons">
-                    <li><button type="button" class="watch-btn js-btn-watched">Add to Watched</button></li>
-                    <li><button type="button" class="queue-btn js-btn-queue">Add to Queue</button></li>
+                    <li><button type="button" class="watch-btn js-btn-watched" data-id="${id}">Add to Watched</button></li>
+                    <li><button type="button" class="queue-btn js-btn-queue" data-id="${id}">Add to Queue</button></li>
                 </ul>
 
                 </div>
@@ -102,12 +107,73 @@ function createMarkupModal(objMovieInfo) {
 function addEventListenerToBtn() {
   const watchBtn = document.querySelector('.js-btn-watched');
   const queueBtn = document.querySelector('.js-btn-queue');
-  watchBtn.addEventListener('click', saveLocalStorageToWatched);
-  queueBtn.addEventListener('click', saveLocalStorageToQueue);
+
+  const movieId = watchBtn.dataset.id;
+  const indexOfMovieInWatched = checkForMovieInLocalStorage(movieId, refsStorage.STORAGE_KEY_WATCHED);
+  const indexOfMovieInQueue = checkForMovieInLocalStorage(movieId, refsStorage.STORAGE_KEY_QUEUE);
+
+  // if (!) {
+
+  // }
+  //*  watchBtn.addEventListener
+  watchBtn.addEventListener('click', (e) => {
+    addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_WATCHED);
+    // const pushArray = [];
+    // array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
+    // const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
+    // // array.results[indexOfMovie];
+    // pushArray.push(array.results[indexOfMovie]);
+    // console.log(pushArray);
+
+    // arrayWatched = JSON.parse(localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED));
+    // console.log(arrayWatched);
+    // if (arrayWatched) {
+    //   arrayWatched.push(array.results[indexOfMovie]);
+    //   localStorage.setItem(refsStorage.STORAGE_KEY_WATCHED, JSON.stringify(arrayWatched));
+    // } else {
+    //   localStorage.setItem(refsStorage.STORAGE_KEY_WATCHED, JSON.stringify(pushArray));
+    // }
+  });
+
+
+  // * queueBtn.addEventListene
+  queueBtn.addEventListener('click', (e) => {
+    addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
+    //   const pushArray = [];
+    //   array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
+    //   const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
+    //   console.log(array.results[indexOfMovie]);
+    //   pushArray.push(array.results[indexOfMovie]);
+    //   console.log(pushArray);
+
+    //   arrayWatched = JSON.parse(localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE));
+    //   console.log(arrayWatched);
+    //   if (arrayWatched) {
+    //     arrayWatched.push(array.results[indexOfMovie]);
+    //     localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(arrayWatched));
+    //   } else {
+    //     localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(pushArray));
+    //   }
+  });
 }
 
-function addToLibrary() {
-  const m
+
+function addSelectedFilmsLocalStorage(e, key) {
+  const pushArray = [];
+  array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
+  const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
+  // array.results[indexOfMovie];
+  pushArray.push(array.results[indexOfMovie]);
+  console.log(pushArray);
+
+  arrayWatched = JSON.parse(localStorage.getItem(key));
+  console.log(arrayWatched);
+  if (arrayWatched) {
+    arrayWatched.push(array.results[indexOfMovie]);
+    localStorage.setItem(key, JSON.stringify(arrayWatched));
+  } else {
+    localStorage.setItem(key, JSON.stringify(pushArray));
+  }
 }
 
 window.addEventListener('keydown', closeModalHandler);
@@ -129,3 +195,28 @@ function closeBDModal(e) {
     document.body.classList.remove('stop-scrolling');
   } else return;
 }
+
+function checkForMovieInLocalStorage(id, key) {
+  const arrayMovies = JSON.parse(localStorage.getItem(key));
+  if (!arrayMovies) {
+    return;
+  }
+  const indexOfMovie = arrayMovies.findIndex(movie => movie.id === id);
+  return indexOfMovie;
+}
+
+// const pushArray = [];
+// array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
+// const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
+// console.log(array.results[indexOfMovie]);
+// pushArray.push(array.results[indexOfMovie]);
+// console.log(pushArray);
+
+// arrayWatched = JSON.parse(localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE));
+// console.log(arrayWatched);
+// if (arrayWatched) {
+//   arrayWatched.push(array.results[indexOfMovie]);
+//   localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(arrayWatched));
+// } else {
+//   localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(pushArray));
+// }
