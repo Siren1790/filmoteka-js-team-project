@@ -1,5 +1,6 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 import { markUpGenresInModal } from './createMarkupCardsFilms';
+import noPhoto from '../images/no_image.jpg';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 const backdropModal = document.querySelector('.js-markup__modal');
@@ -30,6 +31,8 @@ function createMarkupModal(objMovieInfo) {
     overview,
   } = objMovieInfo;
 
+  const imgSource = poster_path ? BASE_URL_POSTER + poster_path : noPhoto;
+
   const markup = `<div class="movie-card" id="bright">
         <div class="button-wrapper">
             <div class="button-container">
@@ -44,7 +47,7 @@ function createMarkupModal(objMovieInfo) {
     
             <div class="#">
                 <img class="card-main-poster"
-                    src="${BASE_URL_POSTER}${poster_path}" />
+                    src="${imgSource}" />
             </div>
     
             <div class="info-section">
@@ -55,7 +58,9 @@ function createMarkupModal(objMovieInfo) {
                 <table class="card-movie-info">
                     <tr class="row">
                         <td class="row-title">Vote / Votes</td>
-                        <td class="row-value"><span class="votes">${vote_average}</span> / ${vote_count}</td>
+                        <td class="row-value"><span class="votes">${vote_average.toFixed(
+                          1
+                        )}</span> / ${vote_count}</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Popularity</td>
