@@ -5,10 +5,8 @@ import { refsApi } from './refs';
 class Movie {
     constructor() {
     this.searchValue = '';
-    this.currentPage
+    this.currentPage = 1;
     this.totalpages
-    // this.isFirstPageActive = true;
-    // this.isLastPageActive = false;
     this.firstRequest = true;
   }
 
@@ -19,16 +17,11 @@ class Movie {
     return this.searchValue;
   }
 
-  // setIsFirstPageActive(value){
-  //   this.isFirstPageActive = value
-  // }
-
-  // setIsLastPageActive(value){
-  //   this.isLastPageActive = value
-  // }
-
   setCurrentPage(value){
     this.currentPage = value;
+  }
+  getCurrentPage(){
+    return this.currentPage;
   }
   setTotalPages(value){
     this.totalpages = value;
@@ -36,16 +29,13 @@ class Movie {
   getTotalPages(){
     return this.totalpages;
   }
-  getCurrentPage(){
-    return this.currentPage;
-  }
+
   nextPage() {
     console.log('nextPage')
     this.setCurrentPage(this.currentPage += 1);
   }
 
   resetPage() {
-    console.log('resetPage')
     this.currentPage = 1;
   }
 
@@ -53,20 +43,15 @@ class Movie {
    *
    * @returns a list of popular movies for today
    */
-  async fetchTrendingMovies(pageIndex = 1) {
-    this.setCurrentPage(pageIndex);
-
+  async fetchTrendingMovies() {
     try {
       const response = await axios.get(refsApi.API_URL_TRENDING_MOVIE, {
         params: {
           api_key: refsApi.API_KEY,
-          page: pageIndex,
+          page: this.currentPage,
         },
       });
       return response.data;
-
-      // this.setIsFirstPageActive([1,2,3].includes(pageIndex))
-      // this.setIsLastPageActive([1000, 999, 998].includes(pageIndex))
       
     } catch (error) {
       console.error(error);
