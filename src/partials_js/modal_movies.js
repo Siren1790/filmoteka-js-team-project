@@ -58,6 +58,7 @@ const markup = `    <div class="movie-card" id="bright">
                     </p>
                 </div>
     
+                <div class="desktop-wrapper">
                 <ul class="modal-buttons">
                     <li><button type="button" class="watch-btn js-btn-watched">Add to Watched</button></li>
                     <li><button type="button" class="queue-btn js-btn-queue">Add to Queue</button></li>
@@ -80,6 +81,7 @@ const markup = `    <div class="movie-card" id="bright">
                             </svg>
                         </li>
                     </ul>
+                </div>
                 </div>
             </div>
         </div>
