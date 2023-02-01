@@ -1,5 +1,6 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 import { getTrailerPath } from './data-for-trailer';
+import noPhoto from '../images/no_image.jpg';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 const backdropModal = document.querySelector('.js-markup__modal');
@@ -12,11 +13,11 @@ function openModal(event) {
   // }
   backdropModal.classList.remove('visually-hidden');
   const objectInfoMovie = restDataForModal(event);
-  getTrailerPath(objectInfoMovie.id);
   const markup = createMarkupModal(objectInfoMovie);
   backdropModal.innerHTML = markup;
   document.body.classList.add('stop-scrolling');
   addEventListenerToBtn();
+  getTrailerPath(objectInfoMovie.id);
 }
 
 function createMarkupModal(objMovieInfo) {
@@ -31,21 +32,30 @@ function createMarkupModal(objMovieInfo) {
     overview,
   } = objMovieInfo;
 
+  const imgSource = poster_path ? BASE_URL_POSTER + poster_path : noPhoto;
+
   const markup = `<div class="movie-card" id="bright">
         <div class="button-wrapper">
             <div class="button-container">
                 <button class="close-button" id='close-button'>Close</button>
             </div>
             <div class="button-container">
-                <button class="watch-trailer js-watch-trailer visually-hidden" id='watch-trailer'><a href="" class="js-link-tailer" target="_blank" rel="noopener noreferrer">Watch trailer</a></button>
-            </div>
+  <button
+    class="watch-trailer js-watch-trailer visually-hidden"
+    id="watch-trailer"
+  >
+    <a href="" class="js-link-tailer" target="_blank" rel="noopener noreferrer">
+      Watch trailer
+    </a>
+  </button>
+</div>;
         </div>
     
         <div class="info-wrapper">
     
             <div class="#">
                 <img class="card-main-poster"
-                    src="${BASE_URL_POSTER}${poster_path}" />
+                    src="${imgSource}" />
             </div>
     
             <div class="info-section">
@@ -56,7 +66,9 @@ function createMarkupModal(objMovieInfo) {
                 <table class="card-movie-info">
                     <tr class="row">
                         <td class="row-title">Vote / Votes</td>
-                        <td class="row-value"><span class="votes">${vote_average}</span> / ${vote_count}</td>
+                        <td class="row-value"><span class="votes">${vote_average.toFixed(
+                          1
+                        )}</span> / ${vote_count}</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Popularity</td>
