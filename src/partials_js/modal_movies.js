@@ -1,5 +1,5 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
-import { markUpGenresInModal } from './createMarkupCardsFilms';
+import { getTrailerPath } from './data-for-trailer';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 const backdropModal = document.querySelector('.js-markup__modal');
@@ -12,6 +12,7 @@ function openModal(event) {
   // }
   backdropModal.classList.remove('visually-hidden');
   const objectInfoMovie = restDataForModal(event);
+  getTrailerPath(objectInfoMovie.id);
   const markup = createMarkupModal(objectInfoMovie);
   backdropModal.innerHTML = markup;
   document.body.classList.add('stop-scrolling');
@@ -36,7 +37,7 @@ function createMarkupModal(objMovieInfo) {
                 <button class="close-button" id='close-button'>Close</button>
             </div>
             <div class="button-container">
-                <button class="watch-trailer js-watch-trailer" id='watch-trailer'>Watch Trailer</button>
+                <button class="watch-trailer js-watch-trailer visually-hidden" id='watch-trailer'><a href="" class="js-link-tailer" target="_blank" rel="noopener noreferrer">Watch trailer</a></button>
             </div>
         </div>
     
