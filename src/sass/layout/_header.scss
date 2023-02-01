@@ -111,9 +111,8 @@
     margin-right: 16px;
   }
 }
-.header-btn--active,
-.header-btn:hover,
-.header-btn:focus {
+
+.header-btn:hover {
   background: #ff6b01;
   border-color: #ff6b01;
   cursor: pointer;
@@ -140,6 +139,11 @@
     width: 148px;
     height: 42px;
   }
+}
+
+.header-btn-active {
+  background: #ff6b01;
+  border-color: #ff6b01;
 }
 
 .header-item-btn {
@@ -226,7 +230,7 @@
 
   &:hover,
   &:focus {
-  border-bottom: 0.5px solid var(--accent-color);
+    border-bottom: 0.5px solid var(--accent-color);
   }
 
   @media screen and (min-width: 768px) {
@@ -236,7 +240,6 @@
   @media screen and (min-width: 1280px) {
     width: 394px;
   }
-
 }
 
 ::placeholder {
