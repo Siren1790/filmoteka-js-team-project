@@ -8,7 +8,7 @@ function saveLocalStorageMovies(data) {
   localStorage.setItem(refsStorage.CURRENT_FILMS, JSON.stringify(data));
 }
 
-function getLocalStorage(){
+function getLocalStorage() {
   return JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
 }
 
@@ -28,7 +28,7 @@ async function saveLocalStorageToQueue() {
   localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(movieDetails));
 }
 
-refs.btnToWatched.addEventListener('click', saveLocalStorageToWatched);
-refs.btnToQueue.addEventListener('click', saveLocalStorageToQueue);
+// refs.btnToWatched.addEventListener('click', saveLocalStorageToWatched);
+// refs.btnToQueue.addEventListener('click', saveLocalStorageToQueue);
 
-export {saveLocalStorageMovies, getLocalStorage, saveLocalStorageToWatched, saveLocalStorageToQueue};
+export { saveLocalStorageMovies, getLocalStorage, saveLocalStorageToWatched, saveLocalStorageToQueue };

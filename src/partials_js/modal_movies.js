@@ -1,5 +1,6 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 import { markUpGenresInModal } from './createMarkupCardsFilms';
+import { saveLocalStorageToWatched, saveLocalStorageToQueue } from './local_storage';
 import noPhoto from '../images/no_image.jpg';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
@@ -42,25 +43,25 @@ function createMarkupModal(objMovieInfo) {
                 <button class="watch-trailer js-watch-trailer" id='watch-trailer'>Watch Trailer</button>
             </div>
         </div>
-    
+
         <div class="info-wrapper">
-    
+
             <div class="#">
                 <img class="card-main-poster"
                     src="${imgSource}" />
             </div>
-    
+
             <div class="info-section">
                 <div class="title-wrapper">
                     <h1 class="card-movie-title">${title}</h1>
                 </div>
-    
+
                 <table class="card-movie-info">
                     <tr class="row">
                         <td class="row-title">Vote / Votes</td>
                         <td class="row-value"><span class="votes">${vote_average.toFixed(
-                          1
-                        )}</span> / ${vote_count}</td>
+    1
+  )}</span> / ${vote_count}</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Popularity</td>
@@ -75,34 +76,38 @@ function createMarkupModal(objMovieInfo) {
     <td class="row-value genres-row">${createStringOfGenres(genre_ids)}</td>
                     </tr>
                 </table>
-    
+
                 <div class="movie-descr">
                     <p class="movie-descr__about">About</p>
                     <p class="movie-descr__text">
                         ${overview}
                     </p>
                 </div>
-    
+
                 <div class="desktop-wrapper">
                 <ul class="modal-buttons">
                     <li><button type="button" class="watch-btn js-btn-watched">Add to Watched</button></li>
                     <li><button type="button" class="queue-btn js-btn-queue">Add to Queue</button></li>
                 </ul>
-    
+
                 </div>
             </div>
         </div>
-    
+
     </div>`;
 
   return markup;
 }
 
 function addEventListenerToBtn() {
-  const watchBtn = modal.querySelector('.watch-btn');
-  const queueBtn = modal.querySelector('.queue-btn');
-  // watchBtn.addEventListener('click', saveLocalStorageToWatched);
-  // queueBtn.addEventListener('click', saveLocalStorageToQueue);
+  const watchBtn = document.querySelector('.js-btn-watched');
+  const queueBtn = document.querySelector('.js-btn-queue');
+  watchBtn.addEventListener('click', saveLocalStorageToWatched);
+  queueBtn.addEventListener('click', saveLocalStorageToQueue);
+}
+
+function addToLibrary() {
+  const m
 }
 
 window.addEventListener('keydown', closeModalHandler);
