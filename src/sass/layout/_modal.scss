@@ -51,7 +51,6 @@ a {
   height: 100%;
   pointer-events: auto;
   overflow-y: scroll;
-
 }
 
 .stop-scrolling {
@@ -62,40 +61,40 @@ a {
 // Modal
 
 .movie-card {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    z-index: 20;
-    width: 280px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 20;
+  width: 280px;
+  height: 940px;
+  background-color: var(--color-white);
+  border: 1px solid var(--accent-color);
+  border-radius: 10px;
+
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.87), rgba(85, 78, 78, 0.274));
+
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  margin-top: 170px;
+
+  @media screen and (min-width: 480px) {
+    width: 420px;
     height: 940px;
-    background-color: var(--color-white);
-    border: 1px solid var(--accent-color);
-    border-radius: 10px;
+  }
 
-    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.87), rgba(85, 78, 78, 0.274));
+  @media screen and (min-width: 768px) {
+    width: 704px;
+    height: 552px;
+    margin-top: 0px;
+  }
 
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-    margin-top: 170px;
-
-    @media screen and (min-width: 480px) {
-        width: 420px;
-        height: 940px;
-    }
-    
-    @media screen and (min-width: 768px) {
-        width: 704px;
-        height: 552px; 
-        margin-top: 0px;
-    }
-    
-    @media screen and (min-width: 1280px) {
-        width: 806px;
-        height: 558px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: 806px;
+    height: 558px;
+  }
 }
 
 .button-wrapper {
@@ -119,9 +118,9 @@ a {
   display: flex;
   justify-content: flex-end;
 
-    @media screen and (min-width: 1280px) {
-      justify-content: flex-start;
-    }
+  @media screen and (min-width: 1280px) {
+    justify-content: flex-start;
+  }
 }
 
 .close-button {
@@ -181,36 +180,36 @@ a {
     padding: 0px 36px;
     padding-top: 20px;
   }
-    
+
   @media screen and (min-width: 1280px) {
     padding: 40px 12px;
   }
 }
 
 .card-main-poster {
-    width: 240px;
-    height: 357px;
-    margin: 0 auto;
-    margin-top: 20px;
-    border-radius: 5px;
-    overflow: hidden;
+  width: 240px;
+  height: 357px;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 5px;
+  overflow: hidden;
 
-    @media screen and (min-width: 480px) {
-        width: 280px;
-        height: 367px;
-        margin-bottom: 20px;
-    }
-        
-    @media screen and (min-width: 768px) {
-      width: 264px;
-      height: 373.55px;
-    }
-        
-    @media screen and (min-width: 1280px) {
-      width: 375px;
-      height: 478px;
-      margin-top: 0px;
-    }
+  @media screen and (min-width: 480px) {
+    width: 280px;
+    height: 367px;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 264px;
+    height: 373.55px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 375px;
+    height: 478px;
+    margin-top: 0px;
+  }
 }
 
 .info-section {
@@ -218,7 +217,7 @@ a {
   margin-top: 20px;
 
   @media screen and (min-width: 480px) {
-      padding: 0px 40px;
+    padding: 0px 40px;
   }
 
   @media screen and (min-width: 768px) {
@@ -236,64 +235,62 @@ a {
   max-height: 70px;
   overflow-wrap: break-word;
   overflow-y: hidden;
-
 }
 
 .card-movie-title {
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 1.15;
-    text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  margin-bottom: 0px;
+  max-height: 70px;
+  overflow-y: hidden;
+
+  @media screen and (min-width: 768px) {
+    width: 345px;
+    max-height: 45px;
     margin-bottom: 0px;
-    max-height: 70px;
-    overflow-y: hidden;
+    margin-top: 20px;
+  }
 
-    @media screen and (min-width: 768px) {
-        width: 345px;
-        max-height: 45px;
-        margin-bottom: 0px;
-        margin-top: 20px;
-    }
-    
-    @media screen and (min-width: 1280px) {
-        font-size: 30px;
-        max-height: 40px;
-        margin-top: 0px;
-    }
-
+  @media screen and (min-width: 1280px) {
+    font-size: 30px;
+    max-height: 40px;
+    margin-top: 0px;
+  }
 }
 
 .genres-row {
-      max-height: 30px;
-      overflow-y: hidden;
+  max-height: 30px;
+  overflow-y: hidden;
 
-      @media screen and (min-width: 768px) {
-          width: 345px;
-          max-height: 45px;
-      }
-          
-      @media screen and (min-width: 1280px) {
-          max-height: 40px;
-      }
+  @media screen and (min-width: 768px) {
+    width: 345px;
+    max-height: 45px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    max-height: 40px;
+  }
 }
 
 .card-movie-info {
   margin-bottom: 20px;
   display: flex;
 
-    @media screen and (min-width: 480px) {
-        max-width: 378px;
-        margin-top: 10px;
-    }
-    
-      @media screen and (min-width: 768px) {
-        margin-top: 20px;
-      }
-    
-      @media screen and (min-width: 1280px) {
-        margin-top: 20px;
-      }
+  @media screen and (min-width: 480px) {
+    max-width: 378px;
+    margin-top: 10px;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-top: 20px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 20px;
+  }
 }
 
 .row {
@@ -307,7 +304,6 @@ a {
   color: var(--icon-color);
   min-width: 75px;
   margin-right: 37px;
-
 }
 
 .row-value {
@@ -325,10 +321,10 @@ a {
   text-transform: uppercase;
   overflow-y: hidden;
 
-    @media screen and (min-width: 480px) {
-      max-width: 295px;
-      max-height: 48px;
-    }
+  @media screen and (min-width: 480px) {
+    max-width: 295px;
+    max-height: 48px;
+  }
 }
 
 .votes {
@@ -346,8 +342,8 @@ a {
   overflow-y: hidden;
 
   @media screen and (min-width: 480px) {
-      width: 322px;
-      max-height: 260px;
+    width: 322px;
+    max-height: 260px;
   }
 
   @media screen and (min-width: 768px) {
@@ -454,7 +450,13 @@ a {
     transform: scale(1.1);
   }
 
-  &:active {
+  // &:active {
+  //   border-color: var(--accent-color);
+  //   background-color: var(--accent-color);
+  //   color: var(--color-white);
+  // }
+
+  &.active {
     border-color: var(--accent-color);
     background-color: var(--accent-color);
     color: var(--color-white);
