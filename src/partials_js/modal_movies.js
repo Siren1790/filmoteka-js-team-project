@@ -47,7 +47,7 @@ const markup = `    <div class="movie-card" id="bright">
                     </tr>
                     <tr class="row">
                         <td class="row-title">Genre</td>
-                        <td class="row-value">Western</td>
+                        <td class="row-value genres-row">Western Western Western Western Western Western Western Western</td>
                     </tr>
                 </table>
     
@@ -81,6 +81,7 @@ function openModal(event) {
   if (event.currentTarget == event.target) return;
   modal.innerHTML = markup;
   modal.classList.remove('visually-hidden');
+  document.body.classList.add('stop-scrolling');
   addEventListenerToBtn();
 }
 
@@ -91,13 +92,16 @@ const modalItself = document.querySelector('.movie-card');
 function closeModalHandler(e) {
   if (e.code === 'Escape') {
     modal.classList.add('visually-hidden');
+    document.body.classList.remove('stop-scrolling');
   }
 }
 
 function closeBDModal(e) {
   if (e.target === e.currentTarget) {
     modal.classList.add('visually-hidden');
+    document.body.classList.remove('stop-scrolling');
   } else if (e.target.className === 'close-button') {
     modal.classList.add('visually-hidden');
+    document.body.classList.remove('stop-scrolling');
   } else return;
 }

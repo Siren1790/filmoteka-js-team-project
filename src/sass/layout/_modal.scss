@@ -44,47 +44,42 @@ a {
 .backdrop-modal {
   background-color: rgba(187, 49, 21, 0.84);
   z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 80%;
-  // watch tp!!!!
-  left: 50%;
-  transform: translate(-50%, -50%);
   pointer-events: auto;
- 
-    // @media screen and (min-width: 480px) {
+}
 
-    // }
-    
-    // @media screen and (min-width: 768px) {
-
-    // }
-    
-    // @media screen and (min-width: 1280px) {
-
-    // }
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
 }
 
 // Modal
 
 .movie-card {
     font-family: "Roboto", sans-serif;
+
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    // transform: translate(-50%, -50%) scale(1);
+    // transition-property: transform;
+    // transition: transform var(--transition-duration-function);
+    
     z-index: 20;
     width: 280px;
     height: 940px;
     background-color: var(--color-white);
     border: 1px solid var(--accent-color);
     border-radius: 10px;
-    // transition: ease-in 0.4s;
 
     background-image: linear-gradient(to top, rgba(255, 255, 255, 0.87), rgba(85, 78, 78, 0.274));
 
-    animation: flicker 1.5s infinite alternate;
+    // animation: flicker 1.5s infinite alternate;
     box-shadow: 0 0 4px rgb(128, 91, 91), 0 0 11px rgb(175, 112, 112), 0 0 80px rgb(109, 100, 100);
 
     @media screen and (min-width: 480px) {
@@ -242,14 +237,6 @@ a {
   overflow-wrap: break-word;
   overflow-y: hidden;
 
-    // @media screen and (min-width: 768px) {
-    //     width: 264px;
-    //     max-height: 373.55px;
-    // }
-    
-      // @media screen and (min-width: 1280px) {
-    
-      // }
 }
 
 .card-movie-title {
@@ -275,6 +262,20 @@ a {
         margin-top: 0px;
     }
 
+}
+
+.genres-row {
+      max-height: 30px;
+      overflow-y: hidden;
+
+      @media screen and (min-width: 768px) {
+          width: 345px;
+          max-height: 45px;
+      }
+          
+      @media screen and (min-width: 1280px) {
+          max-height: 40px;
+      }
 }
 
 .card-movie-info {
@@ -307,31 +308,10 @@ a {
   min-width: 75px;
   margin-right: 37px;
 
-    @media screen and (min-width: 480px) {
-        // max-width: 80px;
-    }
-    
-      // @media screen and (min-width: 768px) {
-    
-      // }
-    
-      // @media screen and (min-width: 1280px) {
-    
-      // }
-
-  // @media screen and (min-width: 1280px) {
-  //   margin-right: 83px;
-  // }
 }
 
 .row-value {
   padding-left: 38px;
-
-  @media screen and (min-width: 480px) {
-        //  display: block;      
-        //  max-width: 190px;
- 
-  }
 
   @media screen and (min-width: 1280px) {
     padding-left: 83px;
@@ -474,11 +454,11 @@ a {
     transform: scale(1.1);
   }
 
-  //  &:visited {
-  //    border-color: var(--accent-color);
-  //    background-color: var(--accent-color);
-  //    color: var(--color-white);
-  //  }
+  &:active {
+    border-color: var(--accent-color);
+    background-color: var(--accent-color);
+    color: var(--color-white);
+  }
 
   @media screen and (min-width: 768px) {
     max-width: 125px;
