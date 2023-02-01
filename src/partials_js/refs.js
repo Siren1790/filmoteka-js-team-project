@@ -8,6 +8,8 @@ const refs = {
   firstPaginationItemNode: document.querySelector('.first-page'),
   prevPaginationNode: document.querySelector('.btn-arrow-prev'),
   nextPaginationNode: document.querySelector('.btn-arrow-next'),
+  listPaginationNode: document.querySelector('.list-pagination'),
+
   // DEFAULT_START_PAGINATION: [2, 3, 4, 5, 6],
   // DEFAULT_END_PAGINATION: [995, 996, 997, 998, 999],
   //serch.js

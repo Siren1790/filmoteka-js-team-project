@@ -6,8 +6,13 @@ class Movie {
     constructor() {
     this.searchValue = '';
     this.currentPage = 1;
-    this.totalpages
+    this.totalpages = 0;
     this.firstRequest = true;
+    this.isSearched = false;
+  }
+
+  setIsSearched(value) {
+    this.isSearched = value
   }
 
   setSearchValue(value){
@@ -52,7 +57,7 @@ class Movie {
         },
       });
       return response.data;
-      
+
     } catch (error) {
       console.error(error);
     }
