@@ -2,13 +2,21 @@ import { restDataForModal, createStringOfGenres } from './data-for-modal';
 import { markUpGenresInModal } from './createMarkupCardsFilms';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
-
-const closeModalBtn = document.querySelector('#close-button-1');
-// const divCard = document.querySelector('.js-modal-window');
-
+const backdropModal = document.querySelector('.js-markup__modal');
 const modal = document.querySelector('.js-modal-window');
-
 modal.addEventListener('click', openModal);
+
+function openModal(event) {
+  // if (event.currentTarget == event.target) {
+  //   return
+  // }
+  backdropModal.classList.remove('visually-hidden');
+  const objectInfoMovie = restDataForModal(event);
+  const markup = createMarkupModal(objectInfoMovie);
+  backdropModal.innerHTML = markup;
+  document.body.classList.add('stop-scrolling');
+  addEventListenerToBtn();
+}
 
 function createMarkupModal(objMovieInfo) {
   const {
@@ -92,35 +100,22 @@ function addEventListenerToBtn() {
   // queueBtn.addEventListener('click', saveLocalStorageToQueue);
 }
 
-function openModal(event) {
-  console.log(event);
-  if (event.currentTarget == event.target) return;
-  const objectInfoMovie = restDataForModal(event);
-
-  const markup = createMarkupModal(objectInfoMovie);
-  // modal.innerHTML = markup;
-  modal.classList.remove('visually-hidden');
-  document.body.classList.add('stop-scrolling');
-  addEventListenerToBtn();
-}
-
 window.addEventListener('keydown', closeModalHandler);
-modal.addEventListener('click', closeBDModal);
-const modalItself = document.querySelector('.movie_card');
+backdropModal.addEventListener('click', closeBDModal);
 
 function closeModalHandler(e) {
   if (e.code === 'Escape') {
-    modal.classList.add('visually-hidden');
+    backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
   }
 }
 
 function closeBDModal(e) {
   if (e.target === e.currentTarget) {
-    modal.classList.add('visually-hidden');
+    backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
   } else if (e.target.className === 'close-button') {
-    modal.classList.add('visually-hidden');
+    backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
   } else return;
 }
