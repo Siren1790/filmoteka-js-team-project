@@ -124,51 +124,24 @@ function addEventListenerToBtn() {
   const indexOfMovieInWatched = checkForMovieInLocalStorage(movieId, refsStorage.STORAGE_KEY_WATCHED);
   const indexOfMovieInQueue = checkForMovieInLocalStorage(movieId, refsStorage.STORAGE_KEY_QUEUE);
 
-  // if (!) {
+  if (indexOfMovieInWatched !== -1) {
+    watchBtn.classList.add('active');
+  }
 
-  // }
+  if (indexOfMovieInQueue !== -1) {
+    queueBtn.classList.add('active');
+  }
+
   //*  watchBtn.addEventListener
   watchBtn.addEventListener('click', (e) => {
     addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_WATCHED);
-    // const pushArray = [];
-    // array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
-    // const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
-    // // array.results[indexOfMovie];
-    // pushArray.push(array.results[indexOfMovie]);
-    // console.log(pushArray);
-
-    // arrayWatched = JSON.parse(localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED));
-    // console.log(arrayWatched);
-    // if (arrayWatched) {
-    //   arrayWatched.push(array.results[indexOfMovie]);
-    //   localStorage.setItem(refsStorage.STORAGE_KEY_WATCHED, JSON.stringify(arrayWatched));
-    // } else {
-    //   localStorage.setItem(refsStorage.STORAGE_KEY_WATCHED, JSON.stringify(pushArray));
-    // }
   });
-
 
   // * queueBtn.addEventListene
   queueBtn.addEventListener('click', (e) => {
     addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
-    //   const pushArray = [];
-    //   array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
-    //   const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
-    //   console.log(array.results[indexOfMovie]);
-    //   pushArray.push(array.results[indexOfMovie]);
-    //   console.log(pushArray);
-
-    //   arrayWatched = JSON.parse(localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE));
-    //   console.log(arrayWatched);
-    //   if (arrayWatched) {
-    //     arrayWatched.push(array.results[indexOfMovie]);
-    //     localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(arrayWatched));
-    //   } else {
-    //     localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(pushArray));
-    //   }
   });
 }
-
 
 function addSelectedFilmsLocalStorage(e, key) {
   const pushArray = [];
@@ -211,7 +184,7 @@ function closeBDModal(e) {
 function checkForMovieInLocalStorage(id, key) {
   const arrayMovies = JSON.parse(localStorage.getItem(key));
   if (!arrayMovies) {
-    return;
+    return -1;
   }
   const indexOfMovie = arrayMovies.findIndex(movie => movie.id === id);
   return indexOfMovie;
