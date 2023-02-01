@@ -65,6 +65,5 @@ export default function createMarkupCardsFilms(arrayMovies) {
       }
     )
     .join('');
-  refs.mainMarkFilms.innerHTML = markup;
-  refs.searchButton.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  return markup;
 }
