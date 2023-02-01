@@ -4,10 +4,11 @@ import { markUpGenresInModal } from './createMarkupCardsFilms';
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 
 const closeModalBtn = document.querySelector('#close-button-1');
-const divCard = document.querySelector('.js-modal-window');
-divCard.addEventListener('click', openModal);
+// const divCard = document.querySelector('.js-modal-window');
 
-const modal = document.querySelector('.js-markup__modal');
+const modal = document.querySelector('.js-modal-window');
+
+modal.addEventListener('click', openModal);
 
 function createMarkupModal(objMovieInfo) {
   const {
@@ -92,8 +93,12 @@ function addEventListenerToBtn() {
 }
 
 function openModal(event) {
+  console.log(event);
   if (event.currentTarget == event.target) return;
-  modal.innerHTML = markup;
+  const objectInfoMovie = restDataForModal(event);
+
+  const markup = createMarkupModal(objectInfoMovie);
+  // modal.innerHTML = markup;
   modal.classList.remove('visually-hidden');
   document.body.classList.add('stop-scrolling');
   addEventListenerToBtn();
