@@ -112,7 +112,7 @@ a {
   }
 
   @media screen and (min-width: 768px) {
-    transform: translate(560%, 10%);
+    transform: translate(500%, 10%);
   }
 
   @media screen and (min-width: 1280px) {
@@ -124,7 +124,7 @@ a {
   display: flex;
   justify-content: flex-end;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 1280px) {
       justify-content: flex-start;
     }
 }
@@ -412,23 +412,25 @@ a {
   }
 }
 
-.desktop-wrapper {
+// DO NOT remove desktop-wrapper
 
-  @media screen and (min-width: 768px) {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-around;
-    align-items: center;
-    margin-left: -130px;
-  }
+// .desktop-wrapper {
 
-  @media screen and (min-width: 1280px) {
-    flex-direction: column;
-    margin-left: 0px;
-    align-items: center;
-    gap: 10px;
-  }
-}
+//   @media screen and (min-width: 768px) {
+//     display: flex;
+//     flex-direction: row-reverse;
+//     justify-content: space-around;
+//     align-items: center;
+//     margin-left: -130px;
+//   }
+
+//   @media screen and (min-width: 1280px) {
+//     flex-direction: column;
+//     margin-left: 0px;
+//     align-items: center;
+//     gap: 10px;
+//   }
+// }
 
 .modal-buttons {
   display: flex;
@@ -482,6 +484,8 @@ a {
     max-width: 125px;
   }
 }
+
+// Do not remove styles below
 
 .movie-social {
   padding: 15px;
