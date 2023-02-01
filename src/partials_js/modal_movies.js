@@ -1,7 +1,10 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 
 import { markUpGenresInModal } from './createMarkupCardsFilms';
-import { saveLocalStorageToWatched, saveLocalStorageToQueue } from './local_storage';
+import {
+  saveLocalStorageToWatched,
+  saveLocalStorageToQueue,
+} from './local_storage';
 import { refsStorage } from './refs';
 
 import { getTrailerPath } from './data-for-trailer';
@@ -13,6 +16,9 @@ const backdropModal = document.querySelector('.js-markup__modal');
 const modal = document.querySelector('.js-modal-window');
 modal.addEventListener('click', openModal);
 
+// const watchBtn = document.querySelector('.js-btn-watched');
+// const queueBtn = document.querySelector('.js-btn-queue');
+
 function openModal(event) {
   // if (event.currentTarget == event.target) {
   //   return
@@ -22,11 +28,11 @@ function openModal(event) {
   const markup = createMarkupModal(objectInfoMovie);
   backdropModal.innerHTML = markup;
 
-
-
   document.body.classList.add('stop-scrolling');
   addEventListenerToBtn();
   getTrailerPath(objectInfoMovie.id);
+  // console.log(`id`, objectInfoMovie.id);
+  chechFilmInLockalStoreg(objectInfoMovie.id);
 }
 
 function createMarkupModal(objMovieInfo) {
@@ -77,8 +83,8 @@ function createMarkupModal(objMovieInfo) {
                     <tr class="row">
                         <td class="row-title">Vote / Votes</td>
                         <td class="row-value"><span class="votes">${vote_average.toFixed(
-    1
-  )}</span> / ${vote_count}</td>
+                          1
+                        )}</span> / ${vote_count}</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Popularity</td>
@@ -121,8 +127,14 @@ function addEventListenerToBtn() {
   const queueBtn = document.querySelector('.js-btn-queue');
 
   const movieId = watchBtn.dataset.id;
-  const indexOfMovieInWatched = checkForMovieInLocalStorage(movieId, refsStorage.STORAGE_KEY_WATCHED);
-  const indexOfMovieInQueue = checkForMovieInLocalStorage(movieId, refsStorage.STORAGE_KEY_QUEUE);
+  const indexOfMovieInWatched = checkForMovieInLocalStorage(
+    movieId,
+    refsStorage.STORAGE_KEY_WATCHED
+  );
+  const indexOfMovieInQueue = checkForMovieInLocalStorage(
+    movieId,
+    refsStorage.STORAGE_KEY_QUEUE
+  );
 
   if (indexOfMovieInWatched !== -1) {
     watchBtn.classList.add('active');
@@ -133,12 +145,12 @@ function addEventListenerToBtn() {
   }
 
   //*  watchBtn.addEventListener
-  watchBtn.addEventListener('click', (e) => {
+  watchBtn.addEventListener('click', e => {
     addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_WATCHED);
   });
 
   // * queueBtn.addEventListene
-  queueBtn.addEventListener('click', (e) => {
+  queueBtn.addEventListener('click', e => {
     addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
   });
 }
@@ -146,7 +158,9 @@ function addEventListenerToBtn() {
 function addSelectedFilmsLocalStorage(e, key) {
   const pushArray = [];
   const array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
-  const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
+  const indexOfMovie = array.results.findIndex(
+    movieObj => movieObj.id == e.currentTarget.dataset.id
+  );
   // array.results[indexOfMovie];
   pushArray.push(array.results[indexOfMovie]);
   console.log(pushArray);
@@ -205,3 +219,31 @@ function checkForMovieInLocalStorage(id, key) {
 // } else {
 //   localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(pushArray));
 // }
+
+function chechFilmInLockalStoreg(idFilms) {
+  const watchBtn = document.querySelector('.js-btn-watched');
+  const queueBtn = document.querySelector('.js-btn-queue');
+
+  const arrayMoviesQueue = JSON.parse(
+    localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
+  );
+
+  const arrayMoviesWatched = JSON.parse(
+    localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
+  );
+
+  const indexOfMovieQueue = arrayMoviesQueue.findIndex(movie => {
+    return movie.id === idFilms;
+  });
+
+  const indexOfMovieWatched = arrayMoviesWatched.findIndex(
+    movie => movie.id === idFilms
+  );
+
+  if (indexOfMovieQueue !== -1) {
+    queueBtn.classList.add('active');
+  }
+  if (indexOfMovieWatched !== -1) {
+    watchBtn.classList.add('active');
+  }
+}
