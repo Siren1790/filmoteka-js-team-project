@@ -42,14 +42,16 @@ a {
 // Backdrop - DO NOT REMOVE
 
 .backdrop-modal {
-  background-color: rgba(187, 49, 21, 0.84);
+  background-color: rgba(113, 103, 100, 0.562);
   z-index: 10;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   pointer-events: auto;
+  overflow-y: scroll;
+
 }
 
 .stop-scrolling {
@@ -66,9 +68,6 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    // transform: translate(-50%, -50%) scale(1);
-    // transition-property: transform;
-    // transition: transform var(--transition-duration-function);
     
     z-index: 20;
     width: 280px;
@@ -79,8 +78,8 @@ a {
 
     background-image: linear-gradient(to top, rgba(255, 255, 255, 0.87), rgba(85, 78, 78, 0.274));
 
-    // animation: flicker 1.5s infinite alternate;
-    box-shadow: 0 0 4px rgb(128, 91, 91), 0 0 11px rgb(175, 112, 112), 0 0 80px rgb(109, 100, 100);
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    margin-top: 170px;
 
     @media screen and (min-width: 480px) {
         width: 420px;
@@ -89,7 +88,8 @@ a {
     
     @media screen and (min-width: 768px) {
         width: 704px;
-        height: 552px;    
+        height: 552px; 
+        margin-top: 0px;
     }
     
     @media screen and (min-width: 1280px) {
