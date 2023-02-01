@@ -28,9 +28,9 @@ async function onSubmit(event) {
     movie.setTotalPages(response.total_pages);
 
     if (searchAnswer.length > 0) {
-      saveLocalStorageMovies(searchAnswer);
+      saveLocalStorageMovies(response);
       let cardsMovies = getLocalStorage();
-      createMarkupCardsFilms(cardsMovies);
+      createMarkupCardsFilms(cardsMovies.results);
 
       movie.firstRequest = false;
       preparePaginationDynamicList();

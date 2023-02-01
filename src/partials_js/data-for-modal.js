@@ -1,7 +1,7 @@
-const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
+// const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 const genres = JSON.parse(localStorage.getItem('genres'));
-import axios from 'axios';
-import { refs, refsApi, refsStorage } from './refs';
+// import axios from 'axios';
+// import { refs, refsApi, refsStorage } from './refs';
 
 function restDataForModal(e) {
   const targetClickMovieCard = e.target.closest('.item-films');
@@ -13,7 +13,6 @@ function restDataForModal(e) {
   const indexOfMovie = currentMoviesFromStorage.results.findIndex(
     movieObj => movieObj.id == movieIdFromClick
   );
-  console.log(indexOfMovie);
 
   return currentMoviesFromStorage.results[indexOfMovie];
 }

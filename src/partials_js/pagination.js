@@ -51,7 +51,6 @@ const preparePaginationDynamicList = () => {
   // const { currentPage, total_pages} = movie;
   let currentPage = movie.getCurrentPage();
   let total_pages = movie.getTotalPages();
-  console.log(total_pages);
   refs.lastPaginationItemNode.textContent = total_pages;
   const paginationValues = getPaginationValues(currentPage, total_pages);
   let nodesArray;
