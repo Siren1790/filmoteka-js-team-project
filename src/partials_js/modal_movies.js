@@ -172,13 +172,13 @@ function addEventListenerToBtn() {
 
 function addSelectedFilmsLocalStorage(e, key) {
   const pushArray = [];
-  array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
+  const array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
   const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
   // array.results[indexOfMovie];
   pushArray.push(array.results[indexOfMovie]);
   console.log(pushArray);
 
-  arrayWatched = JSON.parse(localStorage.getItem(key));
+  const arrayWatched = JSON.parse(localStorage.getItem(key));
   console.log(arrayWatched);
   if (arrayWatched) {
     arrayWatched.push(array.results[indexOfMovie]);
