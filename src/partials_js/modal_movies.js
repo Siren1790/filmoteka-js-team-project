@@ -88,8 +88,8 @@ function createMarkupModal(objMovieInfo) {
 function addEventListenerToBtn() {
   const watchBtn = modal.querySelector('.watch-btn');
   const queueBtn = modal.querySelector('.queue-btn');
-  watchBtn.addEventListener('click', saveLocalStorageToWatched);
-  queueBtn.addEventListener('click', saveLocalStorageToQueue);
+  // watchBtn.addEventListener('click', saveLocalStorageToWatched);
+  // queueBtn.addEventListener('click', saveLocalStorageToQueue);
 }
 
 function openModal(event) {
