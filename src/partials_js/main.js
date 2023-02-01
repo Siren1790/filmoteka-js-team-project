@@ -18,7 +18,6 @@ async function fetchData() {
   saveStorageGenres(objGenres);
   let cardsMovies = getLocalStorage();
   let markup = createMarkupCardsFilms(cardsMovies.results);
-  // console.log();
   refs.mainMarkFilms.innerHTML = markup;
   refs.searchButton.scrollIntoView({ block: 'center', behavior: 'smooth' });
   preparePaginationDynamicList();

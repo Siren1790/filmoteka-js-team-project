@@ -44,7 +44,7 @@ function onClickMakeMarkUpWatched() {
 }
 
 function onClickMakeMarkUpQueue() {
-  mptyLibraryAnimation.classList.add('visually-hidden');
+  emptyLibraryAnimation.classList.add('visually-hidden');
   // emptyLibraryParagraoh.classList.add('visually-hidden');
   const arrayFilmsWatched = JSON.parse(
     localStorage.getItem(refsStorage.CURRENT_FILMS)
