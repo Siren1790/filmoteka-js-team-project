@@ -127,7 +127,6 @@ const renderPaginationDynamicList = nodes => {
 // KEYBOARD PAGINATION
 window.addEventListener('keydown', onArrowButtons);
 function onArrowButtons(event) {
-  console.log('event.code =', event.code);
   if (event.code === 'ArrowLeft' && movie.getCurrentPage() > 1)
     movie.currentPage -= 1;
   if (
