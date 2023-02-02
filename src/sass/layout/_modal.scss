@@ -99,28 +99,13 @@ a {
 
 .button-wrapper {
   position: absolute;
-  transform: translate(140%, 10%);
-
-  @media screen and (min-width: 480px) {
-    transform: translate(260%, 10%);
-  }
-
-  @media screen and (min-width: 768px) {
-    transform: translate(500%, 10%);
-  }
-
-  @media screen and (min-width: 1280px) {
-    transform: translate(640%, 10%);
-  }
+  top: 5px;
+  right: -25px;
 }
 
 .button-container {
   display: flex;
   justify-content: flex-end;
-
-  @media screen and (min-width: 1280px) {
-    justify-content: flex-start;
-  }
 }
 
 .close-button {
@@ -134,7 +119,6 @@ a {
   font-style: inherit;
   font-weight: 500;
   background-color: rgba(226, 220, 220, 0.776);
-  transition: transform 0.5s;
 
   &:hover,
   &:focus {
