@@ -40,6 +40,16 @@ function onClickMakeMarkUpWatched() {
     const arrayFilmsWatched = JSON.parse(
       localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
     );
+    // костиль Ярослава
+    const objCurFilms = JSON.parse(
+      localStorage.getItem(refsStorage.CURRENT_FILMS)
+    );
+    objCurFilms.results = arrayFilmsWatched;
+    localStorage.setItem(
+      refsStorage.CURRENT_FILMS,
+      JSON.stringify(objCurFilms)
+    );
+    //
     newWatchedBtn.classList.add('header-btn-active');
     let markup = createMarkupCardsFilms(arrayFilmsWatched);
     refs.mainMarkFilms.innerHTML = markup;
@@ -61,6 +71,16 @@ function onClickMakeMarkUpQueue() {
     const arrayFilmsWatched = JSON.parse(
       localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
     );
+    // костиль Ярослава
+    const objCurFilms = JSON.parse(
+      localStorage.getItem(refsStorage.CURRENT_FILMS)
+    );
+    objCurFilms.results = arrayFilmsWatched;
+    localStorage.setItem(
+      refsStorage.CURRENT_FILMS,
+      JSON.stringify(objCurFilms)
+    );
+    //
     let markup = createMarkupCardsFilms(arrayFilmsWatched);
     refs.mainMarkFilms.innerHTML = markup;
   } else {
