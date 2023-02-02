@@ -169,9 +169,27 @@ function addEventListenerToBtn() {
       e.currentTarget.classList.remove('hover') &
       e.currentTarget.classList.remove('focus');
 
-    if (refs.mustToRedraw) {
+    const activeBtn = document.querySelector('.header-btn-active');
+    const checkButton = activeBtn.textContent === 'QUEUE';
+    console.log(checkButton);
+    if (checkButton) {
+      if (refs.mustToRedraw) {
+        const anMovie = JSON.parse(
+          localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
+        );
+
+        const objCurFilms = JSON.parse(
+          localStorage.getItem(refsStorage.CURRENT_FILMS)
+        );
+        objCurFilms.results = anMovie;
+        localStorage.setItem(
+          refsStorage.CURRENT_FILMS,
+          JSON.stringify(objCurFilms)
+        );
+      }
+    } else if (refs.mustToRedraw) {
       const anMovie = JSON.parse(
-        localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
+        localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
       );
 
       const objCurFilms = JSON.parse(
@@ -212,9 +230,29 @@ function addEventListenerToBtn() {
       e.currentTarget.classList.remove('hover') &
       e.currentTarget.classList.remove('focus');
 
-    if (refs.mustToRedraw) {
+    const activeBtn = document.querySelector('.header-btn-active');
+    // console.dir(activeBtn);
+    const checkButton = activeBtn.textContent === 'WATCHED';
+    console.dir(checkButton);
+
+    if (checkButton) {
+      if (refs.mustToRedraw) {
+        const anMovie = JSON.parse(
+          localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
+        );
+
+        const objCurFilms = JSON.parse(
+          localStorage.getItem(refsStorage.CURRENT_FILMS)
+        );
+        objCurFilms.results = anMovie;
+        localStorage.setItem(
+          refsStorage.CURRENT_FILMS,
+          JSON.stringify(objCurFilms)
+        );
+      }
+    } else if (refs.mustToRedraw) {
       const anMovie = JSON.parse(
-        localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
+        localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
       );
 
       const objCurFilms = JSON.parse(
