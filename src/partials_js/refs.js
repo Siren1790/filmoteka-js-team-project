@@ -16,6 +16,8 @@ const refs = {
   //local_storage.js
   btnToWatched: document.querySelector('.js-btn-watched'),
   btnToQueue: document.querySelector('.js-btn-queue'),
+  //to-top.js
+  scrollToTopButton: document.getElementById('js-top'),
 };
 
 const refsApi = {

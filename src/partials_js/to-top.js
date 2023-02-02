@@ -1,12 +1,14 @@
-const scrollToTopButton = document.getElementById('js-top');
+
+import { refs } from "./refs";
+// const refs.scrollToTopButton = document.getElementById('js-top');
 
 const scrollFunc = () => {
   let y = window.scrollY;
 
   if (y > 0) {
-    scrollToTopButton.className = 'top-link show';
+    refs.scrollToTopButton.className = 'top-link show';
   } else {
-    scrollToTopButton.className = 'top-link hide';
+    refs.scrollToTopButton.className = 'top-link hide';
   }
 };
 
@@ -17,11 +19,11 @@ const scrollToTop = () => {
 
   if (c > 0) {
     window.requestAnimationFrame(scrollToTop);
-    window.scrollTo(0, c - c / 10);
+    window.scrollTo(0, c - c / 5);
   }
 };
 
-scrollToTopButton.onclick = function (e) {
+refs.scrollToTopButton.onclick = function (e) {
   e.preventDefault();
   scrollToTop();
 };
