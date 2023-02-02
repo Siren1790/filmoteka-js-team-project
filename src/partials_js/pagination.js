@@ -67,7 +67,6 @@ const preparePaginationDynamicList = () => { // відповірає за фор
   // const { currentPage, total_pages } = movie;
   const currentPage = movie.getCurrentPage();
   const total_pages = movie.getTotalPages();
-  console.log(total_pages);
   refs.paginationWrapperNode.innerHTML = ''; // очищаємо блок для кнопок пагінації
   if (total_pages === 1) {
     refs.prevPaginationNode.style.cssText = HIDE_STYLES; // сховати стрілку <--
@@ -116,7 +115,7 @@ const renderPaginationDynamicList = nodes => { // відповірає за ма
       // }
 
       if (movie.firstRequest) {
-              fetchData();
+        fetchData();
       } else {
         searchPagination();
     }
@@ -128,10 +127,11 @@ async function searchPagination () {
       //SEARCH PAGINATION
       //preloaderShow();
       const moviesSearch = await movie.fetchSearchMovies();
-      // console.log('moviesSearch', moviesSearch);
       saveLocalStorageMovies(moviesSearch);
+      console.log('moviesSearch', moviesSearch.results);
       movie.setCurrentPage(moviesSearch.page);
-      createMarkupCardsFilms(moviesSearch.results);
+      let markup = createMarkupCardsFilms(moviesSearch.results);
+      refs.mainMarkFilms.innerHTML = markup;
       preparePaginationDynamicList();
       //preloaderHide();
   }
