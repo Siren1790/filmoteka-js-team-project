@@ -1,7 +1,10 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 
-import { markUpGenresInModal } from './createMarkupCardsFilms';
-import { saveLocalStorageToWatched, saveLocalStorageToQueue } from './local_storage';
+// import { markUpGenresInModal } from './createMarkupCardsFilms';
+// import {
+//   saveLocalStorageToWatched,
+//   saveLocalStorageToQueue,
+// } from './local_storage';
 import { refsStorage } from './refs';
 
 import { getTrailerPath } from './data-for-trailer';
@@ -14,15 +17,32 @@ const modal = document.querySelector('.js-modal-window');
 modal.addEventListener('click', openModal);
 
 function openModal(event) {
-  // if (event.currentTarget == event.target) {
-  //   return
-  // }
+  if (event.currentTarget == event.target) {
+    return;
+  }
   backdropModal.classList.remove('visually-hidden');
   const objectInfoMovie = restDataForModal(event);
   const markup = createMarkupModal(objectInfoMovie);
   backdropModal.innerHTML = markup;
 
+  const watchBtn = document.querySelector('.js-btn-watched');
+  const queueBtn = document.querySelector('.js-btn-queue');
+  const indexOfMovieInWatched = checkForMovieInLocalStorage(
+    objectInfoMovie.id,
+    refsStorage.STORAGE_KEY_WATCHED
+  );
+  const indexOfMovieInQueue = checkForMovieInLocalStorage(
+    objectInfoMovie.id,
+    refsStorage.STORAGE_KEY_QUEUE
+  );
 
+  if (indexOfMovieInWatched !== -1) {
+    watchBtn.classList.add('active');
+  } else watchBtn.classList.remove('active') &  watchBtn.classList.remove('hover') &  watchBtn.classList.remove('focus');
+
+  if (indexOfMovieInQueue !== -1) {
+    queueBtn.classList.add('active');
+  } else queueBtn.classList.remove('active') & queueBtn.classList.remove('hover') & queueBtn.classList.remove('focus');
 
   document.body.classList.add('stop-scrolling');
   addEventListenerToBtn();
@@ -77,8 +97,8 @@ function createMarkupModal(objMovieInfo) {
                     <tr class="row">
                         <td class="row-title">Vote / Votes</td>
                         <td class="row-value"><span class="votes">${vote_average.toFixed(
-    1
-  )}</span> / ${vote_count}</td>
+                          1
+                        )}</span> / ${vote_count}</td>
                     </tr>
                     <tr class="row">
                         <td class="row-title">Popularity</td>
@@ -120,60 +140,42 @@ function addEventListenerToBtn() {
   const watchBtn = document.querySelector('.js-btn-watched');
   const queueBtn = document.querySelector('.js-btn-queue');
 
-  const movieId = watchBtn.dataset.id;
-  const indexOfMovieInWatched = checkForMovieInLocalStorage(movieId, refsStorage.STORAGE_KEY_WATCHED);
-  const indexOfMovieInQueue = checkForMovieInLocalStorage(movieId, refsStorage.STORAGE_KEY_QUEUE);
-
-  // if (!) {
-
-  // }
-  //*  watchBtn.addEventListener
-  watchBtn.addEventListener('click', (e) => {
-    addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_WATCHED);
-    // const pushArray = [];
-    // array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
-    // const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
-    // // array.results[indexOfMovie];
-    // pushArray.push(array.results[indexOfMovie]);
-    // console.log(pushArray);
-
-    // arrayWatched = JSON.parse(localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED));
-    // console.log(arrayWatched);
-    // if (arrayWatched) {
-    //   arrayWatched.push(array.results[indexOfMovie]);
-    //   localStorage.setItem(refsStorage.STORAGE_KEY_WATCHED, JSON.stringify(arrayWatched));
-    // } else {
-    //   localStorage.setItem(refsStorage.STORAGE_KEY_WATCHED, JSON.stringify(pushArray));
-    // }
+  watchBtn.addEventListener('click', e => {
+    const index = checkForMovieInLocalStorage(
+      e.currentTarget.dataset.id,
+      refsStorage.STORAGE_KEY_WATCHED
+    );
+    if (index == -1) {
+      addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_WATCHED);
+      e.currentTarget.classList.add('active');
+    } else
+      delSelectedFilmsFromLocalStoradge(index, refsStorage.STORAGE_KEY_WATCHED);
+    e.currentTarget.classList.remove('active') & e.currentTarget.classList.remove('hover') & e.currentTarget.classList.remove('focus');
   });
-
 
   // * queueBtn.addEventListene
-  queueBtn.addEventListener('click', (e) => {
-    addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
-    //   const pushArray = [];
-    //   array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
-    //   const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
-    //   console.log(array.results[indexOfMovie]);
-    //   pushArray.push(array.results[indexOfMovie]);
-    //   console.log(pushArray);
-
-    //   arrayWatched = JSON.parse(localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE));
-    //   console.log(arrayWatched);
-    //   if (arrayWatched) {
-    //     arrayWatched.push(array.results[indexOfMovie]);
-    //     localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(arrayWatched));
-    //   } else {
-    //     localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(pushArray));
-    //   }
+  queueBtn.addEventListener('click', e => {
+    const index = checkForMovieInLocalStorage(
+      e.currentTarget.dataset.id,
+      refsStorage.STORAGE_KEY_QUEUE
+    );
+    console.log(index);
+    // addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
+    if (index == -1) {
+      addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
+      e.currentTarget.classList.add('active');
+    } else
+      delSelectedFilmsFromLocalStoradge(index, refsStorage.STORAGE_KEY_QUEUE);
+      e.currentTarget.classList.remove('active') & e.currentTarget.classList.remove('hover') & e.currentTarget.classList.remove('focus');
   });
 }
-
 
 function addSelectedFilmsLocalStorage(e, key) {
   const pushArray = [];
   const array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
-  const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
+  const indexOfMovie = array.results.findIndex(
+    movieObj => movieObj.id == e.currentTarget.dataset.id
+  );
   // array.results[indexOfMovie];
   pushArray.push(array.results[indexOfMovie]);
   console.log(pushArray);
@@ -186,6 +188,13 @@ function addSelectedFilmsLocalStorage(e, key) {
   } else {
     localStorage.setItem(key, JSON.stringify(pushArray));
   }
+}
+
+function delSelectedFilmsFromLocalStoradge(index, key) {
+  const array = JSON.parse(localStorage.getItem(key));
+  array.splice(index, 1);
+  const arrayJSON = JSON.stringify(array);
+  localStorage.setItem(key, arrayJSON);
 }
 
 window.addEventListener('keydown', closeModalHandler);
@@ -211,24 +220,8 @@ function closeBDModal(e) {
 function checkForMovieInLocalStorage(id, key) {
   const arrayMovies = JSON.parse(localStorage.getItem(key));
   if (!arrayMovies) {
-    return;
+    return -1;
   }
-  const indexOfMovie = arrayMovies.findIndex(movie => movie.id === id);
+  const indexOfMovie = arrayMovies.findIndex(movie => movie.id == id);
   return indexOfMovie;
 }
-
-// const pushArray = [];
-// array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
-// const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
-// console.log(array.results[indexOfMovie]);
-// pushArray.push(array.results[indexOfMovie]);
-// console.log(pushArray);
-
-// arrayWatched = JSON.parse(localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE));
-// console.log(arrayWatched);
-// if (arrayWatched) {
-//   arrayWatched.push(array.results[indexOfMovie]);
-//   localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(arrayWatched));
-// } else {
-//   localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(pushArray));
-// }
