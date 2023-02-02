@@ -7,13 +7,7 @@ class Movie {
     this.currentPage = 1;
     this.totalpages;
     this.firstRequest = true;
-    // this.isSearched = false; // Юра
   }
-
-  // Юра
-  // setIsSearched(value) {
-  //   this.isSearched = value
-  // }
 
   setSearchValue(value) {
     this.searchValue = value;

@@ -1,10 +1,5 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 
-// import { markUpGenresInModal } from './createMarkupCardsFilms';
-// import {
-//   saveLocalStorageToWatched,
-//   saveLocalStorageToQueue,
-// } from './local_storage';
 import { refsStorage } from './refs';
 
 import { getTrailerPath } from './data-for-trailer';
@@ -179,8 +174,6 @@ function addEventListenerToBtn() {
       e.currentTarget.dataset.id,
       refsStorage.STORAGE_KEY_QUEUE
     );
-    console.log(index);
-    // addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
     if (index == -1) {
       addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
       e.currentTarget.classList.add('active');
@@ -210,12 +203,9 @@ function addSelectedFilmsLocalStorage(e, key) {
   const indexOfMovie = array.results.findIndex(
     movieObj => movieObj.id == e.currentTarget.dataset.id
   );
-  // array.results[indexOfMovie];
   pushArray.push(array.results[indexOfMovie]);
-  console.log(pushArray);
 
   const arrayWatched = JSON.parse(localStorage.getItem(key));
-  console.log(arrayWatched);
   if (arrayWatched) {
     arrayWatched.push(array.results[indexOfMovie]);
     localStorage.setItem(key, JSON.stringify(arrayWatched));

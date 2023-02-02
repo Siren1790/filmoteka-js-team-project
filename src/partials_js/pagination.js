@@ -90,7 +90,6 @@ const getPaginationValues = (currentPage, total_pages) => {
 
 const preparePaginationDynamicList = () => {
   // відповірає за формування масиву з кнопками
-  // const { currentPage, total_pages } = movie;
   const currentPage = movie.getCurrentPage();
   const total_pages = movie.getTotalPages();
   refs.paginationWrapperNode.innerHTML = ''; // очищаємо блок для кнопок пагінації
@@ -151,16 +150,6 @@ function onArrowButtons(event) {
         ? (movie.currentPage -= 1)
         : (movie.currentPage += 1);
 
-      // movie.setCurrentPage(pageValue); // записуємо номер поточної сторінки
-
-      // const data = movie.isSearched
-      //   ? await movie.fetchSearchMovies() // запит на популярні фільми
-      //   : await movie.fetchTrendingMovies(); // запит на пошук фільмів
-
-      // if (data.results.length) {
-      //   fetchData(); // робимо запит і відмальовуємо популярні фільми
-      // }
-
       if (movie.firstRequest) {
         fetchData();
       } else {
@@ -174,7 +163,6 @@ async function searchPagination() {
   preloaderShow();
   const moviesSearch = await movie.fetchSearchMovies();
   saveLocalStorageMovies(moviesSearch);
-  // console.log('moviesSearch', moviesSearch.results);
   movie.setCurrentPage(moviesSearch.page);
   let markup = createMarkupCardsFilms(moviesSearch.results);
   refs.mainMarkFilms.innerHTML = markup;

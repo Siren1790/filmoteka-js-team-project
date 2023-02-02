@@ -4,18 +4,15 @@ const refs = {
   mainMarkFilms: document.querySelector('.list-films'),
   //pagination.js
   paginationWrapperNode: document.querySelector('.render-pagination-list'),
-  // lastPaginationItemNode: document.querySelector('.last-page'), //don`t use
-  // firstPaginationItemNode: document.querySelector('.first-page'), //don`t use
   prevPaginationNode: document.querySelector('.btn-arrow-prev'),
   nextPaginationNode: document.querySelector('.btn-arrow-next'),
   listPaginationNode: document.querySelector('.list-pagination'),
 
-  // DEFAULT_START_PAGINATION: [2, 3, 4, 5, 6],
-  // DEFAULT_END_PAGINATION: [995, 996, 997, 998, 999],
   //serch.js
   markSearchFilms: document.querySelector('.list-films'),
   searchButton: document.querySelector('.js-search-form'),
   searchBadResult: document.querySelector('.js-search-badResult'),
+  
   //local_storage.js
   btnToWatched: document.querySelector('.js-btn-watched'),
   btnToQueue: document.querySelector('.js-btn-queue'),

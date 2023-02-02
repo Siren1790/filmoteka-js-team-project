@@ -1,6 +1,3 @@
-// const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
-// import axios from 'axios';
-// import { refs, refsApi, refsStorage } from './refs';
 
 function restDataForModal(e) {
   const targetClickMovieCard = e.target.closest('.item-films');

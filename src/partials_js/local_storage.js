@@ -28,7 +28,4 @@ async function saveLocalStorageToQueue() {
   localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(movieDetails));
 }
 
-// refs.btnToWatched.addEventListener('click', saveLocalStorageToWatched);
-// refs.btnToQueue.addEventListener('click', saveLocalStorageToQueue);
-
 export { saveLocalStorageMovies, getLocalStorage, saveLocalStorageToWatched, saveLocalStorageToQueue };
