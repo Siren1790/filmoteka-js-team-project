@@ -38,11 +38,17 @@ function openModal(event) {
 
   if (indexOfMovieInWatched !== -1) {
     watchBtn.classList.add('active');
-  } else watchBtn.classList.remove('active') &  watchBtn.classList.remove('hover') &  watchBtn.classList.remove('focus');
+  } else
+    watchBtn.classList.remove('active') &
+      watchBtn.classList.remove('hover') &
+      watchBtn.classList.remove('focus');
 
   if (indexOfMovieInQueue !== -1) {
     queueBtn.classList.add('active');
-  } else queueBtn.classList.remove('active') & queueBtn.classList.remove('hover') & queueBtn.classList.remove('focus');
+  } else
+    queueBtn.classList.remove('active') &
+      queueBtn.classList.remove('hover') &
+      queueBtn.classList.remove('focus');
 
   document.body.classList.add('stop-scrolling');
   addEventListenerToBtn();
@@ -148,9 +154,23 @@ function addEventListenerToBtn() {
     if (index == -1) {
       addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_WATCHED);
       e.currentTarget.classList.add('active');
+
+      const indexOther = checkForMovieInLocalStorage(
+        e.currentTarget.dataset.id,
+        refsStorage.STORAGE_KEY_QUEUE
+      );
+      if (indexOther != -1) {
+        delSelectedFilmsFromLocalStoradge(
+          indexOther,
+          refsStorage.STORAGE_KEY_QUEUE
+        );
+        queueBtn.classList.remove('active');
+      }
     } else
       delSelectedFilmsFromLocalStoradge(index, refsStorage.STORAGE_KEY_WATCHED);
-    e.currentTarget.classList.remove('active') & e.currentTarget.classList.remove('hover') & e.currentTarget.classList.remove('focus');
+    e.currentTarget.classList.remove('active') &
+      e.currentTarget.classList.remove('hover') &
+      e.currentTarget.classList.remove('focus');
   });
 
   // * queueBtn.addEventListene
@@ -164,9 +184,23 @@ function addEventListenerToBtn() {
     if (index == -1) {
       addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
       e.currentTarget.classList.add('active');
+
+      const indexOther = checkForMovieInLocalStorage(
+        e.currentTarget.dataset.id,
+        refsStorage.STORAGE_KEY_WATCHED
+      );
+      if (indexOther != -1) {
+        delSelectedFilmsFromLocalStoradge(
+          indexOther,
+          refsStorage.STORAGE_KEY_WATCHED
+        );
+        watchBtn.classList.remove('active');
+      }
     } else
       delSelectedFilmsFromLocalStoradge(index, refsStorage.STORAGE_KEY_QUEUE);
-      e.currentTarget.classList.remove('active') & e.currentTarget.classList.remove('hover') & e.currentTarget.classList.remove('focus');
+    e.currentTarget.classList.remove('active') &
+      e.currentTarget.classList.remove('hover') &
+      e.currentTarget.classList.remove('focus');
   });
 }
 
