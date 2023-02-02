@@ -1,18 +1,10 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 
-<<<<<<< Updated upstream
-import { markUpGenresInModal } from './createMarkupCardsFilms';
-import {
-  saveLocalStorageToWatched,
-  saveLocalStorageToQueue,
-} from './local_storage';
-=======
 // import { markUpGenresInModal } from './createMarkupCardsFilms';
 // import {
 //   saveLocalStorageToWatched,
 //   saveLocalStorageToQueue,
 // } from './local_storage';
->>>>>>> Stashed changes
 import { refsStorage } from './refs';
 
 import { getTrailerPath } from './data-for-trailer';
@@ -24,9 +16,6 @@ const backdropModal = document.querySelector('.js-markup__modal');
 const modal = document.querySelector('.js-modal-window');
 modal.addEventListener('click', openModal);
 
-// const watchBtn = document.querySelector('.js-btn-watched');
-// const queueBtn = document.querySelector('.js-btn-queue');
-
 function openModal(event) {
   if (event.currentTarget == event.target) {
     return;
@@ -36,8 +25,6 @@ function openModal(event) {
   const markup = createMarkupModal(objectInfoMovie);
   backdropModal.innerHTML = markup;
 
-<<<<<<< Updated upstream
-=======
   const watchBtn = document.querySelector('.js-btn-watched');
   const queueBtn = document.querySelector('.js-btn-queue');
   const indexOfMovieInWatched = checkForMovieInLocalStorage(
@@ -50,19 +37,16 @@ function openModal(event) {
   );
 
   if (indexOfMovieInWatched !== -1) {
-    watchBtn.classList.add('active') && watchBtn.classList.add('hover') && watchBtn.classList.add('focus');
-  } else watchBtn.classList.remove('active') || watchBtn.classList.remove('hover') || watchBtn.classList.remove('focus');
+    watchBtn.classList.add('active');
+  } else watchBtn.classList.remove('active') &  watchBtn.classList.remove('hover') &  watchBtn.classList.remove('focus');
 
   if (indexOfMovieInQueue !== -1) {
-    queueBtn.classList.add('active') && queueBtn.classList.add('hover') && queueBtn.classList.add('focus');
-  } else queueBtn.classList.remove('active') || queueBtn.classList.remove('hover') || queueBtn.classList.remove('focus');
+    queueBtn.classList.add('active');
+  } else queueBtn.classList.remove('active') & queueBtn.classList.remove('hover') & queueBtn.classList.remove('focus');
 
->>>>>>> Stashed changes
   document.body.classList.add('stop-scrolling');
   addEventListenerToBtn();
   getTrailerPath(objectInfoMovie.id);
-  // console.log(`id`, objectInfoMovie.id);
-  chechFilmInLockalStoreg(objectInfoMovie.id);
 }
 
 function createMarkupModal(objMovieInfo) {
@@ -156,29 +140,6 @@ function addEventListenerToBtn() {
   const watchBtn = document.querySelector('.js-btn-watched');
   const queueBtn = document.querySelector('.js-btn-queue');
 
-<<<<<<< Updated upstream
-  const movieId = watchBtn.dataset.id;
-  const indexOfMovieInWatched = checkForMovieInLocalStorage(
-    movieId,
-    refsStorage.STORAGE_KEY_WATCHED
-  );
-  const indexOfMovieInQueue = checkForMovieInLocalStorage(
-    movieId,
-    refsStorage.STORAGE_KEY_QUEUE
-  );
-
-  if (indexOfMovieInWatched !== -1) {
-    watchBtn.classList.add('active');
-  }
-
-  if (indexOfMovieInQueue !== -1) {
-    queueBtn.classList.add('active');
-  }
-
-  //*  watchBtn.addEventListener
-  watchBtn.addEventListener('click', e => {
-    addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_WATCHED);
-=======
   watchBtn.addEventListener('click', e => {
     const index = checkForMovieInLocalStorage(
       e.currentTarget.dataset.id,
@@ -186,18 +147,14 @@ function addEventListenerToBtn() {
     );
     if (index == -1) {
       addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_WATCHED);
-      e.currentTarget.classList.add('active') && e.currentTarget.classList.add('hover') && e.currentTarget.classList.add('focus');
+      e.currentTarget.classList.add('active');
     } else
       delSelectedFilmsFromLocalStoradge(index, refsStorage.STORAGE_KEY_WATCHED);
-    e.currentTarget.classList.remove('active') && e.currentTarget.classList.remove('hover') && e.currentTarget.classList.remove('focus'); 
->>>>>>> Stashed changes
+    e.currentTarget.classList.remove('active') & e.currentTarget.classList.remove('hover') & e.currentTarget.classList.remove('focus');
   });
 
   // * queueBtn.addEventListene
   queueBtn.addEventListener('click', e => {
-<<<<<<< Updated upstream
-    addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
-=======
     const index = checkForMovieInLocalStorage(
       e.currentTarget.dataset.id,
       refsStorage.STORAGE_KEY_QUEUE
@@ -206,11 +163,10 @@ function addEventListenerToBtn() {
     // addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
     if (index == -1) {
       addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
-      e.currentTarget.classList.add('active') && e.currentTarget.classList.add('hover') && e.currentTarget.classList.add('focus');
+      e.currentTarget.classList.add('active');
     } else
       delSelectedFilmsFromLocalStoradge(index, refsStorage.STORAGE_KEY_QUEUE);
-    e.currentTarget.classList.remove('active') && e.currentTarget.classList.remove('hover') && e.currentTarget.classList.remove('focus'); 
->>>>>>> Stashed changes
+      e.currentTarget.classList.remove('active') & e.currentTarget.classList.remove('hover') & e.currentTarget.classList.remove('focus');
   });
 }
 
@@ -269,50 +225,3 @@ function checkForMovieInLocalStorage(id, key) {
   const indexOfMovie = arrayMovies.findIndex(movie => movie.id == id);
   return indexOfMovie;
 }
-<<<<<<< Updated upstream
-
-// const pushArray = [];
-// array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
-// const indexOfMovie = array.results.findIndex(movieObj => movieObj.id == e.currentTarget.dataset.id);
-// console.log(array.results[indexOfMovie]);
-// pushArray.push(array.results[indexOfMovie]);
-// console.log(pushArray);
-
-// arrayWatched = JSON.parse(localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE));
-// console.log(arrayWatched);
-// if (arrayWatched) {
-//   arrayWatched.push(array.results[indexOfMovie]);
-//   localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(arrayWatched));
-// } else {
-//   localStorage.setItem(refsStorage.STORAGE_KEY_QUEUE, JSON.stringify(pushArray));
-// }
-
-function chechFilmInLockalStoreg(idFilms) {
-  const watchBtn = document.querySelector('.js-btn-watched');
-  const queueBtn = document.querySelector('.js-btn-queue');
-
-  const arrayMoviesQueue = JSON.parse(
-    localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
-  );
-
-  const arrayMoviesWatched = JSON.parse(
-    localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
-  );
-
-  const indexOfMovieQueue = arrayMoviesQueue.findIndex(movie => {
-    return movie.id === idFilms;
-  });
-
-  const indexOfMovieWatched = arrayMoviesWatched.findIndex(
-    movie => movie.id === idFilms
-  );
-
-  if (indexOfMovieQueue !== -1) {
-    queueBtn.classList.add('active');
-  }
-  if (indexOfMovieWatched !== -1) {
-    watchBtn.classList.add('active');
-  }
-}
-=======
->>>>>>> Stashed changes
