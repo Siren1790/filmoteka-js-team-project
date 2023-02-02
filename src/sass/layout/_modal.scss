@@ -134,7 +134,7 @@ a {
   font-style: inherit;
   font-weight: 500;
   background-color: rgba(226, 220, 220, 0.776);
-  transition: all 0.4s;
+  transition: transform 0.5s;
 
   &:hover,
   &:focus {
@@ -156,7 +156,7 @@ a {
   font-style: inherit;
   font-weight: 500;
   background-color: rgba(226, 220, 220, 0.776);
-  transition: all 0.4s;
+  transition: transform 0.5s;
 
   &:hover,
   &:focus {
