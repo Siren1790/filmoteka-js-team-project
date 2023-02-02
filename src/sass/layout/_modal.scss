@@ -70,7 +70,7 @@ a {
 
   z-index: 20;
   width: 280px;
-  height: 940px;
+  max-height: 940px;
   background-color: var(--color-white);
   border: 1px solid var(--accent-color);
   border-radius: 10px;
@@ -82,18 +82,18 @@ a {
 
   @media screen and (min-width: 480px) {
     width: 420px;
-    height: 940px;
+    max-height: 940px;
   }
 
   @media screen and (min-width: 768px) {
     width: 704px;
-    height: 552px;
+    max-height: 552px;
     margin-top: 0px;
   }
 
   @media screen and (min-width: 1280px) {
     width: 806px;
-    height: 558px;
+    max-height: 558px;
   }
 }
 
@@ -168,17 +168,14 @@ a {
 }
 
 .info-wrapper {
-  @media screen and (min-width: 768px) {
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
-    padding-bottom: 10px;
-  }
+    padding: 20px 10px;
+
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
-    padding: 0px 36px;
-    padding-top: 20px;
+    padding: 20px 36px;
   }
 
   @media screen and (min-width: 1280px) {
@@ -187,6 +184,7 @@ a {
 }
 
 .card-main-poster {
+  object-fit: cover;
   width: 240px;
   height: 357px;
   margin: 0 auto;
@@ -232,7 +230,6 @@ a {
 }
 
 .title-wrapper {
-  max-height: 70px;
   overflow-wrap: break-word;
   overflow-y: hidden;
 }
@@ -243,20 +240,17 @@ a {
   font-size: 20px;
   line-height: 1.15;
   text-transform: uppercase;
-  margin-bottom: 0px;
-  max-height: 70px;
+  margin-bottom: 20px;
   overflow-y: hidden;
 
   @media screen and (min-width: 768px) {
     width: 345px;
-    max-height: 45px;
     margin-bottom: 0px;
     margin-top: 20px;
   }
 
   @media screen and (min-width: 1280px) {
     font-size: 30px;
-    max-height: 40px;
     margin-top: 0px;
   }
 }
@@ -353,7 +347,7 @@ a {
 
   @media screen and (min-width: 1280px) {
     width: 391px;
-    height: 194px;
+    max-height: 194px;
   }
 }
 
@@ -365,8 +359,9 @@ a {
 }
 
 .movie-descr__text {
+  width: 220px;
   font-weight: 500;
-  max-height: 240px;
+  max-height: 260px;
   overflow-y: hidden;
   line-height: 1.67;
 
@@ -411,6 +406,8 @@ a {
 .modal-buttons {
   display: flex;
   justify-content: space-between;
+  gap: 5px;
+  margin-bottom: 10px;
 
   @media screen and (min-width: 480px) {
     justify-content: center;
