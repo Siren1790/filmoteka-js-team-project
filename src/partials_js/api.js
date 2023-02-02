@@ -1,38 +1,43 @@
 import axios from 'axios';
 import { refsApi } from './refs';
 
-
 class Movie {
-    constructor() {
+  constructor() {
     this.searchValue = '';
     this.currentPage = 1;
-    this.totalpages
+    this.totalpages;
     this.firstRequest = true;
+    // this.isSearched = false; // Юра
   }
 
-  setSearchValue(value){
+  // Юра
+  // setIsSearched(value) {
+  //   this.isSearched = value
+  // }
+
+  setSearchValue(value) {
     this.searchValue = value;
   }
-  getSearchValue(){
+  getSearchValue() {
     return this.searchValue;
   }
 
-  setCurrentPage(value){
+  setCurrentPage(value) {
     this.currentPage = value;
   }
-  getCurrentPage(){
+  getCurrentPage() {
     return this.currentPage;
   }
-  setTotalPages(value){
+  setTotalPages(value) {
     this.totalpages = value;
   }
-  getTotalPages(){
+  getTotalPages() {
     return this.totalpages;
   }
 
   nextPage() {
-    console.log('nextPage')
-    this.setCurrentPage(this.currentPage += 1);
+    console.log('nextPage');
+    this.setCurrentPage((this.currentPage += 1));
   }
 
   resetPage() {
@@ -52,7 +57,6 @@ class Movie {
         },
       });
       return response.data;
-      
     } catch (error) {
       console.error(error);
     }
@@ -64,7 +68,7 @@ class Movie {
    */
   async fetchSearchMovies() {
     try {
-      const response =  await axios.get(refsApi.API_URL_SEARCH_MOVIE, {
+      const response = await axios.get(refsApi.API_URL_SEARCH_MOVIE, {
         params: {
           api_key: refsApi.API_KEY,
           query: this.searchValue,
@@ -87,12 +91,15 @@ class Movie {
    */
   async fetchMovieDetails(id = `3986`) {
     try {
-      const response = await axios.get(`${refsApi.API_URL_MOVIE_DETAILS}${id}`, {
-        params: {
-          api_key: refsApi.API_KEY,
-          language: 'en-US',
-        },
-      });
+      const response = await axios.get(
+        `${refsApi.API_URL_MOVIE_DETAILS}${id}`,
+        {
+          params: {
+            api_key: refsApi.API_KEY,
+            language: 'en-US',
+          },
+        }
+      );
 
       console.log(response.data);
 
@@ -130,18 +137,18 @@ class Movie {
    * @returns an array of objects with decrypted genre ids
    */
   async fetchMovieGenres() {
-      try {
-          const response = await axios.get(refsApi.API_URL_MOVIE_GENRES, {
-              params: {
-                  api_key: refsApi.API_KEY,
-              }
-          });
+    try {
+      const response = await axios.get(refsApi.API_URL_MOVIE_GENRES, {
+        params: {
+          api_key: refsApi.API_KEY,
+        },
+      });
 
-        return response.data;
-      } catch (error) {
-        console.error(error);
-      }
+      return response.data;
+    } catch (error) {
+      console.error(error);
     }
+  }
 }
 
 const movie = new Movie();

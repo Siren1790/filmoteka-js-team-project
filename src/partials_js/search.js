@@ -21,11 +21,21 @@ async function onSubmit(event) {
     movie.setSearchValue(event.currentTarget.searchQuery.value);
     event.currentTarget.searchQuery.value = '';
     movie.resetPage();
+
     const response = await movie.fetchSearchMovies();
     const searchAnswer = response.results;
 
     movie.setCurrentPage(response.page);
+    // movie.setIsSearched(true); //Юра
     movie.setTotalPages(response.total_pages);
+    //Юра
+    // if (response.results.length <= 20) {
+    //   refs.listPaginationNode.innerHTML = '';
+    //   const template = `<li class="item-pagination"><button class="btn-pagination">1</button></li>`;
+    //   refs.listPaginationNode.insertAdjacentHTML('afterbegin', template);
+    // } else {
+    //   // implement pagination if movies > 20
+    // }
 
     if (searchAnswer.length > 0) {
       saveLocalStorageMovies(response);
@@ -44,6 +54,7 @@ async function onSubmit(event) {
       hideErrorMessage();
     }
   } else {
+    // movie.setIsSearched(false); //Юра
     refs.searchBadResult.hidden = false;
     hideErrorMessage();
   }

@@ -1,3 +1,4 @@
+
 import { movie } from './api';
 import { refs } from './refs';
 import createMarkupCardsFilms from './createMarkupCardsFilms';
@@ -6,6 +7,7 @@ import { preloaderHide, preloaderShow } from './spinner';
 import { preparePaginationDynamicList } from './pagination';
 import { saveStorageGenres, createGenresObject } from './local_genres-storage';
 import { refs } from './refs';
+
 
 async function fetchData() {
   preloaderShow();
@@ -23,6 +25,9 @@ async function fetchData() {
   preparePaginationDynamicList();
   preloaderHide();
 }
+
 fetchData();
 
+
 export { fetchData };
+
