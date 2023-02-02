@@ -33,7 +33,8 @@ function markUpMainGenres(genre_ids, loadGenres) {
 }
 
 export default function createMarkupCardsFilms(arrayMovies) {
-  let markup = arrayMovies.map(
+  let markup = arrayMovies
+    .map(
       ({ poster_path, title, genre_ids, release_date, vote_average, id }) => {
         let genresState = localStorage.getItem('genres');
         const loadGenres = JSON.parse(genresState);
@@ -41,7 +42,7 @@ export default function createMarkupCardsFilms(arrayMovies) {
         let genresLoad = markUpMainGenres(genre_ids, loadGenres);
 
         const imgRow = poster_path
-          ? `<img class="img-cover" src="${BASE_URL_POSTER}${poster_path}" />`
+          ? `<img class="img-cover" src="${BASE_URL_POSTER}${poster_path}" alt="${title}"/>`
           : `<img class="img-cover" src="${noPhoto}" alt="no photo" width="400" height="500">`;
 
         const ratingRow = vote_average
@@ -61,9 +62,8 @@ export default function createMarkupCardsFilms(arrayMovies) {
                  ${ratingRow}
                 </div>
               </li>`;
-      })
+      }
+    )
     .join('');
-    refs.mainMarkFilms.innerHTML = markup;
-    refs.searchButton.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  return markup;
 }
-

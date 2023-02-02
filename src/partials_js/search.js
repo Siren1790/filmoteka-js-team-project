@@ -40,7 +40,12 @@ async function onSubmit(event) {
     if (searchAnswer.length > 0) {
       saveLocalStorageMovies(response);
       let cardsMovies = getLocalStorage();
-      createMarkupCardsFilms(cardsMovies.results);
+      let markup = createMarkupCardsFilms(cardsMovies.results);
+      refs.mainMarkFilms.innerHTML = markup;
+      refs.searchButton.scrollIntoView({
+        block: 'center',
+        behavior: 'smooth',
+      });
 
       movie.firstRequest = false;
       preparePaginationDynamicList();
