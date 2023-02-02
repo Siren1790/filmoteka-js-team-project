@@ -33,6 +33,8 @@ function hiddenEmptyAnimation() {
 }
 
 function onClickMakeMarkUpWatched() {
+  refs.mustToRedraw = 1;
+
   if (localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)) {
     emptyLibraryAnimation.classList.add('visually-hidden');
     emptyLibraryParagraoh.classList.add('visually-hidden');
@@ -63,6 +65,8 @@ function onClickMakeMarkUpWatched() {
 }
 
 function onClickMakeMarkUpQueue() {
+  refs.mustToRedraw = 1;
+
   if (localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)) {
     emptyLibraryAnimation.classList.add('visually-hidden');
     emptyLibraryParagraoh.classList.add('visually-hidden');

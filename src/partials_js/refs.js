@@ -12,7 +12,7 @@ const refs = {
   markSearchFilms: document.querySelector('.list-films'),
   searchButton: document.querySelector('.js-search-form'),
   searchBadResult: document.querySelector('.js-search-badResult'),
-  
+  mustToRedraw: 0,
   //local_storage.js
   btnToWatched: document.querySelector('.js-btn-watched'),
   btnToQueue: document.querySelector('.js-btn-queue'),

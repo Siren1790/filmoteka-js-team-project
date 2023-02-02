@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { refsApi } from './refs';
+import { refs, refsApi } from './refs';
 
 class Movie {
   constructor() {
@@ -43,6 +43,7 @@ class Movie {
    * @returns a list of popular movies for today
    */
   async fetchTrendingMovies() {
+    refs.mustToRedraw = 0;
     try {
       const response = await axios.get(refsApi.API_URL_TRENDING_MOVIE, {
         params: {
@@ -61,6 +62,8 @@ class Movie {
    * @returns a list of movies by keyword
    */
   async fetchSearchMovies() {
+    refs.mustToRedraw = 0;
+
     try {
       const response = await axios.get(refsApi.API_URL_SEARCH_MOVIE, {
         params: {
