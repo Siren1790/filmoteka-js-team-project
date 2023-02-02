@@ -84,7 +84,7 @@ function createMarkupModal(objMovieInfo) {
       Watch trailer
     </a>
   </button>
-</div>;
+</div>
         </div>
 
         <div class="info-wrapper">
