@@ -1,10 +1,18 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 
+<<<<<<< Updated upstream
 import { markUpGenresInModal } from './createMarkupCardsFilms';
 import {
   saveLocalStorageToWatched,
   saveLocalStorageToQueue,
 } from './local_storage';
+=======
+// import { markUpGenresInModal } from './createMarkupCardsFilms';
+// import {
+//   saveLocalStorageToWatched,
+//   saveLocalStorageToQueue,
+// } from './local_storage';
+>>>>>>> Stashed changes
 import { refsStorage } from './refs';
 
 import { getTrailerPath } from './data-for-trailer';
@@ -20,14 +28,36 @@ modal.addEventListener('click', openModal);
 // const queueBtn = document.querySelector('.js-btn-queue');
 
 function openModal(event) {
-  // if (event.currentTarget == event.target) {
-  //   return
-  // }
+  if (event.currentTarget == event.target) {
+    return;
+  }
   backdropModal.classList.remove('visually-hidden');
   const objectInfoMovie = restDataForModal(event);
   const markup = createMarkupModal(objectInfoMovie);
   backdropModal.innerHTML = markup;
 
+<<<<<<< Updated upstream
+=======
+  const watchBtn = document.querySelector('.js-btn-watched');
+  const queueBtn = document.querySelector('.js-btn-queue');
+  const indexOfMovieInWatched = checkForMovieInLocalStorage(
+    objectInfoMovie.id,
+    refsStorage.STORAGE_KEY_WATCHED
+  );
+  const indexOfMovieInQueue = checkForMovieInLocalStorage(
+    objectInfoMovie.id,
+    refsStorage.STORAGE_KEY_QUEUE
+  );
+
+  if (indexOfMovieInWatched !== -1) {
+    watchBtn.classList.add('active') && watchBtn.classList.add('hover') && watchBtn.classList.add('focus');
+  } else watchBtn.classList.remove('active') || watchBtn.classList.remove('hover') || watchBtn.classList.remove('focus');
+
+  if (indexOfMovieInQueue !== -1) {
+    queueBtn.classList.add('active') && queueBtn.classList.add('hover') && queueBtn.classList.add('focus');
+  } else queueBtn.classList.remove('active') || queueBtn.classList.remove('hover') || queueBtn.classList.remove('focus');
+
+>>>>>>> Stashed changes
   document.body.classList.add('stop-scrolling');
   addEventListenerToBtn();
   getTrailerPath(objectInfoMovie.id);
@@ -126,6 +156,7 @@ function addEventListenerToBtn() {
   const watchBtn = document.querySelector('.js-btn-watched');
   const queueBtn = document.querySelector('.js-btn-queue');
 
+<<<<<<< Updated upstream
   const movieId = watchBtn.dataset.id;
   const indexOfMovieInWatched = checkForMovieInLocalStorage(
     movieId,
@@ -147,11 +178,39 @@ function addEventListenerToBtn() {
   //*  watchBtn.addEventListener
   watchBtn.addEventListener('click', e => {
     addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_WATCHED);
+=======
+  watchBtn.addEventListener('click', e => {
+    const index = checkForMovieInLocalStorage(
+      e.currentTarget.dataset.id,
+      refsStorage.STORAGE_KEY_WATCHED
+    );
+    if (index == -1) {
+      addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_WATCHED);
+      e.currentTarget.classList.add('active') && e.currentTarget.classList.add('hover') && e.currentTarget.classList.add('focus');
+    } else
+      delSelectedFilmsFromLocalStoradge(index, refsStorage.STORAGE_KEY_WATCHED);
+    e.currentTarget.classList.remove('active') && e.currentTarget.classList.remove('hover') && e.currentTarget.classList.remove('focus'); 
+>>>>>>> Stashed changes
   });
 
   // * queueBtn.addEventListene
   queueBtn.addEventListener('click', e => {
+<<<<<<< Updated upstream
     addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
+=======
+    const index = checkForMovieInLocalStorage(
+      e.currentTarget.dataset.id,
+      refsStorage.STORAGE_KEY_QUEUE
+    );
+    console.log(index);
+    // addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
+    if (index == -1) {
+      addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
+      e.currentTarget.classList.add('active') && e.currentTarget.classList.add('hover') && e.currentTarget.classList.add('focus');
+    } else
+      delSelectedFilmsFromLocalStoradge(index, refsStorage.STORAGE_KEY_QUEUE);
+    e.currentTarget.classList.remove('active') && e.currentTarget.classList.remove('hover') && e.currentTarget.classList.remove('focus'); 
+>>>>>>> Stashed changes
   });
 }
 
@@ -173,6 +232,13 @@ function addSelectedFilmsLocalStorage(e, key) {
   } else {
     localStorage.setItem(key, JSON.stringify(pushArray));
   }
+}
+
+function delSelectedFilmsFromLocalStoradge(index, key) {
+  const array = JSON.parse(localStorage.getItem(key));
+  array.splice(index, 1);
+  const arrayJSON = JSON.stringify(array);
+  localStorage.setItem(key, arrayJSON);
 }
 
 window.addEventListener('keydown', closeModalHandler);
@@ -200,9 +266,10 @@ function checkForMovieInLocalStorage(id, key) {
   if (!arrayMovies) {
     return -1;
   }
-  const indexOfMovie = arrayMovies.findIndex(movie => movie.id === id);
+  const indexOfMovie = arrayMovies.findIndex(movie => movie.id == id);
   return indexOfMovie;
 }
+<<<<<<< Updated upstream
 
 // const pushArray = [];
 // array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
@@ -247,3 +314,5 @@ function chechFilmInLockalStoreg(idFilms) {
     watchBtn.classList.add('active');
   }
 }
+=======
+>>>>>>> Stashed changes
