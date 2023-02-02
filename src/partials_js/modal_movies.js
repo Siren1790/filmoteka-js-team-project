@@ -1,10 +1,12 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 
-import { refsStorage } from './refs';
+import { refsStorage, refs } from './refs';
 
 import { getTrailerPath } from './data-for-trailer';
 
 import noPhoto from '../images/no_image.jpg';
+
+import createMarkupCardsFilms from './createMarkupCardsFilms';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 const backdropModal = document.querySelector('.js-markup__modal');
@@ -166,6 +168,21 @@ function addEventListenerToBtn() {
     e.currentTarget.classList.remove('active') &
       e.currentTarget.classList.remove('hover') &
       e.currentTarget.classList.remove('focus');
+
+    if (refs.mustToRedraw) {
+      const anMovie = JSON.parse(
+        localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
+      );
+
+      const objCurFilms = JSON.parse(
+        localStorage.getItem(refsStorage.CURRENT_FILMS)
+      );
+      objCurFilms.results = anMovie;
+      localStorage.setItem(
+        refsStorage.CURRENT_FILMS,
+        JSON.stringify(objCurFilms)
+      );
+    }
   });
 
   // * queueBtn.addEventListene
@@ -194,6 +211,21 @@ function addEventListenerToBtn() {
     e.currentTarget.classList.remove('active') &
       e.currentTarget.classList.remove('hover') &
       e.currentTarget.classList.remove('focus');
+
+    if (refs.mustToRedraw) {
+      const anMovie = JSON.parse(
+        localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
+      );
+
+      const objCurFilms = JSON.parse(
+        localStorage.getItem(refsStorage.CURRENT_FILMS)
+      );
+      objCurFilms.results = anMovie;
+      localStorage.setItem(
+        refsStorage.CURRENT_FILMS,
+        JSON.stringify(objCurFilms)
+      );
+    }
   });
 }
 
@@ -229,15 +261,41 @@ function closeModalHandler(e) {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
   }
+  if (refs.mustToRedraw) {
+    const div = document.querySelector('.list-films');
+    const curMov = JSON.parse(
+      localStorage.getItem(refsStorage.CURRENT_FILMS)
+    ).results;
+    let markup = createMarkupCardsFilms(curMov);
+    div.innerHTML = markup;
+  }
 }
 
 function closeBDModal(e) {
   if (e.target === e.currentTarget) {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
+
+    if (refs.mustToRedraw) {
+      const div = document.querySelector('.list-films');
+      const curMov = JSON.parse(
+        localStorage.getItem(refsStorage.CURRENT_FILMS)
+      ).results;
+      let markup = createMarkupCardsFilms(curMov);
+      div.innerHTML = markup;
+    }
   } else if (e.target.className === 'close-button') {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
+
+    if (refs.mustToRedraw) {
+      const div = document.querySelector('.list-films');
+      const curMov = JSON.parse(
+        localStorage.getItem(refsStorage.CURRENT_FILMS)
+      ).results;
+      let markup = createMarkupCardsFilms(curMov);
+      div.innerHTML = markup;
+    }
   } else return;
 }
 
