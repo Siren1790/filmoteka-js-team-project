@@ -1,6 +1,5 @@
 
 import { refs } from "./refs";
-// const refs.scrollToTopButton = document.getElementById('js-top');
 
 const scrollFunc = () => {
   let y = window.scrollY;
