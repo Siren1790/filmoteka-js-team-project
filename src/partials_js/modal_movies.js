@@ -171,7 +171,6 @@ function addEventListenerToBtn() {
 
     const activeBtn = document.querySelector('.header-btn-active');
     const checkButton = activeBtn.textContent === 'QUEUE';
-    console.log(checkButton);
     if (checkButton) {
       if (refs.mustToRedraw) {
         const anMovie = JSON.parse(
@@ -203,7 +202,6 @@ function addEventListenerToBtn() {
     }
   });
 
-  // * queueBtn.addEventListene
   queueBtn.addEventListener('click', e => {
     const index = checkForMovieInLocalStorage(
       e.currentTarget.dataset.id,
@@ -231,9 +229,7 @@ function addEventListenerToBtn() {
       e.currentTarget.classList.remove('focus');
 
     const activeBtn = document.querySelector('.header-btn-active');
-    // console.dir(activeBtn);
     const checkButton = activeBtn.textContent === 'WATCHED';
-    console.dir(checkButton);
 
     if (checkButton) {
       if (refs.mustToRedraw) {
