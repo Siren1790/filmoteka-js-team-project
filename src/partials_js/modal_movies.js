@@ -6,53 +6,40 @@ import { getTrailerPath } from './data-for-trailer';
 
 import noPhoto from '../images/no_image.jpg';
 
-import createMarkupCardsFilms from './createMarkupCardsFilms';
+// import createMarkupCardsFilms from './createMarkupCardsFilms';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 const backdropModal = document.querySelector('.js-markup__modal');
 const modal = document.querySelector('.js-modal-window');
 modal.addEventListener('click', openModal);
 
+function checkForMovieInLocalStorage(id, key) {
+  const arrayMovies = JSON.parse(localStorage.getItem(key));
+
+  if (!arrayMovies) {
+    return -1;
+  }
+  const indexOfMovie = arrayMovies.findIndex(movie => movie.id == id);
+
+  return indexOfMovie;
+}
+
 function openModal(event) {
   if (event.currentTarget == event.target) {
     return;
   }
-  backdropModal.classList.remove('visually-hidden');
-  const objectInfoMovie = restDataForModal(event);
-  const markup = createMarkupModal(objectInfoMovie);
+
+  const objectInfoMovie = restDataForModal(event); // Беремо інформацію про фільм з локал Сторедж
+  const markup = createMarkupModal(objectInfoMovie, objectInfoMovie); // Створюэмо розмітку
   backdropModal.innerHTML = markup;
-
-  const watchBtn = document.querySelector('.js-btn-watched');
-  const queueBtn = document.querySelector('.js-btn-queue');
-  const indexOfMovieInWatched = checkForMovieInLocalStorage(
-    objectInfoMovie.id,
-    refsStorage.STORAGE_KEY_WATCHED
-  );
-  const indexOfMovieInQueue = checkForMovieInLocalStorage(
-    objectInfoMovie.id,
-    refsStorage.STORAGE_KEY_QUEUE
-  );
-
-  if (indexOfMovieInWatched !== -1) {
-    watchBtn.classList.add('active');
-  } else
-    watchBtn.classList.remove('active') &
-      watchBtn.classList.remove('hover') &
-      watchBtn.classList.remove('focus');
-
-  if (indexOfMovieInQueue !== -1) {
-    queueBtn.classList.add('active');
-  } else
-    queueBtn.classList.remove('active') &
-      queueBtn.classList.remove('hover') &
-      queueBtn.classList.remove('focus');
+  backdropModal.classList.remove('visually-hidden'); //Відображення модалки
 
   document.body.classList.add('stop-scrolling');
   addEventListenerToBtn();
   getTrailerPath(objectInfoMovie.id);
 }
 
-function createMarkupModal(objMovieInfo) {
+function createMarkupModal(objMovieInfo, objectInfoMovie) {
   const {
     id,
     poster_path,
@@ -64,6 +51,15 @@ function createMarkupModal(objMovieInfo) {
     genre_ids,
     overview,
   } = objMovieInfo;
+
+  const indexOfMovieInWatched = checkForMovieInLocalStorage(
+    objectInfoMovie.id,
+    refsStorage.STORAGE_KEY_WATCHED
+  );
+  const indexOfMovieInQueue = checkForMovieInLocalStorage(
+    objectInfoMovie.id,
+    refsStorage.STORAGE_KEY_QUEUE
+  );
 
   const imgSource = poster_path ? BASE_URL_POSTER + poster_path : noPhoto;
 
@@ -126,8 +122,16 @@ function createMarkupModal(objMovieInfo) {
 
                 <div class="desktop-wrapper">
                 <ul class="modal-buttons">
-                    <li><button type="button" class="watch-btn js-btn-watched" data-id="${id}">Add to Watched</button></li>
-                    <li><button type="button" class="queue-btn js-btn-queue" data-id="${id}">Add to Queue</button></li>
+                    <li><button type="button" class="watch-btn ${
+                      indexOfMovieInWatched == -1 ? '' : 'active'
+                    } js-btn-watched" data-id="${id}">${
+    indexOfMovieInWatched === -1 ? 'Add to Watched' : 'Watched Remove'
+  }</button></li>
+                    <li><button type="button" class="queue-btn ${
+                      indexOfMovieInQueue == -1 ? '' : 'active'
+                    } js-btn-queue" data-id="${id}">${
+    indexOfMovieInQueue == -1 ? 'Add to Queue' : 'Queue Remove'
+  }</button></li>
                 </ul>
 
                 </div>
@@ -139,77 +143,53 @@ function createMarkupModal(objMovieInfo) {
   return markup;
 }
 
+window.addEventListener('keydown', closeModalHandler);
+backdropModal.addEventListener('click', closeBDModal);
+
 function addEventListenerToBtn() {
   const watchBtn = document.querySelector('.js-btn-watched');
   const queueBtn = document.querySelector('.js-btn-queue');
 
   watchBtn.addEventListener('click', e => {
+    watchBtn.classList.toggle('active');
     const index = checkForMovieInLocalStorage(
       e.currentTarget.dataset.id,
       refsStorage.STORAGE_KEY_WATCHED
     );
+
     if (index == -1) {
       addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_WATCHED);
-      e.currentTarget.classList.add('active');
+      watchBtn.textContent = 'Watched Remove';
 
       const indexOther = checkForMovieInLocalStorage(
         e.currentTarget.dataset.id,
         refsStorage.STORAGE_KEY_QUEUE
       );
+
       if (indexOther != -1) {
         delSelectedFilmsFromLocalStoradge(
           indexOther,
           refsStorage.STORAGE_KEY_QUEUE
         );
         queueBtn.classList.remove('active');
+        queueBtn.textContent = 'ADD TO QUEUE';
       }
-    } else
+    } else {
       delSelectedFilmsFromLocalStoradge(index, refsStorage.STORAGE_KEY_WATCHED);
-    e.currentTarget.classList.remove('active') &
-      e.currentTarget.classList.remove('hover') &
-      e.currentTarget.classList.remove('focus');
-
-    const activeBtn = document.querySelector('.header-btn-active');
-    const checkButton = activeBtn.textContent === 'QUEUE';
-    if (checkButton) {
-      if (refs.mustToRedraw) {
-        const anMovie = JSON.parse(
-          localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
-        );
-
-        const objCurFilms = JSON.parse(
-          localStorage.getItem(refsStorage.CURRENT_FILMS)
-        );
-        objCurFilms.results = anMovie;
-        localStorage.setItem(
-          refsStorage.CURRENT_FILMS,
-          JSON.stringify(objCurFilms)
-        );
-      }
-    } else if (refs.mustToRedraw) {
-      const anMovie = JSON.parse(
-        localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
-      );
-
-      const objCurFilms = JSON.parse(
-        localStorage.getItem(refsStorage.CURRENT_FILMS)
-      );
-      objCurFilms.results = anMovie;
-      localStorage.setItem(
-        refsStorage.CURRENT_FILMS,
-        JSON.stringify(objCurFilms)
-      );
+      watchBtn.textContent = 'Add to Watched';
+      console.log(e.currentTarget);
     }
   });
 
   queueBtn.addEventListener('click', e => {
+    queueBtn.classList.toggle('active');
     const index = checkForMovieInLocalStorage(
       e.currentTarget.dataset.id,
       refsStorage.STORAGE_KEY_QUEUE
     );
     if (index == -1) {
       addSelectedFilmsLocalStorage(e, refsStorage.STORAGE_KEY_QUEUE);
-      e.currentTarget.classList.add('active');
+      e.currentTarget.textContent = 'QUEU Remove';
 
       const indexOther = checkForMovieInLocalStorage(
         e.currentTarget.dataset.id,
@@ -221,48 +201,81 @@ function addEventListenerToBtn() {
           refsStorage.STORAGE_KEY_WATCHED
         );
         watchBtn.classList.remove('active');
+        watchBtn.textContent = 'Add to Watched';
       }
-    } else
+    } else {
       delSelectedFilmsFromLocalStoradge(index, refsStorage.STORAGE_KEY_QUEUE);
-    e.currentTarget.classList.remove('active') &
-      e.currentTarget.classList.remove('hover') &
-      e.currentTarget.classList.remove('focus');
-
-    const activeBtn = document.querySelector('.header-btn-active');
-    const checkButton = activeBtn.textContent === 'WATCHED';
-
-    if (checkButton) {
-      if (refs.mustToRedraw) {
-        const anMovie = JSON.parse(
-          localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
-        );
-
-        const objCurFilms = JSON.parse(
-          localStorage.getItem(refsStorage.CURRENT_FILMS)
-        );
-        objCurFilms.results = anMovie;
-        localStorage.setItem(
-          refsStorage.CURRENT_FILMS,
-          JSON.stringify(objCurFilms)
-        );
-      }
-    } else if (refs.mustToRedraw) {
-      const anMovie = JSON.parse(
-        localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
-      );
-
-      const objCurFilms = JSON.parse(
-        localStorage.getItem(refsStorage.CURRENT_FILMS)
-      );
-      objCurFilms.results = anMovie;
-      localStorage.setItem(
-        refsStorage.CURRENT_FILMS,
-        JSON.stringify(objCurFilms)
-      );
+      e.currentTarget.textContent = 'ADD TO QUEUE';
     }
   });
-}
+  //   const activeBtn = document.querySelector('.header-btn-active');
+  //   const checkButton = activeBtn.textContent === 'QUEUE';
+  //   if (checkButton) {
+  //     if (refs.mustToRedraw) {
+  //       const anMovie = JSON.parse(
+  //         localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
+  //       );
 
+  //       const objCurFilms = JSON.parse(
+  //         localStorage.getItem(refsStorage.CURRENT_FILMS)
+  //       );
+  //       objCurFilms.results = anMovie;
+  //       localStorage.setItem(
+  //         refsStorage.CURRENT_FILMS,
+  //         JSON.stringify(objCurFilms)
+  //       );
+  //     }
+  //   } else if (refs.mustToRedraw) {
+  //     const anMovie = JSON.parse(
+  //       localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
+  //     );
+
+  //     const objCurFilms = JSON.parse(
+  //       localStorage.getItem(refsStorage.CURRENT_FILMS)
+  //     );
+  //     objCurFilms.results = anMovie;
+  //     localStorage.setItem(
+  //       refsStorage.CURRENT_FILMS,
+  //       JSON.stringify(objCurFilms)
+  //     );
+  //   }
+  // });
+
+  //     const activeBtn = document.querySelector('.header-btn-active');
+  //     const checkButton = activeBtn.textContent === 'WATCHED';
+
+  //     if (checkButton) {
+  //       if (refs.mustToRedraw) {
+  //         const anMovie = JSON.parse(
+  //           localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
+  //         );
+
+  //         const objCurFilms = JSON.parse(
+  //           localStorage.getItem(refsStorage.CURRENT_FILMS)
+  //         );
+  //         objCurFilms.results = anMovie;
+  //         localStorage.setItem(
+  //           refsStorage.CURRENT_FILMS,
+  //           JSON.stringify(objCurFilms)
+  //         );
+  //       }
+  //     } else if (refs.mustToRedraw) {
+  //       const anMovie = JSON.parse(
+  //         localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
+  //       );
+
+  //       const objCurFilms = JSON.parse(
+  //         localStorage.getItem(refsStorage.CURRENT_FILMS)
+  //       );
+  //       objCurFilms.results = anMovie;
+  //       localStorage.setItem(
+  //         refsStorage.CURRENT_FILMS,
+  //         JSON.stringify(objCurFilms)
+  //       );
+  //     }
+  //   });
+  // }
+}
 function addSelectedFilmsLocalStorage(e, key) {
   const pushArray = [];
   const array = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
@@ -287,22 +300,21 @@ function delSelectedFilmsFromLocalStoradge(index, key) {
   localStorage.setItem(key, arrayJSON);
 }
 
-window.addEventListener('keydown', closeModalHandler);
-backdropModal.addEventListener('click', closeBDModal);
+
 
 function closeModalHandler(e) {
   if (e.code === 'Escape') {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
   }
-  if (refs.mustToRedraw) {
-    const div = document.querySelector('.list-films');
-    const curMov = JSON.parse(
-      localStorage.getItem(refsStorage.CURRENT_FILMS)
-    ).results;
-    let markup = createMarkupCardsFilms(curMov);
-    div.innerHTML = markup;
-  }
+  // if (refs.mustToRedraw) {
+  //   const div = document.querySelector('.list-films');
+  //   const curMov = JSON.parse(
+  //     localStorage.getItem(refsStorage.CURRENT_FILMS)
+  //   ).results;
+  //   let markup = createMarkupCardsFilms(curMov);
+  //   div.innerHTML = markup;
+  // }
 }
 
 function closeBDModal(e) {
@@ -310,34 +322,25 @@ function closeBDModal(e) {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
 
-    if (refs.mustToRedraw) {
-      const div = document.querySelector('.list-films');
-      const curMov = JSON.parse(
-        localStorage.getItem(refsStorage.CURRENT_FILMS)
-      ).results;
-      let markup = createMarkupCardsFilms(curMov);
-      div.innerHTML = markup;
-    }
+    // if (refs.mustToRedraw) {
+    //   const div = document.querySelector('.list-films');
+    //   const curMov = JSON.parse(
+    //     localStorage.getItem(refsStorage.CURRENT_FILMS)
+    //   ).results;
+    //   let markup = createMarkupCardsFilms(curMov);
+    //   div.innerHTML = markup;
+    // }
   } else if (e.target.className === 'close-button') {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
 
-    if (refs.mustToRedraw) {
-      const div = document.querySelector('.list-films');
-      const curMov = JSON.parse(
-        localStorage.getItem(refsStorage.CURRENT_FILMS)
-      ).results;
-      let markup = createMarkupCardsFilms(curMov);
-      div.innerHTML = markup;
-    }
+    // if (refs.mustToRedraw) {
+    //   const div = document.querySelector('.list-films');
+    //   const curMov = JSON.parse(
+    //     localStorage.getItem(refsStorage.CURRENT_FILMS)
+    //   ).results;
+    //   let markup = createMarkupCardsFilms(curMov);
+    //   div.innerHTML = markup;
+    // }
   } else return;
-}
-
-function checkForMovieInLocalStorage(id, key) {
-  const arrayMovies = JSON.parse(localStorage.getItem(key));
-  if (!arrayMovies) {
-    return -1;
-  }
-  const indexOfMovie = arrayMovies.findIndex(movie => movie.id == id);
-  return indexOfMovie;
 }

@@ -127,24 +127,24 @@ const renderPaginationDynamicList = nodes => {
 };
 
 // KEYBOARD PAGINATION
-window.addEventListener('keydown', onArrowButtons);
-function onArrowButtons(event) {
-  if (event.code === 'ArrowLeft' && movie.getCurrentPage() > 1){
-    movie.currentPage -= 1;
-    refs.scrollToTopButton.click();
-  }
+// window.addEventListener('keydown', onArrowButtons);
+// function onArrowButtons(event) {
+//   if (event.code === 'ArrowLeft' && movie.getCurrentPage() > 1){
+//     movie.currentPage -= 1;
+//     refs.scrollToTopButton.click();
+//   }
     
-  if (    event.code === 'ArrowRight' && movie.getTotalPages() > movie.getCurrentPage()){
-    movie.currentPage += 1;
-    refs.scrollToTopButton.click();
-  }
+//   if (    event.code === 'ArrowRight' && movie.getTotalPages() > movie.getCurrentPage()){
+//     movie.currentPage += 1;
+//     refs.scrollToTopButton.click();
+//   }
     
-  if (movie.firstRequest) {
-    fetchData();
-  } else {
-    searchPagination();
-  }
-}
+//   if (movie.firstRequest) {
+//     fetchData();
+//   } else {
+//     searchPagination();
+//   }
+// }
 
 [refs.prevPaginationNode, refs.nextPaginationNode].map(node => {
   // відповірає за реакцію на стрілки

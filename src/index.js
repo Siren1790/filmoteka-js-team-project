@@ -1,4 +1,3 @@
-
 import './partials_js/pagination';
 
 import './partials_js/local_genres-storage';
