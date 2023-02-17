@@ -1,5 +1,3 @@
-import { movie } from './api';
-
 /**
  *
  * @param {*} array
