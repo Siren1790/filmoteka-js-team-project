@@ -1,4 +1,5 @@
 const refs = {
+  key: '',
   flag: false,
   //spiner.js
   preloader: document.querySelector('#preloader'),

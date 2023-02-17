@@ -1,14 +1,12 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 
-import { saveLocalStorageMovies, getLocalStorage } from './local_storage';
-
 import { refsStorage, refs } from './refs';
 
 import { getTrailerPath } from './data-for-trailer';
 
 import noPhoto from '../images/no_image.jpg';
 
-import createMarkupCardsFilms from './createMarkupCardsFilms';
+import { xxx } from './watched-queue';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 const backdropModal = document.querySelector('.js-markup__modal');
@@ -239,15 +237,14 @@ function closeModalHandler(e) {
   if (e.code === 'Escape') {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
+    refs.flag && xxx();
   }
 }
 
 function closeBDModal(e) {
-  if (e.target === e.currentTarget) {
+  if (e.target === e.currentTarget || e.target.className === 'close-button') {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
-  } else if (e.target.className === 'close-button') {
-    backdropModal.classList.add('visually-hidden');
-    document.body.classList.remove('stop-scrolling');
+    refs.flag && xxx();
   } else return;
 }

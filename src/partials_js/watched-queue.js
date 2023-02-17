@@ -9,9 +9,10 @@ const queueBtnLib = queueBtn[1];
 const emptyLibraryAnimation = document.querySelector('.library__img-container');
 const emptyLibraryParagraph = document.querySelector('.empty-paragraph');
 
-openLibary();
+
 
 function openLibary() {
+  console.log('111');
   refs.flag = true;
   watchedBtnLib.classList.add('header-btn-active');
   watchedBtnLib.addEventListener('click', onClickMakeMarkFilms);
@@ -19,31 +20,28 @@ function openLibary() {
 }
 
 function onClickMakeMarkFilms(event) {
-  let key = '';
-  if (event.target.textContent === 'WATCHED'){
-    key = refsStorage.STORAGE_KEY_WATCHED;
+  refs.key = '';
+  if (event.target.textContent === 'WATCHED') {
+    refs.key = refsStorage.STORAGE_KEY_WATCHED;
     watchedBtnLib.classList.add('header-btn-active');
     queueBtnLib.classList.remove('header-btn-active');
-  }else {
-    key = refsStorage.STORAGE_KEY_QUEUE;
+  } else {
+    refs.key = refsStorage.STORAGE_KEY_QUEUE;
     watchedBtnLib.classList.remove('header-btn-active');
     queueBtnLib.classList.add('header-btn-active');
   }
+  xxx();
+}
 
-  const arrayFilmsWatched = JSON.parse(
-    localStorage.getItem(key)
-  );
+function xxx() {
+  const arrayFilmsWatched = JSON.parse(localStorage.getItem(refs.key));
 
-  const arr = JSON.parse(
-    localStorage.getItem(refsStorage.CURRENT_FILMS)
-  );
+  const arr = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
   arr.results = arrayFilmsWatched;
 
- localStorage.setItem(refsStorage.CURRENT_FILMS, JSON.stringify(arr));
+  localStorage.setItem(refsStorage.CURRENT_FILMS, JSON.stringify(arr));
 
- const films = JSON.parse(
-  localStorage.getItem(refsStorage.CURRENT_FILMS)
-);
+  const films = JSON.parse(localStorage.getItem(refsStorage.CURRENT_FILMS));
 
   if (arrayFilmsWatched && arrayFilmsWatched.length) {
     emptyLibraryAnimation.classList.add('visually-hidden');
@@ -56,3 +54,6 @@ function onClickMakeMarkFilms(event) {
     emptyLibraryParagraph.classList.remove('visually-hidden');
   }
 }
+openLibary();
+
+export { xxx };
