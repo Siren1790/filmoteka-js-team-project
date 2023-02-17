@@ -6,7 +6,7 @@ import { getTrailerPath } from './data-for-trailer';
 
 import noPhoto from '../images/no_image.jpg';
 
-import { xxx } from './watched-queue';
+import showLibrary from './libary_partials/show-library';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 const backdropModal = document.querySelector('.js-markup__modal');
@@ -237,7 +237,7 @@ function closeModalHandler(e) {
   if (e.code === 'Escape') {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
-    refs.flag && xxx();
+    refs.flag && showLibrary();
   }
 }
 
@@ -245,6 +245,6 @@ function closeBDModal(e) {
   if (e.target === e.currentTarget || e.target.className === 'close-button') {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
-    refs.flag && xxx();
+    refs.flag && showLibrary();
   } else return;
 }
