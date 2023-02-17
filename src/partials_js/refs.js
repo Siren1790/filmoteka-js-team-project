@@ -1,5 +1,6 @@
 const refs = {
-  key: '',
+  // key: '',
+  key: "addToWatched",
   flag: false,
   //spiner.js
   preloader: document.querySelector('#preloader'),

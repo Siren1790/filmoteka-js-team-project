@@ -9,7 +9,7 @@ const queueBtnLib = queueBtn[1];
 function openLibrary() {
   refs.flag = true;
   watchedBtnLib.classList.add('header-btn-active');
-
+  showLibrary();
 }
 
 watchedBtnLib.addEventListener('click', onClickMakeMarkFilms);
