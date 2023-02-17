@@ -306,6 +306,7 @@ function closeModalHandler(e) {
   if (e.code === 'Escape') {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
+    console.log('hello');
   }
   // if (refs.mustToRedraw) {
   //   const div = document.querySelector('.list-films');
@@ -333,7 +334,10 @@ function closeBDModal(e) {
   } else if (e.target.className === 'close-button') {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
-
+    
+    // let cardsMovies = getLocalStorage();
+    // let markup = createMarkupCardsFilms(cardsMovies.results);
+    // refs.mainMarkFilms.innerHTML = markup;
     // if (refs.mustToRedraw) {
     //   const div = document.querySelector('.list-films');
     //   const curMov = JSON.parse(

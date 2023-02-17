@@ -431,13 +431,7 @@ a {
     transform: scale(1.1);
   }
 
-  // &:active {
-  //   border-color: var(--accent-color);
-  //   background-color: var(--accent-color);
-  //   color: var(--color-white);
-  // }
-
-  &.active {
+  & .active {
     border-color: var(--accent-color);
     background-color: var(--accent-color);
     color: var(--color-white);
