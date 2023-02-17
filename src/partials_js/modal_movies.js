@@ -1,12 +1,14 @@
 import { restDataForModal, createStringOfGenres } from './data-for-modal';
 
+import { saveLocalStorageMovies, getLocalStorage } from './local_storage';
+
 import { refsStorage, refs } from './refs';
 
 import { getTrailerPath } from './data-for-trailer';
 
 import noPhoto from '../images/no_image.jpg';
 
-// import createMarkupCardsFilms from './createMarkupCardsFilms';
+import createMarkupCardsFilms from './createMarkupCardsFilms';
 
 const BASE_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 const backdropModal = document.querySelector('.js-markup__modal');
@@ -208,73 +210,6 @@ function addEventListenerToBtn() {
       e.currentTarget.textContent = 'ADD TO QUEUE';
     }
   });
-  //   const activeBtn = document.querySelector('.header-btn-active');
-  //   const checkButton = activeBtn.textContent === 'QUEUE';
-  //   if (checkButton) {
-  //     if (refs.mustToRedraw) {
-  //       const anMovie = JSON.parse(
-  //         localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
-  //       );
-
-  //       const objCurFilms = JSON.parse(
-  //         localStorage.getItem(refsStorage.CURRENT_FILMS)
-  //       );
-  //       objCurFilms.results = anMovie;
-  //       localStorage.setItem(
-  //         refsStorage.CURRENT_FILMS,
-  //         JSON.stringify(objCurFilms)
-  //       );
-  //     }
-  //   } else if (refs.mustToRedraw) {
-  //     const anMovie = JSON.parse(
-  //       localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
-  //     );
-
-  //     const objCurFilms = JSON.parse(
-  //       localStorage.getItem(refsStorage.CURRENT_FILMS)
-  //     );
-  //     objCurFilms.results = anMovie;
-  //     localStorage.setItem(
-  //       refsStorage.CURRENT_FILMS,
-  //       JSON.stringify(objCurFilms)
-  //     );
-  //   }
-  // });
-
-  //     const activeBtn = document.querySelector('.header-btn-active');
-  //     const checkButton = activeBtn.textContent === 'WATCHED';
-
-  //     if (checkButton) {
-  //       if (refs.mustToRedraw) {
-  //         const anMovie = JSON.parse(
-  //           localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
-  //         );
-
-  //         const objCurFilms = JSON.parse(
-  //           localStorage.getItem(refsStorage.CURRENT_FILMS)
-  //         );
-  //         objCurFilms.results = anMovie;
-  //         localStorage.setItem(
-  //           refsStorage.CURRENT_FILMS,
-  //           JSON.stringify(objCurFilms)
-  //         );
-  //       }
-  //     } else if (refs.mustToRedraw) {
-  //       const anMovie = JSON.parse(
-  //         localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
-  //       );
-
-  //       const objCurFilms = JSON.parse(
-  //         localStorage.getItem(refsStorage.CURRENT_FILMS)
-  //       );
-  //       objCurFilms.results = anMovie;
-  //       localStorage.setItem(
-  //         refsStorage.CURRENT_FILMS,
-  //         JSON.stringify(objCurFilms)
-  //       );
-  //     }
-  //   });
-  // }
 }
 function addSelectedFilmsLocalStorage(e, key) {
   const pushArray = [];
@@ -300,51 +235,19 @@ function delSelectedFilmsFromLocalStoradge(index, key) {
   localStorage.setItem(key, arrayJSON);
 }
 
-
-
 function closeModalHandler(e) {
   if (e.code === 'Escape') {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
-    console.log('hello');
   }
-  // if (refs.mustToRedraw) {
-  //   const div = document.querySelector('.list-films');
-  //   const curMov = JSON.parse(
-  //     localStorage.getItem(refsStorage.CURRENT_FILMS)
-  //   ).results;
-  //   let markup = createMarkupCardsFilms(curMov);
-  //   div.innerHTML = markup;
-  // }
 }
 
 function closeBDModal(e) {
   if (e.target === e.currentTarget) {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
-
-    // if (refs.mustToRedraw) {
-    //   const div = document.querySelector('.list-films');
-    //   const curMov = JSON.parse(
-    //     localStorage.getItem(refsStorage.CURRENT_FILMS)
-    //   ).results;
-    //   let markup = createMarkupCardsFilms(curMov);
-    //   div.innerHTML = markup;
-    // }
   } else if (e.target.className === 'close-button') {
     backdropModal.classList.add('visually-hidden');
     document.body.classList.remove('stop-scrolling');
-    
-    // let cardsMovies = getLocalStorage();
-    // let markup = createMarkupCardsFilms(cardsMovies.results);
-    // refs.mainMarkFilms.innerHTML = markup;
-    // if (refs.mustToRedraw) {
-    //   const div = document.querySelector('.list-films');
-    //   const curMov = JSON.parse(
-    //     localStorage.getItem(refsStorage.CURRENT_FILMS)
-    //   ).results;
-    //   let markup = createMarkupCardsFilms(curMov);
-    //   div.innerHTML = markup;
-    // }
   } else return;
 }

@@ -3,92 +3,56 @@ import { refs, refsStorage } from './refs';
 
 const queueBtn = document.querySelectorAll('.header-btn');
 
+const watchedBtnLib = queueBtn[0];
+const queueBtnLib = queueBtn[1];
+
 const emptyLibraryAnimation = document.querySelector('.library__img-container');
-const emptyLibraryParagraoh = document.querySelector('.empty-paragraph');
-const newWatchedBtn = queueBtn[0];
-const newQueueBtn = queueBtn[1];
+const emptyLibraryParagraph = document.querySelector('.empty-paragraph');
 
-newWatchedBtn.addEventListener('click', onClickMakeMarkUpWatched);
-newQueueBtn.addEventListener('click', onClickMakeMarkUpQueue);
+openLibary();
 
-hiddenEmptyAnimation();
+function openLibary() {
+  refs.flag = true;
+  watchedBtnLib.classList.add('header-btn-active');
+  watchedBtnLib.addEventListener('click', onClickMakeMarkFilms);
+  queueBtnLib.addEventListener('click', onClickMakeMarkFilms);
+}
 
-function liberyDrawings() {
-  if (localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)) {
-    onClickMakeMarkUpQueue();
-  } else {
-    onClickMakeMarkUpWatched();
+function onClickMakeMarkFilms(event) {
+  let key = '';
+  if (event.target.textContent === 'WATCHED'){
+    key = refsStorage.STORAGE_KEY_WATCHED;
+    watchedBtnLib.classList.add('header-btn-active');
+    queueBtnLib.classList.remove('header-btn-active');
+  }else {
+    key = refsStorage.STORAGE_KEY_QUEUE;
+    watchedBtnLib.classList.remove('header-btn-active');
+    queueBtnLib.classList.add('header-btn-active');
   }
-}
 
-function hiddenEmptyAnimation() {
-  if (
-    localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED) ||
-    localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
-  ) {
+  const arrayFilmsWatched = JSON.parse(
+    localStorage.getItem(key)
+  );
+
+  const arr = JSON.parse(
+    localStorage.getItem(refsStorage.CURRENT_FILMS)
+  );
+  arr.results = arrayFilmsWatched;
+
+ localStorage.setItem(refsStorage.CURRENT_FILMS, JSON.stringify(arr));
+
+ const films = JSON.parse(
+  localStorage.getItem(refsStorage.CURRENT_FILMS)
+);
+
+  if (arrayFilmsWatched && arrayFilmsWatched.length) {
     emptyLibraryAnimation.classList.add('visually-hidden');
-    emptyLibraryParagraoh.classList.add('visually-hidden');
-    liberyDrawings();
-  } else return;
-}
-
-function onClickMakeMarkUpWatched() {
-  refs.mustToRedraw = 1;
-
-  if (localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)) {
-    emptyLibraryAnimation.classList.add('visually-hidden');
-    emptyLibraryParagraoh.classList.add('visually-hidden');
-    newQueueBtn.classList.remove('header-btn-active');
-    const arrayFilmsWatched = JSON.parse(
-      localStorage.getItem(refsStorage.STORAGE_KEY_WATCHED)
-    );
-    const objCurFilms = JSON.parse(
-      localStorage.getItem(refsStorage.CURRENT_FILMS)
-    );
-    objCurFilms.results = arrayFilmsWatched;
-    localStorage.setItem(
-      refsStorage.CURRENT_FILMS,
-      JSON.stringify(objCurFilms)
-    );
-    newWatchedBtn.classList.add('header-btn-active');
-    let markup = createMarkupCardsFilms(arrayFilmsWatched);
+    emptyLibraryParagraph.classList.add('visually-hidden');
+    let markup = createMarkupCardsFilms(films.results);
     refs.mainMarkFilms.innerHTML = markup;
   } else {
-    newQueueBtn.classList.remove('header-btn-active');
-    newWatchedBtn.classList.add('header-btn-active');
-    emptyLibraryAnimation.classList.remove('visually-hidden');
-    emptyLibraryParagraoh.classList.remove('visually-hidden');
     refs.mainMarkFilms.innerHTML = '';
-  }
-}
-
-function onClickMakeMarkUpQueue() {
-  refs.mustToRedraw = 1;
-
-  if (localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)) {
-    emptyLibraryAnimation.classList.add('visually-hidden');
-    emptyLibraryParagraoh.classList.add('visually-hidden');
-    newWatchedBtn.classList.remove('header-btn-active');
-    newQueueBtn.classList.add('header-btn-active');
-    const arrayFilmsWatched = JSON.parse(
-      localStorage.getItem(refsStorage.STORAGE_KEY_QUEUE)
-    );
-
-    const objCurFilms = JSON.parse(
-      localStorage.getItem(refsStorage.CURRENT_FILMS)
-    );
-    objCurFilms.results = arrayFilmsWatched;
-    localStorage.setItem(
-      refsStorage.CURRENT_FILMS,
-      JSON.stringify(objCurFilms)
-    );
-    let markup = createMarkupCardsFilms(arrayFilmsWatched);
-    refs.mainMarkFilms.innerHTML = markup;
-  } else {
-    newWatchedBtn.classList.remove('header-btn-active');
-    newQueueBtn.classList.add('header-btn-active');
     emptyLibraryAnimation.classList.remove('visually-hidden');
-    emptyLibraryParagraoh.classList.remove('visually-hidden');
-    refs.mainMarkFilms.innerHTML = '';
+    emptyLibraryParagraph.classList.remove('visually-hidden');
   }
 }

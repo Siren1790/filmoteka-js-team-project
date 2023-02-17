@@ -1,4 +1,5 @@
 const refs = {
+  flag: false,
   //spiner.js
   preloader: document.querySelector('#preloader'),
   mainMarkFilms: document.querySelector('.list-films'),

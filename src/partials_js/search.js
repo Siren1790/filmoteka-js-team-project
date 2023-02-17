@@ -14,10 +14,10 @@ function hideErrorMessage() {
 refs.searchButton.addEventListener('submit', onSubmit);
 
 async function onSubmit(event) {
-  console.log('hello');
   console.log(event.currentTarget.searchQuery.value);
   event.preventDefault();
   preloaderShow();
+  refs.flag = false;
   if (event.currentTarget.searchQuery.value) {
     refs.searchBadResult.hidden = true;
     movie.setSearchValue(event.currentTarget.searchQuery.value);
