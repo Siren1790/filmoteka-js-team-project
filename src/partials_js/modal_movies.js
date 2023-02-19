@@ -177,7 +177,6 @@ function addEventListenerToBtn() {
     } else {
       delSelectedFilmsFromLocalStoradge(index, refsStorage.STORAGE_KEY_WATCHED);
       watchBtn.textContent = 'Add to Watched';
-      console.log(e.currentTarget);
     }
   });
 
