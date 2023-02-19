@@ -61,7 +61,7 @@ class Movie {
    * @returns a list of movies by keyword
    */
   async fetchSearchMovies() {
-    refs.mustToRedraw = 0;
+    refs.mustToRedraw = true;
 
     try {
       const response = await axios.get(refsApi.API_URL_SEARCH_MOVIE, {
@@ -96,7 +96,6 @@ class Movie {
           },
         }
       );
-
       return response.data;
     } catch (error) {
       console.error(error);

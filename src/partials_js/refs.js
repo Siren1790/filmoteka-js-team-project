@@ -1,4 +1,7 @@
 const refs = {
+  // key: '',
+  key: "addToWatched",
+  flag: false,
   //spiner.js
   preloader: document.querySelector('#preloader'),
   mainMarkFilms: document.querySelector('.list-films'),

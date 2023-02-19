@@ -7,15 +7,17 @@ import { preparePaginationDynamicList } from './pagination';
 
 refs.searchBadResult.hidden = true;
 
-async function hideErrorMessage() {
+function hideErrorMessage() {
   setTimeout(() => (refs.searchBadResult.hidden = true), 2000);
 }
 
 refs.searchButton.addEventListener('submit', onSubmit);
 
 async function onSubmit(event) {
+  console.log(event.currentTarget.searchQuery.value);
   event.preventDefault();
   preloaderShow();
+  refs.flag = false;
   if (event.currentTarget.searchQuery.value) {
     refs.searchBadResult.hidden = true;
     movie.setSearchValue(event.currentTarget.searchQuery.value);

@@ -1,5 +1,5 @@
 import { movie } from './api';
-import { refs, refsStorage } from './refs';
+import { refsStorage } from './refs';
 
 /**
  * function saveLocalStorageTrendingMovies

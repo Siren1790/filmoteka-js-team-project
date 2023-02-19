@@ -11,6 +11,7 @@ import { refs } from './refs';
 
 async function fetchData() {
   preloaderShow();
+  refs.flag = false;
   const movies = await movie.fetchTrendingMovies();
   const genres = await movie.fetchMovieGenres();
   saveLocalStorageMovies(movies);
